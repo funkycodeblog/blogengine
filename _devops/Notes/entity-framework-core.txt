@@ -1,0 +1,26 @@
+
+
+
+* many-to-many in ef core is different (more complicated than in ef framework)
+https://www.learnentityframeworkcore.com/configuration/many-to-many-relationship-configuration
+https://blog.oneunicorn.com/2017/09/25/many-to-many-relationships-in-ef-core-2-0-part-1-the-basics/
+
+* for migrations 
+(1) package Microsoft.EntityFrameworkCore.Tools
+(2) create IDesignTimeDbContextFactory<BlogEngineContext> in startup project
+
+* first migration
+
+Add-Migration Init
+
+[!] There's Migrate() method in dbcontext that update's database and perform migration
+
+
+Remove-Migration
+
+
+--- if problems
+1. Update-Database <prev-migration-name>
+2. Manually remove migration file
+3. Remove-Migration 
+
