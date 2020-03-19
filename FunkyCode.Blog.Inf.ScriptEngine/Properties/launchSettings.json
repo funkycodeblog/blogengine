@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FunkyCode.Blog.ScriptEngine": {
+      "commandName": "Project",
+      "commandLineArgs": "test --environment Development"
+    }
+  }
+}

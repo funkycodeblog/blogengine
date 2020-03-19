@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Cqrs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FunkyCode.Blog.Domain.Entites\FunkyCode.Blog.Domain.Entites.csproj" />
+  </ItemGroup>
+
+</Project>

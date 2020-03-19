@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RunPostBuildEvent></RunPostBuildEvent>
+    <AssemblyName>funky-scripts</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.0.0" />
+    <PackageReference Include="CommandLineParser" Version="2.7.82" />
+    <PackageReference Include="YamlDotNet" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="_devops\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FunkyCode.Blog.App.Core\FunkyCode.Blog.App.Core.csproj" />
+    <ProjectReference Include="..\FunkyCode.Blog.App.Internals\FunkyCode.Blog.App.Internals.csproj" />
+    <ProjectReference Include="..\FunkyCode.Blog.Inf.BlogPostUploadService\FunkyCode.Blog.Inf.BlogPostUploadService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="FunkyCode.Blog.App.Core">
+      <HintPath>..\FunkyCode.Blog.App.Core\bin\Debug\netcoreapp2.2\FunkyCode.Blog.App.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,138 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyCode.Blog.Inf.WebApi", "FunkyCode.Blog.WebApi\FunkyCode.Blog.Inf.WebApi.csproj", "{01735F10-E4E0-46D6-9362-1D4209766877}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyCode.Blog.Domain.Entites", "FunkyCode.Blog.Domain.Entites\FunkyCode.Blog.Domain.Entites.csproj", "{CC8D5DC9-F85D-47C4-8DC7-28613DB7EBD3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyCode.Blog.Inf.EntityFramework", "FunkyCode.Blog.Inf.EntityFramework\FunkyCode.Blog.Inf.EntityFramework.csproj", "{7747DC27-07A3-4CC7-A62E-CB3984F859FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_devops", "_devops", "{178D2999-F9E2-42E1-80B1-7E74DAE42872}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{2CFBC3E9-2EFD-40FB-BC80-28321E3771AD}"
+	ProjectSection(SolutionItems) = preProject
+		_devops\Notes\entity-framework-core.txt = _devops\Notes\entity-framework-core.txt
+		_devops\Notes\snippets.txt = _devops\Notes\snippets.txt
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyCode.Blog.App.Internals", "FunkyCode.Blog.App.Internals\FunkyCode.Blog.App.Internals.csproj", "{70B4AECB-0957-4295-8B2C-55243F8A4806}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{54E8B3A5-506A-48E8-96BA-48D823ACF8B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{625C7420-625D-4230-981F-D10299DC770F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{4291DE90-6770-4DA3-B9DA-576744060780}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{AEE78224-4F1E-4105-BE62-C59F2FD2DA9B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{35A39431-511F-4C87-816F-2188DE6030AB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyCode.Blog.Inf.IoC", "FunkyCode.Blog.Inf.IoC\FunkyCode.Blog.Inf.IoC.csproj", "{17694202-4F3C-4F59-9892-7D92BB3CF31F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyCode.Blog.App.Core", "FunkyCode.Blog.App.Core\FunkyCode.Blog.App.Core.csproj", "{AD710D3B-E95F-4317-8D5A-B6CC14823786}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FunkyCode.Blog.UI.ClientApp", "FunkyCode.Blog.UI.ClientApp", "{65AB012E-B7EA-4214-B9DF-AF7FC6F2A175}"
+	ProjectSection(SolutionItems) = preProject
+		FunkyCode.Blog.UI.ClientAp\readme.txt = FunkyCode.Blog.UI.ClientAp\readme.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{BB508393-E3DA-4348-8886-844171EF27FA}"
+	ProjectSection(SolutionItems) = preProject
+		_devops\SQL\sql-snippets.sql = _devops\SQL\sql-snippets.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipeline", "Pipeline", "{C7F97203-4CBD-46DD-BB0A-CB881CCFC927}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines.yml = azure-pipelines.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{3301857D-2436-4784-A226-5917D141F9EA}"
+	ProjectSection(SolutionItems) = preProject
+		_devops\Scripts\createSkillMatchMigrationScript.bat = _devops\Scripts\createSkillMatchMigrationScript.bat
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Output", "Output", "{19CE09CF-7291-4D4D-868A-20F12CAAE09F}"
+	ProjectSection(SolutionItems) = preProject
+		_devops\Scripts\Output\readme.txt = _devops\Scripts\Output\readme.txt
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyCode.Blog.Inf.MarkdownService", "FunkyCode.Blog.Inf.MarkdownService\FunkyCode.Blog.Inf.MarkdownService.csproj", "{AA1905F0-4EBC-4033-B06A-165661E0FF85}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyCode.Blog.Inf.BlogPostUploadService", "FunkyCode.Blog.Inf.BlogPostUploadService\FunkyCode.Blog.Inf.BlogPostUploadService.csproj", "{F344B514-F078-4C8E-8D6E-5A60E2628A71}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Articles", "Articles", "{5919A651-F08B-44C8-9587-7D89153ABF87}"
+	ProjectSection(SolutionItems) = preProject
+		_devops\Articles\patterns-specification\patterns-specification.md = _devops\Articles\patterns-specification\patterns-specification.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyCode.Blog.Inf.ScriptEngine", "FunkyCode.Blog.Inf.ScriptEngine\FunkyCode.Blog.Inf.ScriptEngine.csproj", "{06902420-01D5-4213-ABEF-566704FD614E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01735F10-E4E0-46D6-9362-1D4209766877}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01735F10-E4E0-46D6-9362-1D4209766877}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01735F10-E4E0-46D6-9362-1D4209766877}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01735F10-E4E0-46D6-9362-1D4209766877}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC8D5DC9-F85D-47C4-8DC7-28613DB7EBD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC8D5DC9-F85D-47C4-8DC7-28613DB7EBD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC8D5DC9-F85D-47C4-8DC7-28613DB7EBD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC8D5DC9-F85D-47C4-8DC7-28613DB7EBD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7747DC27-07A3-4CC7-A62E-CB3984F859FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7747DC27-07A3-4CC7-A62E-CB3984F859FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7747DC27-07A3-4CC7-A62E-CB3984F859FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7747DC27-07A3-4CC7-A62E-CB3984F859FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70B4AECB-0957-4295-8B2C-55243F8A4806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70B4AECB-0957-4295-8B2C-55243F8A4806}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70B4AECB-0957-4295-8B2C-55243F8A4806}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70B4AECB-0957-4295-8B2C-55243F8A4806}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17694202-4F3C-4F59-9892-7D92BB3CF31F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17694202-4F3C-4F59-9892-7D92BB3CF31F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17694202-4F3C-4F59-9892-7D92BB3CF31F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17694202-4F3C-4F59-9892-7D92BB3CF31F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD710D3B-E95F-4317-8D5A-B6CC14823786}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD710D3B-E95F-4317-8D5A-B6CC14823786}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD710D3B-E95F-4317-8D5A-B6CC14823786}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD710D3B-E95F-4317-8D5A-B6CC14823786}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA1905F0-4EBC-4033-B06A-165661E0FF85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA1905F0-4EBC-4033-B06A-165661E0FF85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA1905F0-4EBC-4033-B06A-165661E0FF85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA1905F0-4EBC-4033-B06A-165661E0FF85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F344B514-F078-4C8E-8D6E-5A60E2628A71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F344B514-F078-4C8E-8D6E-5A60E2628A71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F344B514-F078-4C8E-8D6E-5A60E2628A71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F344B514-F078-4C8E-8D6E-5A60E2628A71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06902420-01D5-4213-ABEF-566704FD614E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06902420-01D5-4213-ABEF-566704FD614E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06902420-01D5-4213-ABEF-566704FD614E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06902420-01D5-4213-ABEF-566704FD614E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{01735F10-E4E0-46D6-9362-1D4209766877} = {54E8B3A5-506A-48E8-96BA-48D823ACF8B8}
+		{CC8D5DC9-F85D-47C4-8DC7-28613DB7EBD3} = {625C7420-625D-4230-981F-D10299DC770F}
+		{7747DC27-07A3-4CC7-A62E-CB3984F859FB} = {54E8B3A5-506A-48E8-96BA-48D823ACF8B8}
+		{2CFBC3E9-2EFD-40FB-BC80-28321E3771AD} = {178D2999-F9E2-42E1-80B1-7E74DAE42872}
+		{70B4AECB-0957-4295-8B2C-55243F8A4806} = {4291DE90-6770-4DA3-B9DA-576744060780}
+		{17694202-4F3C-4F59-9892-7D92BB3CF31F} = {54E8B3A5-506A-48E8-96BA-48D823ACF8B8}
+		{AD710D3B-E95F-4317-8D5A-B6CC14823786} = {4291DE90-6770-4DA3-B9DA-576744060780}
+		{65AB012E-B7EA-4214-B9DF-AF7FC6F2A175} = {AEE78224-4F1E-4105-BE62-C59F2FD2DA9B}
+		{BB508393-E3DA-4348-8886-844171EF27FA} = {178D2999-F9E2-42E1-80B1-7E74DAE42872}
+		{C7F97203-4CBD-46DD-BB0A-CB881CCFC927} = {178D2999-F9E2-42E1-80B1-7E74DAE42872}
+		{3301857D-2436-4784-A226-5917D141F9EA} = {178D2999-F9E2-42E1-80B1-7E74DAE42872}
+		{19CE09CF-7291-4D4D-868A-20F12CAAE09F} = {3301857D-2436-4784-A226-5917D141F9EA}
+		{AA1905F0-4EBC-4033-B06A-165661E0FF85} = {54E8B3A5-506A-48E8-96BA-48D823ACF8B8}
+		{F344B514-F078-4C8E-8D6E-5A60E2628A71} = {54E8B3A5-506A-48E8-96BA-48D823ACF8B8}
+		{5919A651-F08B-44C8-9587-7D89153ABF87} = {178D2999-F9E2-42E1-80B1-7E74DAE42872}
+		{06902420-01D5-4213-ABEF-566704FD614E} = {54E8B3A5-506A-48E8-96BA-48D823ACF8B8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D2052BF-4746-4303-A548-5F6A3408DA5C}
+	EndGlobalSection
+EndGlobal

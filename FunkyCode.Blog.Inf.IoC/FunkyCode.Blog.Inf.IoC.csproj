@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Cqrs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FunkyCode.Blog.App.Core\FunkyCode.Blog.App.Core.csproj" />
+    <ProjectReference Include="..\FunkyCode.Blog.App.Internals\FunkyCode.Blog.App.Internals.csproj" />
+    <ProjectReference Include="..\FunkyCode.Blog.Inf.EntityFramework\FunkyCode.Blog.Inf.EntityFramework.csproj" />
+    <ProjectReference Include="..\FunkyCode.Blog.Inf.MarkdownService\FunkyCode.Blog.Inf.MarkdownService.csproj" />
+  </ItemGroup>
+
+</Project>

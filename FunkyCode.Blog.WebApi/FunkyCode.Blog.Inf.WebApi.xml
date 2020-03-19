@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FunkyCode.Blog.Inf.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:FunkyCode.Blog.Inf.WebApi.Controllers.BlogController.GetAllHaders">
+            <summary>
+                Returns all blog article headers
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FunkyCode.Blog.Inf.WebApi.Controllers.BlogController.Get(System.String)">
+            <summary>
+                Returns blog article by id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FunkyCode.Blog.Inf.WebApi.Controllers.BlogController.CheckIfExists(System.String)">
+            <summary>
+                Check if blog article exists.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FunkyCode.Blog.Inf.WebApi.Controllers.BlogController.Get(System.String,System.String)">
+            <summary>
+                Get image from blog article.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FunkyCode.Blog.Inf.WebApi.Controllers.BlogController.Post(Microsoft.AspNetCore.Http.IFormFileCollection)">
+            <summary>
+                Upload blog article
+            </summary>
+        </member>
+        <member name="M:FunkyCode.Blog.Inf.WebApi.Controllers.BlogController.Delete(System.String)">
+            <summary>
+                Deletes blog article
+            </summary>
+            <param name="blogPostId"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

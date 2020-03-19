@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Zilla+Slab');
+
+body {
+  margin: 0;
+  font-family: 'Zilla Slab';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background: gray;
+
+}
+
+/* code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} */

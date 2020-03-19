@@ -1,0 +1,36 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App />, div);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+import UserFilterService  from '../services/UserFilterService'
+import { FilterResult } from '../contracts/FilterResult';
+import { User } from '../model/User'
+
+
+
+
+
+describe('Users', () => {
+    
+    
+
+
+
+    it('should get all users as an array', async () => {
+
+        const filterResult : FilterResult = await UserFilterService.FilterUsers(testUsers, "re")
+
+        console.log('filterResult',filterResult);
+
+        expect(filterResult.users.length)
+
+        expect(filterResult).toBeDefined();
+
+    });
+});
