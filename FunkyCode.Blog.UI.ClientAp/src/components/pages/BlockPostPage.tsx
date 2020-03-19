@@ -6,6 +6,13 @@ import { IFunkyState } from '../../redux/State';
 import { isNullOrUndefined } from 'util';
 import { BlogPost } from '../../model/BlogPost';
 
+import Prism from "prismjs"
+
+// @ts-ignore;
+import csharp from 'prismjs/components/prism-csharp';
+// @ts-ignore;
+import sql from 'prismjs/components/prism-sql';
+
 interface Props  {
   post?: BlogPost
 }
@@ -16,7 +23,24 @@ interface State {
 
 class BlockPostPage extends Component<Props, State>  {
 
-  state = { isRedirectToBlog: false };
+  
+  componentDidMount()
+  {
+    // this is temporary workaround for receiving 
+    console.log('csharp',csharp, sql);
+  }
+ 
+
+  componentDidUpdate()
+  {
+
+    console.log('Prism.highlightAll();');
+    
+    Prism.highlightAll();
+    console.log(Prism.languages);
+    
+    
+  }
 
   render() {
 
@@ -31,6 +55,22 @@ class BlockPostPage extends Component<Props, State>  {
     
     if (isNullOrUndefined(source))
       return null;
+
+    // return <pre>
+    //   <code className='language-csharp'>
+    //   {`public void OnLogging(Customer customer)
+    //     {
+    //         // (...)
+      
+    //         if (customer.Accounts.Count >= 10)
+    //             ConvertToPremiumCustomer(customer);
+      
+    //         // (...)
+    //     }
+    //   `}
+    //   </code>
+    // </pre>
+      
 
     return <div style={{paddingLeft: '20px', overflowY: 'scroll', width: '750px', height: '100%'}}>
         <div dangerouslySetInnerHTML={this.createMarkup(source)} />

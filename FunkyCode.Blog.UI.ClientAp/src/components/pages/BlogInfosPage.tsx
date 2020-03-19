@@ -47,7 +47,7 @@ class BlogInfosPage extends Component<Props, State>  {
 
       {blogInfos.map( blogInfo => 
       
-        <div>
+        <div key={blogInfo.id}>
         <BlogInfoComponent blogInfo={blogInfo} handleBlogInfoSelected={this.handleBlogArticleSelected.bind(this)} />
         <Spacer height = {20} />
         </div>
