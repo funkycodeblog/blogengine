@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="_devops\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\FunkyCode.Blog.App.Core\FunkyCode.Blog.App.Core.csproj" />
     <ProjectReference Include="..\FunkyCode.Blog.App.Internals\FunkyCode.Blog.App.Internals.csproj" />
     <ProjectReference Include="..\FunkyCode.Blog.Inf.BlogPostUploadService\FunkyCode.Blog.Inf.BlogPostUploadService.csproj" />
