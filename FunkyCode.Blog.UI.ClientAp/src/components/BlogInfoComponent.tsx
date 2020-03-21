@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BlogInfoModel } from '../model/BlogInfoModel';
 import { Typography, Button } from '@material-ui/core';
+import { resolvePostDate } from '../tools/tools';
 
 
 
@@ -18,6 +19,7 @@ export class BlogInfoComponent extends Component<Props, {}> {
         const {blogInfo} = this.props;
        
         return <div style={{width: '750px'}}>
+        <Typography style = {{color: 'gray'}} >{ resolvePostDate(blogInfo.published)}  </Typography>
            <Typography  variant="h4" >{blogInfo.title}</Typography>
            <Typography>{blogInfo.text}</Typography>
            <Button onClick={this.handleClick.bind(this)} variant="outlined">Read more</Button>

@@ -72,9 +72,10 @@ class BlockPostPage extends Component<Props, State>  {
     // </pre>
       
 
-    return <div style={{paddingLeft: '20px', overflowY: 'scroll', width: '750px', height: '100%'}}>
-        <div dangerouslySetInnerHTML={this.createMarkup(source)} />
+    return  <div style={{display: 'block', overflowX: 'auto', overflowY: 'auto', height: '100%', paddingRight: '20%' }}>
+        <div dangerouslySetInnerHTML={this.createMarkup(source)}  />
     </div>
+    
     
   }
 

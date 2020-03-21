@@ -1,3 +1,5 @@
+import { isNullOrUndefined } from "util";
+
 export function deepCopy(obj : any) : any {
     var copy : any;
 
@@ -30,6 +32,24 @@ export function deepCopy(obj : any) : any {
     }
 
     throw new Error("Unable to copy obj! Its type isn't supported.");
+}
+
+export function resolvePostDate(json : string) : string
+{
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const months = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  
+    const date = new Date(json);
+    
+    const dayName = days[date.getDay()];
+    const monthName = months[date.getMonth()];
+    const day = date.getUTCDate();
+
+    
+    return `${dayName}, ${monthName} ${day}, ${date.getFullYear()}` ;
+
 }
 
 

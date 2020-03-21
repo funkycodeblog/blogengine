@@ -11,11 +11,7 @@ namespace FunkyCode.Blog.Domain.Entites
         public DateTime PublishingDate { get; set; }
         public BlogStatusTypeEnum Status { get; set; }
 
-        public string Title
-        {
-            get; set;
-
-        }
+        public string Title { get; set; }
         public string Header { get; set; }
         public string Content { get; set; }
 

@@ -1,7 +1,7 @@
 export interface BlogInfoModel
 {
     id: string,
-    published: Date,
+    published: string,
     title: string;
     tags: string[];
     text: string;
