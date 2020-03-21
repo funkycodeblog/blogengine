@@ -18,8 +18,15 @@ export class BlogInfoComponent extends Component<Props, {}> {
     
         const {blogInfo} = this.props;
        
+        
+
         return <div style={{width: '750px'}}>
         <Typography style = {{color: 'gray'}} >{ resolvePostDate(blogInfo.published)}  </Typography>
+        <div>
+            { blogInfo.tags.map( tag => 
+                <span style={{borderWidth: 1, borderStyle: 'solid', marginLeft: '1px', marginRight: '1px', paddingLeft: '1px', paddingRight: '1px'}} key={tag}>{tag}</span>
+            ) }
+        </div>
            <Typography  variant="h4" >{blogInfo.title}</Typography>
            <Typography>{blogInfo.text}</Typography>
            <Button onClick={this.handleClick.bind(this)} variant="outlined">Read more</Button>

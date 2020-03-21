@@ -34,7 +34,9 @@ namespace FunkyCode.Blog.App.Internals.Tools
             result.AddRequiredMessageIfNullOrEmpty(nameof(BlogPostMetadata.Categories), categories);
             result.AddRequiredMessageIfNullOrEmpty(nameof(BlogPostMetadata.PublishedDate), date);
             
-            var categoriesAsList = categories.Split(',').ToListSafe();
+            var categoriesAsList = categories.Split(',')
+                .Select(i => i.Trim())
+                .ToListSafe();
 
             var datetime = new DateTime(
                 int.Parse(date.Substring(0, 4)),
