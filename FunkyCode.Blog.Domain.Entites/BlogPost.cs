@@ -16,6 +16,8 @@ namespace FunkyCode.Blog.Domain.Entites
         public string Content { get; set; }
 
         public virtual IList<BlogPostImage> Images { get; set; }
+
+        public string Tags { get; set; }
     }
 
     public enum BlogStatusTypeEnum

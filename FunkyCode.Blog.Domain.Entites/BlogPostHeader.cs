@@ -12,5 +12,6 @@ namespace FunkyCode.Blog.Domain.Entites
         public string Title { get; set; }
         public BlogStatusTypeEnum Status { get; set; }
         public string Header { get; set; }
+        public string Tags { get; set; }
     }
 }

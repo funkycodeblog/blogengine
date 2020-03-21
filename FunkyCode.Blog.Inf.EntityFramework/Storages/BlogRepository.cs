@@ -28,7 +28,8 @@ namespace FunkyCode.Blog.Inf.EntityFramework.Storages
                     Header = p.Header,
                     PublishingDate = p.PublishingDate,
                     Status = p.Status,
-                    Title = p.Title
+                    Title = p.Title,
+                    Tags = p.Tags
                 }).ToListAsync();
 
                 return headers;

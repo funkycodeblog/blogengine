@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FunkyCode.Blog.App.Core.Infrastructure.Internals;
-
+using FunkyCode.Blog.App.Internals.Map;
 using FunkyCode.Blog.Domain.Entites;
 
 
@@ -18,11 +18,13 @@ namespace FunkyCode.Blog.App.Core.Commands
     {
         private readonly IBlogRepository _blogRepository;
         private readonly IBlogPostMetadataResolver _postMetadataResolver;
+        private readonly ITagMapper _tagMapper;
 
-        public CommandsHandler(IBlogRepository blogRepository, IBlogPostMetadataResolver postMetadataResolver)
+        public CommandsHandler(IBlogRepository blogRepository, IBlogPostMetadataResolver postMetadataResolver, ITagMapper tagMapper)
         {
             _blogRepository = blogRepository;
             _postMetadataResolver = postMetadataResolver;
+            _tagMapper = tagMapper;
         }
 
 
@@ -38,6 +40,7 @@ namespace FunkyCode.Blog.App.Core.Commands
 
             var date = metadata.PublishedDate ?? DateTime.Now;
             var postId = metadata.Id;
+            var tags = _tagMapper.Map(metadata.Categories.ToArray());
 
             var blogPost = new BlogPost
             {
@@ -47,7 +50,8 @@ namespace FunkyCode.Blog.App.Core.Commands
                 Header = metadata.Header,
                 PublishingDate = date,
                 Status = BlogStatusTypeEnum.Active,
-                Images = new List<BlogPostImage>()
+                Images = new List<BlogPostImage>(),
+                Tags = tags
             };
 
             foreach (var imageFile in imageFiles)

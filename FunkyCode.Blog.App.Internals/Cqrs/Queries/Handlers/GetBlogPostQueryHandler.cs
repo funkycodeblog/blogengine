@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using FunkyCode.Blog.App.Core;
 using FunkyCode.Blog.App.Core.Infrastructure.Internals;
-
+using FunkyCode.Blog.App.Internals.Map;
 using FunkyCode.Blog.Domain.Entites;
 using FunkyCode.Blog.Domain.Entites.Client;
 
@@ -22,11 +22,13 @@ namespace FunkyCode.Blog.App
     {
         private readonly IMarkdownService _markdownService;
         private readonly IBlogRepository _blogRepository;
-        
-        public GetBlogPostQueryHandler(IMarkdownService markdownService, IBlogRepository blogRepository)
+        private readonly ITagMapper _tagMapper;
+
+        public GetBlogPostQueryHandler(IMarkdownService markdownService, IBlogRepository blogRepository, ITagMapper tagMapper)
         {
             _markdownService = markdownService;
             _blogRepository = blogRepository;
+            _tagMapper = tagMapper;
         }
 
         public async Task<BlogPostDto> Handle(GetBlogPostQuery query)
@@ -51,7 +53,8 @@ namespace FunkyCode.Blog.App
                 Id = postId,
                 Date = DateTime.Now,
                 Title = "Test title",
-                Content = postAsHtml
+                Content = postAsHtml,
+                Tags = _tagMapper.Map(blogPost.Tags).ToList()
             };
 
         }
@@ -68,12 +71,14 @@ namespace FunkyCode.Blog.App
         public async Task<List<BlogPostHeaderDto>> Handle(GetBlogPostHeadersQuery query)
         {
             var blockPosts = await _blogRepository.GetHeaders();
+
             var dtos = blockPosts.Select(p => new BlogPostHeaderDto
             {
                 Id = p.Id,
                 Title = p.Title,
                 Text = p.Header,
                 Published = p.PublishingDate,
+                Tags = _tagMapper.Map(p.Tags).ToList()
             }).ToList();
 
             return dtos;
