@@ -39,6 +39,21 @@ namespace FunkyCode.Blog.Inf.WebApi.Controllers
         }
 
         /// <summary>
+        ///     Returns all blog article headers
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("Tag/{tag}")]
+        public async Task<ActionResult<List<BlogPostHeaderDto>>> GetHeadersByTag(string tag)
+        {
+            var headers =
+                await _queryProcessor.Process<GetBlogPostHeadersByTagQuery, List<BlogPostHeaderDto>>(
+                    new GetBlogPostHeadersByTagQuery{Tag = tag});
+            return Ok(headers);
+        }
+
+
+
+        /// <summary>
         ///     Returns blog article by id.
         /// </summary>
         /// <returns></returns>
@@ -61,6 +76,17 @@ namespace FunkyCode.Blog.Inf.WebApi.Controllers
                 await _queryProcessor.Process<CheckIfExistsQuery, bool>(new CheckIfExistsQuery {Id = blogPostId});
             if (!isExists) return NoContent();
             return Ok();
+        }
+
+        /// <summary>
+        ///     Check if blog article exists.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("Tags")]
+        public async Task<ActionResult<BlogPostDto>> GetTags()
+        {
+            var tags = await _queryProcessor.Process<GetAllTagsQuery, string[]>(new GetAllTagsQuery());
+            return Ok(tags);
         }
 
         /// <summary>

@@ -1,7 +1,7 @@
 namespace FunkyCode.Blog.App
 {
-    public class CheckIfExistsQuery : IQuery
+    public class GetAllTagsQuery : IQuery
     {
-        public string Id { get; set; }
+     
     }
 }

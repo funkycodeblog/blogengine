@@ -13,18 +13,19 @@ using FunkyCode.Blog.Domain.Entites.Client;
 
 namespace FunkyCode.Blog.App
 {
-    public class GetBlogPostQueryHandler :  
+    public class QueriesHandler :  
         IQueryHandler<GetBlogPostQuery, BlogPostDto>,
         IQueryHandler<GetBlogPostImageQuery, byte[]>,
         IQueryHandler<GetBlogPostHeadersQuery, List<BlogPostHeaderDto>>,
-        IQueryHandler<CheckIfExistsQuery, bool>
-
+        IQueryHandler<GetBlogPostHeadersByTagQuery, List<BlogPostHeaderDto>>,
+        IQueryHandler<CheckIfExistsQuery, bool>,
+        IQueryHandler<GetAllTagsQuery, string[]>
     {
         private readonly IMarkdownService _markdownService;
         private readonly IBlogRepository _blogRepository;
         private readonly ITagMapper _tagMapper;
 
-        public GetBlogPostQueryHandler(IMarkdownService markdownService, IBlogRepository blogRepository, ITagMapper tagMapper)
+        public QueriesHandler(IMarkdownService markdownService, IBlogRepository blogRepository, ITagMapper tagMapper)
         {
             _markdownService = markdownService;
             _blogRepository = blogRepository;
@@ -84,10 +85,47 @@ namespace FunkyCode.Blog.App
             return dtos;
         }
 
+        public async Task<List<BlogPostHeaderDto>> Handle(GetBlogPostHeadersByTagQuery query)
+        {
+            var blockPosts = await _blogRepository.GetHeaders(query.Tag);
+            
+            var dtos = blockPosts.Select(p => new BlogPostHeaderDto
+            {
+                Id = p.Id,
+                Title = p.Title,
+                Text = p.Header,
+                Published = p.PublishingDate,
+                Tags = _tagMapper.Map(p.Tags).ToList()
+            }).ToList();
+
+            return dtos;
+        }
+
         public async Task<bool> Handle(CheckIfExistsQuery query)
         {
             var blogPost = await _blogRepository.GetBlogPostWithNoImages(query.Id);
             return blogPost != null;
         }
+
+        public async Task<string[]> Handle(GetAllTagsQuery query)
+        {
+            var tagsJoinedCollection = await _blogRepository.GetAllTags();
+
+            var tags = new List<string>();
+
+            foreach (var tagsJoined in tagsJoinedCollection)
+            {
+                var iTags = _tagMapper.Map(tagsJoined);
+                tags.AddRange(iTags.ToList());
+            }
+
+            var distincted = tags.Distinct()
+                .OrderBy(t => t)
+                .ToArray();
+
+            return distincted;
+        }
+
+      
     }
 }

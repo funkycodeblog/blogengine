@@ -10,6 +10,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:FunkyCode.Blog.Inf.WebApi.Controllers.BlogController.GetHeadersByTag(System.String)">
+            <summary>
+                Returns all blog article headers
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:FunkyCode.Blog.Inf.WebApi.Controllers.BlogController.Get(System.String)">
             <summary>
                 Returns blog article by id.
@@ -17,6 +23,12 @@
             <returns></returns>
         </member>
         <member name="M:FunkyCode.Blog.Inf.WebApi.Controllers.BlogController.CheckIfExists(System.String)">
+            <summary>
+                Check if blog article exists.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FunkyCode.Blog.Inf.WebApi.Controllers.BlogController.GetTags">
             <summary>
                 Check if blog article exists.
             </summary>

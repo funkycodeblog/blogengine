@@ -36,6 +36,30 @@ namespace FunkyCode.Blog.Inf.EntityFramework.Storages
             }
         }
 
+        public async Task<List<BlogPostHeader>> GetHeaders(string tag)
+        {
+            using (var context = new BlogContext(_options))
+            {
+                var tag1 = $"{tag};";
+                var tag2 = $";{tag};";
+                var tag3 = $";{tag}";
+
+                var headers = await context.BlogPosts
+                    .Where(p => p.Tags.StartsWith(tag1) || p.Tags.Contains(tag2) || p.Tags.EndsWith(tag3) || p.Tags == tag)
+                    .Select(p => new BlogPostHeader
+                {
+                    Id = p.Id,
+                    Header = p.Header,
+                    PublishingDate = p.PublishingDate,
+                    Status = p.Status,
+                    Title = p.Title,
+                    Tags = p.Tags
+                }).ToListAsync();
+
+                return headers;
+            }
+        }
+
         public async Task<bool> Add(BlogPost post)
         {
             using (var context = new BlogContext(_options))
@@ -84,6 +108,17 @@ namespace FunkyCode.Blog.Inf.EntityFramework.Storages
                 await context.SaveChangesAsync();
 
                 return true;
+            }
+        }
+
+        public async Task<string[]> GetAllTags()
+        {
+            using (var context = new BlogContext(_options))
+            {
+                var tags = await
+                    context.BlogPosts.Select(b => b.Tags).ToArrayAsync();
+
+                return tags;
             }
         }
     }
