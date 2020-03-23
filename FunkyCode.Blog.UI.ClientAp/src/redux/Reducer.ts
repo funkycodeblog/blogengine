@@ -53,7 +53,12 @@ export const funkyReducer: Reducer<IFunkyState, BlogEngineActions> = (
       };
     }
 
-
+    case FunkyActionTypes.GET_ARCHIVES_SUCCESS: {
+      return {
+        ...state,
+        archives: action.archives
+      };
+    }
 
     default:
       return state;

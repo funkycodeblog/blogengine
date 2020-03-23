@@ -11,6 +11,7 @@ import { ErrorInfo } from '../model/ErrorInfo';
 
 import { BlogInfoModel } from '../model/BlogInfoModel';
 import { BlogPost } from '../model/BlogPost';
+import { ArchiveYearDto } from '../model/ArchiveYearDto';
 
 
 
@@ -169,6 +170,43 @@ export const getArticlesByTagAction: ActionCreator<
   };
 };
 
+// ----------------------------------------------------------------------------------------
+
+export interface IGetArchivesAction {
+  type: FunkyActionTypes.GET_ARCHIVES;
+}
+
+export interface IGetArchivesAction_Success {
+  type: FunkyActionTypes.GET_ARCHIVES_SUCCESS;
+  archives: ArchiveYearDto[]
+}
+
+export const getArchives: ActionCreator<
+  ThunkAction<Promise<any>, IFunkyState, null, IGetArchivesAction_Success>
+> = () => {
+  return async (dispatch: Dispatch) => {
+    try {
+
+      dispatch(setLoadingStatusAction(true));
+
+      const getResponse = await iBlogService.GetArchives();
+      const isOk = checkResponseAndDispatchError(getResponse, dispatch);
+        if (!isOk) return;
+
+      const getResponseSuccess : IGetArchivesAction_Success = {
+        type: FunkyActionTypes.GET_ARCHIVES_SUCCESS,
+        archives: getResponse.Data
+      }
+
+      dispatch(getResponseSuccess);
+
+    } catch (err) {
+      console.error(err);
+    } finally {
+      dispatch(setLoadingStatusAction(false));
+    }
+  };
+};
 
 
 // ----------------------------------------------------------------------------------------

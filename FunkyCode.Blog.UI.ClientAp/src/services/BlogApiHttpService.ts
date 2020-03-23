@@ -4,13 +4,10 @@ import { BlogInfoModel } from "../model/BlogInfoModel"
 import { BlogPost } from "../model/BlogPost";
 import axios, { AxiosResponse } from 'axios';
 import IPathProvider from './PathProvider';
+import { ArchiveYearDto } from "../model/ArchiveYearDto";
 
 class BlogApiHttpService implements IBlogService
 {
-    
-    
-    
-
     async GetBlogInfos(): Promise<ServiceResponse<BlogInfoModel[]>> {
 
         const relativePath : string = `/api/Blog`;
@@ -47,7 +44,12 @@ class BlogApiHttpService implements IBlogService
         return createServiceResponse<string[]>(axiosResponse.data, axiosResponse.status, axiosResponse.statusText);
     }
 
-    
+    async GetArchives(): Promise<ServiceResponse<ArchiveYearDto[]>> {
+        
+        const url : string  = IPathProvider.GetApiUrl(`/api/Blog/Archives`);
+        const axiosResponse : AxiosResponse = await axios.get(url);
+        return createServiceResponse<ArchiveYearDto[]>(axiosResponse.data, axiosResponse.status, axiosResponse.statusText);
+    }
 
 }
 

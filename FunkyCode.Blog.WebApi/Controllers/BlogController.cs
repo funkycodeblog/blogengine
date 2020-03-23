@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using FunkyCode.Blog.App;
 using FunkyCode.Blog.App.Core.Commands;
+using FunkyCode.Blog.Domain;
 using FunkyCode.Blog.Domain.Entites.Client;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +40,7 @@ namespace FunkyCode.Blog.Inf.WebApi.Controllers
         }
 
         /// <summary>
-        ///     Returns all blog article headers
+        ///     Returns blog article headers by tag
         /// </summary>
         /// <returns></returns>
         [HttpGet("Tag/{tag}")]
@@ -79,7 +80,7 @@ namespace FunkyCode.Blog.Inf.WebApi.Controllers
         }
 
         /// <summary>
-        ///     Check if blog article exists.
+        ///     Get all tags.
         /// </summary>
         /// <returns></returns>
         [HttpGet("Tags")]
@@ -88,6 +89,19 @@ namespace FunkyCode.Blog.Inf.WebApi.Controllers
             var tags = await _queryProcessor.Process<GetAllTagsQuery, string[]>(new GetAllTagsQuery());
             return Ok(tags);
         }
+
+        /// <summary>
+        ///     Get archive.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("Archives")]
+        public async Task<ActionResult<List<ArchiveYearDto>>> GetArchives()
+        {
+            var tags = await _queryProcessor.Process<GetArchiveQuery, List<ArchiveYearDto>>(new GetArchiveQuery());
+            return Ok(tags);
+        }
+
+
 
         /// <summary>
         ///     Get image from blog article.

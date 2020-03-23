@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using FunkyCode.Blog.App.Core;
 using FunkyCode.Blog.App.Core.Infrastructure.Internals;
 using FunkyCode.Blog.App.Internals.Map;
+using FunkyCode.Blog.Domain;
 using FunkyCode.Blog.Domain.Entites;
 using FunkyCode.Blog.Domain.Entites.Client;
 
@@ -19,7 +20,8 @@ namespace FunkyCode.Blog.App
         IQueryHandler<GetBlogPostHeadersQuery, List<BlogPostHeaderDto>>,
         IQueryHandler<GetBlogPostHeadersByTagQuery, List<BlogPostHeaderDto>>,
         IQueryHandler<CheckIfExistsQuery, bool>,
-        IQueryHandler<GetAllTagsQuery, string[]>
+        IQueryHandler<GetAllTagsQuery, string[]>,
+        IQueryHandler<GetArchiveQuery, List<ArchiveYearDto>>
     {
         private readonly IMarkdownService _markdownService;
         private readonly IBlogRepository _blogRepository;
@@ -126,6 +128,28 @@ namespace FunkyCode.Blog.App
             return distincted;
         }
 
-      
+
+        public async Task<List<ArchiveYearDto>> Handle(GetArchiveQuery query)
+        {
+            var headers = await _blogRepository.GetHeaders();
+
+            var ordered = headers.OrderByDescending(h => h.PublishingDate);
+
+            var byYear = ordered.GroupBy(h => h.PublishingDate.Year);
+
+            var model = byYear.Select(b => new ArchiveYearDto
+            {
+                Year = b.Key,
+                Articles = b.Select(h => new ArchiveArticleDto
+                {
+                    Id = h.Id,
+                    Title = h.Title,
+                    Tags = _tagMapper.Map(h.Tags).ToList()
+                }).ToList()
+            }).ToList();
+
+            return model;
+
+        }
     }
 }

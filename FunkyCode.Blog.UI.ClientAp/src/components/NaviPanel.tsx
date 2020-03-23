@@ -42,7 +42,7 @@ class NaviPanel extends Component<Props, State>  {
               </ListItem>
 
               <ListItem button key='key02'>
-                <Link style={{ textDecoration: 'none', color: 'white' }} to={BlogEngineSettings.AboutPath}>archives</Link>
+                <Link style={{ textDecoration: 'none', color: 'white' }} to={BlogEngineSettings.ArchivesPath}>archives</Link>
               </ListItem>
         </List>
 
