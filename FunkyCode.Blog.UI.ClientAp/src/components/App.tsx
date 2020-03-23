@@ -2,7 +2,7 @@ import * as React from 'react';
 import '../App.css';
 import { hot } from 'react-hot-loader';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { AboutPage } from './pages/AboutPage'
+import AboutPage  from './pages/AboutPage'
 import { BlogEngineSettings } from '../config/BlogEngineSettings'
 import BlogInfosPage from './pages/BlogInfosPage'
 import BlockPostPage  from './pages/BlockPostPage';

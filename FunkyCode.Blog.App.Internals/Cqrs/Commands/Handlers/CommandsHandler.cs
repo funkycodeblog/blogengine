@@ -40,7 +40,7 @@ namespace FunkyCode.Blog.App.Core.Commands
 
             var date = metadata.PublishedDate ?? DateTime.Now;
             var postId = metadata.Id;
-            var tags = _tagMapper.Map(metadata.Categories.ToArray());
+            var tags = _tagMapper.Map(metadata.Categories?.ToArray());
 
             var blogPost = new BlogPost
             {

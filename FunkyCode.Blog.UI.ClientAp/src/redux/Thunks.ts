@@ -1,7 +1,7 @@
 import { ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import iBlogService  from '../services/MockBlogService';
+import iBlogService  from '../services/BlogApiHttpService';
 
 import { IFunkyState } from './State';
 import { setLoadingStatusAction, setErrorInfoAction } from './Actions';
@@ -91,6 +91,87 @@ export const getBlogPost: ActionCreator<
     }
   };
 };
+
+// ----------------------------------------------------------------------------------------
+
+export interface IGetAllTagsAction {
+  type: FunkyActionTypes.GET_ALL_TAGS;
+}
+
+export interface IGetAllTagsAction_Success {
+  type: FunkyActionTypes.GET_ALL_TAGS_SUCCESS;
+  tags: string[]
+}
+
+export const getAllTags: ActionCreator<
+  ThunkAction<Promise<any>, IFunkyState, null, IGetAllTagsAction_Success>
+> = () => {
+  return async (dispatch: Dispatch) => {
+    try {
+
+      dispatch(setLoadingStatusAction(true));
+
+      const getAllTagsResponse = await iBlogService.GetAllTags();
+      const isOk = checkResponseAndDispatchError(getAllTagsResponse, dispatch);
+        if (!isOk) return;
+
+      const getAllTagsResponseSuccess : IGetAllTagsAction_Success = {
+        type: FunkyActionTypes.GET_ALL_TAGS_SUCCESS,
+        tags: getAllTagsResponse.Data
+      }
+
+      dispatch(getAllTagsResponseSuccess);
+
+    } catch (err) {
+      console.error(err);
+    } finally {
+      dispatch(setLoadingStatusAction(false));
+    }
+  };
+};
+
+// ----------------------------------------------------------------------------------------
+
+export interface IGetArticlesByTagAction {
+  type: FunkyActionTypes.GET_BLOG_ARTICLES_BY_TAGS;
+  tag: string;
+}
+
+export interface IGetArticlesByTagAction_Success {
+  type: FunkyActionTypes.GET_BLOG_ARTICLES_BY_TAGS_SUCCESS;
+  blogInfos: BlogInfoModel[]
+}
+
+export const getArticlesByTagAction: ActionCreator<
+  ThunkAction<Promise<any>, IFunkyState, null, IGetArticlesByTagAction_Success>
+> = (tag: string) => {
+  return async (dispatch: Dispatch) => {
+    try {
+
+      dispatch(setLoadingStatusAction(true));
+
+      const getPostsByTagResponse = await iBlogService.GetBlogInfosByTag(tag);
+      const isOk = checkResponseAndDispatchError(getPostsByTagResponse, dispatch);
+        if (!isOk) return;
+
+      const getPostsByTagResponseSuccess : IGetArticlesByTagAction_Success = {
+        type: FunkyActionTypes.GET_BLOG_ARTICLES_BY_TAGS_SUCCESS,
+        blogInfos: getPostsByTagResponse.Data
+      }
+
+      dispatch(getPostsByTagResponseSuccess);
+
+    } catch (err) {
+      console.error(err);
+    } finally {
+      dispatch(setLoadingStatusAction(false));
+    }
+  };
+};
+
+
+
+// ----------------------------------------------------------------------------------------
 
 function checkResponseAndDispatchError(response: ServiceResponse<any>, dispatch : Dispatch) : boolean
 {

@@ -64,7 +64,19 @@ namespace FunkyCode.Blog.Inf
 
                     _logger.Info($"Posting blog to: {_url} ...");
                     var response = client.PostAsync(_url, formData).Result;
-                    _logger.Success($"Posted!");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        _logger.Success($"Posted!");
+                        _logger.Info($"Status code: {response.StatusCode}");
+                        _logger.Info(response.ReasonPhrase);
+
+                    }
+                    else
+                    {
+                        _logger.Error($"Status code: {response.StatusCode}");
+                        _logger.Error(response.ReasonPhrase);
+                    }
+                 
                 }
             }
         }
@@ -72,7 +84,10 @@ namespace FunkyCode.Blog.Inf
 
         private bool CheckMarkdownFile(HttpClient client, string filePath, bool isOverrideWhenExists)
         {
+            
             var file = File.ReadAllText(filePath);
+            
+            _logger.Info("Obtaining metadata...");
             var metadataProcessingResult = _blockBlogPostMetadataResolver.Resolve(file);
             var metadata = metadataProcessingResult.Result;
             

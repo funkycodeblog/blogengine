@@ -15,6 +15,12 @@ export enum FunkyActionTypes {
   GET_BLOG_POST = 'GET_BLOG_POST',
   GET_BLOG_POST_SUCCESS = 'GET_BLOG_POST_SUCCESS',
 
+  GET_ALL_TAGS = 'GET_ALL_TAGS',
+  GET_ALL_TAGS_SUCCESS = 'GET_ALL_TAGS_SUCCESS',
+
+  GET_BLOG_ARTICLES_BY_TAGS = 'GET_BLOG_ARTICLES_BY_TAGS',
+  GET_BLOG_ARTICLES_BY_TAGS_SUCCESS = 'GET_BLOG_ARTICLES_BY_TAGS_SUCCESS',
+
 }
 
 // ----------------------------------------------------------------------------------------
@@ -26,5 +32,8 @@ export type BlogEngineActions =
   | Thunks.IGetBlogInfosAction_Success
   | Thunks.IGetBlogPostAction
   | Thunks.IGetBlogPostAction_Success
+  | Thunks.IGetAllTagsAction
+  | Thunks.IGetAllTagsAction_Success
+  | Thunks.IGetArticlesByTagAction
+  | Thunks.IGetArticlesByTagAction_Success
   
-

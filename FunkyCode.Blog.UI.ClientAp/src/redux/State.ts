@@ -6,6 +6,7 @@ export interface IFunkyState {
   
   readonly blogInfos? : BlogInfoModel[],
   readonly currentPost?: BlogPost
+  readonly tags? : string[];
 
   errorInfo? : ErrorInfo,
   isLoading: boolean

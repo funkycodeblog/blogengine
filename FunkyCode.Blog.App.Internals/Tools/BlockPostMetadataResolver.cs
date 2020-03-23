@@ -18,22 +18,41 @@ namespace FunkyCode.Blog.App.Internals.Tools
             var datePattern = "<!-- Date: (?<match>.*) -->";
             var categoriesPattern = "<!-- Categories: (?<match>.*) -->";
             var headerPattern = "<!-- #header -->(?<match>(?s).*)<!-- #endheader -->";
+            var pagePattern = "<!-- Page -->";
 
             var titleToProcess = blog.Split(Environment.NewLine).FirstOrDefault();
             var title = titleToProcess.Replace("# ", "");
 
             var id = GetMatched(blog, idPattern);
+            var isArticle = !blog.Contains(pagePattern);
+            
+            result.AddRequiredMessageIfNullOrEmpty(nameof(BlogPostMetadata.Title), title);
+            result.AddRequiredMessageIfNullOrEmpty(nameof(BlogPostMetadata.Id), id);
+
+            if (!isArticle)
+            {
+                result.Result = new BlogPostMetadata
+                {
+                    Id = id,
+                    Title = title,
+                    PostType = BlogPostMetadata.PostTypeEnum.Page
+                };
+
+                result.Status = result.Messages.Count == 0 ? ProcessingStatus.Ok : ProcessingStatus.Error;
+                return result;
+            }
+
             var date = GetMatched(blog, datePattern).Trim();
             var categories = GetMatched(blog, categoriesPattern);
             var header = GetMatched(blog, headerPattern);
             var headerNoNewLines = header.Replace(Environment.NewLine, "");
 
-            result.AddRequiredMessageIfNullOrEmpty(nameof(BlogPostMetadata.Title), title);
-            result.AddRequiredMessageIfNullOrEmpty(nameof(BlogPostMetadata.Id), id);
+
+
             result.AddRequiredMessageIfNullOrEmpty(nameof(BlogPostMetadata.Header), header);
-            result.AddRequiredMessageIfNullOrEmpty(nameof(BlogPostMetadata.Categories), categories);
-            result.AddRequiredMessageIfNullOrEmpty(nameof(BlogPostMetadata.PublishedDate), date);
-            
+                result.AddRequiredMessageIfNullOrEmpty(nameof(BlogPostMetadata.Categories), categories);
+                result.AddRequiredMessageIfNullOrEmpty(nameof(BlogPostMetadata.PublishedDate), date);
+
             var categoriesAsList = categories.Split(',')
                 .Select(i => i.Trim())
                 .ToListSafe();
@@ -49,7 +68,8 @@ namespace FunkyCode.Blog.App.Internals.Tools
                 Title = title,
                 Header = headerNoNewLines,
                 Categories = categoriesAsList,
-                PublishedDate = datetime
+                PublishedDate = datetime,
+                PostType = BlogPostMetadata.PostTypeEnum.Article
             };
 
             result.Status = result.Messages.Count == 0 ? ProcessingStatus.Ok : ProcessingStatus.Error;
@@ -59,6 +79,8 @@ namespace FunkyCode.Blog.App.Internals.Tools
         string GetMatched(string content, string pattern)
         {
             var isMatched = RegexHelper.Match(content, pattern, out var result);
+            if (!isMatched) return null;
+            
             var match = result["match"];
             return match.Trim();
         }

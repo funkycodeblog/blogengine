@@ -10,7 +10,7 @@ import { Store } from 'redux';
 
 // Import the store function and state
 import configureStore, { IAppState } from './redux/Store';
-import { getBlogInfos } from './redux/Thunks';
+import { getBlogInfos, getAllTags } from './redux/Thunks';
 
 import './index.css';
 
@@ -49,6 +49,7 @@ const Root: React.SFC<IProps> = props => {
 // Generate the store
 export const funkyStore = configureStore();
 funkyStore.dispatch(getBlogInfos());
+funkyStore.dispatch(getAllTags());
 
 // Render the App
 ReactDOM.render(<Root store={funkyStore} />, document.getElementById(

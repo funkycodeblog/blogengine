@@ -11,7 +11,6 @@ export const funkyReducer: Reducer<IFunkyState, BlogEngineActions> = (
   switch (action.type) {
 
     case FunkyActionTypes.SET_LOADING_STATUS: {
-
       return {
         ...state,
         isLoading: action.isLoading
@@ -19,7 +18,6 @@ export const funkyReducer: Reducer<IFunkyState, BlogEngineActions> = (
     }
 
     case FunkyActionTypes.SET_ERROR_INFO: {
-
       return {
         ...state,
         errorInfo: action.error,
@@ -31,8 +29,9 @@ export const funkyReducer: Reducer<IFunkyState, BlogEngineActions> = (
       };
     }
 
-    case FunkyActionTypes.GET_BLOG_INFOS_SUCCESS: {
-
+    case FunkyActionTypes.GET_BLOG_INFOS_SUCCESS:
+    case FunkyActionTypes.GET_BLOG_ARTICLES_BY_TAGS_SUCCESS:
+       {
       return {
         ...state,
         blogInfos: action.blogInfos
@@ -41,12 +40,19 @@ export const funkyReducer: Reducer<IFunkyState, BlogEngineActions> = (
     }
 
     case FunkyActionTypes.GET_BLOG_POST_SUCCESS: {
-
       return {
         ...state,
         currentPost: action.blogPost
       };
     }
+
+    case FunkyActionTypes.GET_ALL_TAGS_SUCCESS: {
+      return {
+        ...state,
+        tags: action.tags
+      };
+    }
+
 
 
     default:

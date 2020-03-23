@@ -23,6 +23,7 @@ namespace FunkyCode.Blog.Domain.Entites
     public enum BlogStatusTypeEnum
     {
         Active,
-        New
+        New,
+        Page
     }
 }

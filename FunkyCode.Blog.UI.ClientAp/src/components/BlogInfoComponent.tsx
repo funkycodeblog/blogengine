@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BlogInfoModel } from '../model/BlogInfoModel';
 import { Typography, Button } from '@material-ui/core';
 import { resolvePostDate } from '../tools/tools';
+import { TagBox } from './UIComponents/TagBox';
 
 
 
@@ -9,6 +10,7 @@ interface Props {
     
     blogInfo: BlogInfoModel
     handleBlogInfoSelected: (id: string) => void;
+    handleTagSelected: (tag: string) => void;
 
 }
 
@@ -22,11 +24,9 @@ export class BlogInfoComponent extends Component<Props, {}> {
 
         return <div style={{width: '750px'}}>
         <Typography style = {{color: 'gray'}} >{ resolvePostDate(blogInfo.published)}  </Typography>
-        <div>
-            { blogInfo.tags.map( tag => 
-                <span style={{borderWidth: 1, borderStyle: 'solid', marginLeft: '1px', marginRight: '1px', paddingLeft: '1px', paddingRight: '1px'}} key={tag}>{tag}</span>
-            ) }
-        </div>
+
+        <TagBox type='article' tags={blogInfo.tags} tagSelected={this.props.handleTagSelected}  />
+        
            <Typography  variant="h4" >{blogInfo.title}</Typography>
            <Typography>{blogInfo.text}</Typography>
            <Button onClick={this.handleClick.bind(this)} variant="outlined">Read more</Button>
@@ -37,6 +37,8 @@ export class BlogInfoComponent extends Component<Props, {}> {
         
         this.props.handleBlogInfoSelected(this.props.blogInfo.id);
     }
+
+    
     
 }
 

@@ -18,7 +18,7 @@ namespace FunkyCode.Blog.App.Core.Infrastructure.Internals
         public void AddRequiredMessageIfNullOrEmpty(string propName, string value)
         {
             if (string.IsNullOrEmpty(value))
-                Messages.Add($"{value} is required!");
+                Messages.Add($"{propName} is required!");
         }
 
 

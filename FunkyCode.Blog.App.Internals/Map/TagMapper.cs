@@ -8,11 +8,13 @@ namespace FunkyCode.Blog.App.Internals.Map
     {
         public string[] Map(string first)
         {
-            return first.Split(';');
+            if (string.IsNullOrEmpty(first)) return new string[0];
+            return first.Split(';'); 
         }
 
         public string Map(string[] second)
         {
+            if (second == null) return string.Empty;
             return string.Join(';', second);
         }
 

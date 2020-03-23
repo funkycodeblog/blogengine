@@ -7,9 +7,15 @@ import { MyAvatar} from '../components/UIComponents/MyAvatar'
 import { Typography, List, ListItem } from '@material-ui/core';
 import { BlogEngineSettings } from '../config/BlogEngineSettings';
 import { Link } from 'react-router-dom';
+import { TagBox } from './UIComponents/TagBox'
+import { getArticlesByTagAction } from '../redux/Thunks';
+import { IFunkyState } from '../redux/State';
 
 interface Props {
- 
+  
+  dispatch: ThunkDispatch<any, any, AnyAction>;
+  tags?: string[] ;
+
 }
 
 interface State  {
@@ -38,24 +44,35 @@ class NaviPanel extends Component<Props, State>  {
               <ListItem button key='key02'>
                 <Link style={{ textDecoration: 'none', color: 'white' }} to={BlogEngineSettings.AboutPath}>archives</Link>
               </ListItem>
-
-              
         </List>
+
+        <div style={{paddingTop: '30px', paddingLeft: '30px', paddingRight: '30px'}} >
+          <TagBox type='navi' tags= {this.props.tags } tagSelected={this.tagSelected.bind(this)} />
+        </div>
 
 
         </div>
     }
+
+    private tagSelected(tag: string) {
+      
+      this.props.dispatch(getArticlesByTagAction(tag));
+    
+    }
 }
 
 const mapStateToProps = (store: IAppState) => {
-    return {
-     
-    };
+
+  const state: IFunkyState = store.funkyState;
+  return {
+    tags: state.tags
+  };
+
 };
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     return {
-
+      dispatch
     };
   };
 

@@ -11,7 +11,7 @@ import { BlogInfoComponent } from '../BlogInfoComponent';
 import { IFunkyState } from '../../redux/State';
 import { isNullOrUndefined } from 'util';
 import { Spacer } from '../Spacer';
-import { getBlogPost } from '../../redux/Thunks';
+import { getBlogPost, getArticlesByTagAction } from '../../redux/Thunks';
 
 interface Props  {
 
@@ -48,11 +48,12 @@ class BlogInfosPage extends Component<Props, State>  {
       {blogInfos.map( blogInfo => 
       
         <div key={blogInfo.id}>
-        <BlogInfoComponent blogInfo={blogInfo} handleBlogInfoSelected={this.handleBlogArticleSelected.bind(this)} />
+        <BlogInfoComponent blogInfo={blogInfo} 
+          handleBlogInfoSelected={this.handleBlogArticleSelected.bind(this)} 
+          handleTagSelected={this.handleTagSelected.bind(this)} />
         <Spacer height = {20} />
         </div>
       )}
-
 
       </div>
       
@@ -63,6 +64,12 @@ class BlogInfosPage extends Component<Props, State>  {
     
        this.props.dispatch(getBlogPost(id));
        this.setState({isRedirectToBlog: true});
+
+  }
+
+  handleTagSelected(tag: string) : void {
+
+    this.props.dispatch(getArticlesByTagAction(tag));
 
   }
 
