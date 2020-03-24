@@ -1,6 +1,6 @@
 export interface ArchiveArticleDto
 {
-    Id: string;
-    Title: string;
-    Tags: string[];
+    id: string;
+    title: string;
+    tags: string[];
 }

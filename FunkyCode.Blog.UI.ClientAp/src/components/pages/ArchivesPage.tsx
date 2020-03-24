@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import BlogPostPage from './BlockPostPage';
-import { IAppState } from '../../redux/Store';
-import { ThunkDispatch } from 'redux-thunk';
-import { AnyAction } from 'redux';
-import { getBlogPost, getArchives } from '../../redux/Thunks';
 import { connect } from 'react-redux';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { isNullOrUndefined } from 'util';
 import { ArchiveYearDto } from '../../model/ArchiveYearDto';
 import { IFunkyState } from '../../redux/State';
+import { IAppState } from '../../redux/Store';
+import { getArchives } from '../../redux/Thunks';
+import { ArchiveYearComponent } from './ArchiveYearComponent';
+import { ArchiveTitleComponent } from './ArchiveTitleComponent';
 
 interface Props {
     archives?: ArchiveYearDto[];
@@ -25,9 +27,29 @@ class ArchivesPage extends Component<Props, State>  {
     }
 
     render() {
-       
-        console.log(this.props.archives);
-        return <div>:)</div>
+        
+        const {archives} = this.props;
+        if (isNullOrUndefined(archives)) return null;
+
+        return <div>
+            { archives.map(y => {
+
+                return <div> 
+                    <ArchiveYearComponent year={y} />
+                    {
+                        y.articles.map(a => <ArchiveTitleComponent article = {a} /> )
+                    }
+
+                </div>
+
+            }
+                
+
+               
+
+            )}
+
+        </div>
     }
 }
 
