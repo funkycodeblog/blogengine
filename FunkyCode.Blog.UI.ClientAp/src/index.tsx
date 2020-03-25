@@ -48,7 +48,7 @@ const Root: React.SFC<IProps> = props => {
 
 // Generate the store
 export const funkyStore = configureStore();
-funkyStore.dispatch(getBlogInfos());
+
 funkyStore.dispatch(getAllTags());
 
 // Render the App

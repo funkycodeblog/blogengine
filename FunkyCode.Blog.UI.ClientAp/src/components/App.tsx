@@ -6,7 +6,11 @@ import AboutPage  from './pages/AboutPage'
 import { BlogEngineSettings } from '../config/BlogEngineSettings'
 import BlogInfosPage from './pages/BlogInfosPage'
 import BlockPostPage  from './pages/BlockPostPage';
+import BlockInfosByTagPage  from './pages/BlogInfosByTag';
+
 import ArchivesPage  from './pages/ArchivesPage';
+
+
 import { connect } from 'react-redux';
 import { IAppState } from '../redux/Store';
 import { ErrorInfo } from '../model/ErrorInfo';
@@ -29,11 +33,12 @@ const RootApp: React.SFC<IProps> = () => {
             <NaviPanel />
         </div>
 
-        <div style={{height: '100%', width: '100%', background: 'white', position: 'fixed', left: '300px', top: '0px'}} >
+        <div style={{height: '100%', width: '100%', background: 'white', position: 'fixed', left: '300px', top: '0px', paddingLeft: '30px'}} >
           <Route exact path={BlogEngineSettings.MainPath} component={BlogInfosPage} />
           <Route path={BlogEngineSettings.AboutPath} component={AboutPage} /> 
           <Route path={BlogEngineSettings.ArchivesPath} component={ArchivesPage} /> 
           <Route path={BlogEngineSettings.BlogPostPath} component={BlockPostPage} /> 
+          <Route path={BlogEngineSettings.TagPath} component={BlockInfosByTagPage} /> 
         </div>
 
         <Progress />

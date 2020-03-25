@@ -12,14 +12,31 @@ import Prism from "prismjs"
 import csharp from 'prismjs/components/prism-csharp';
 // @ts-ignore;
 import sql from 'prismjs/components/prism-sql';
+import { RouteComponentProps } from 'react-router-dom';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { getBlogPost } from '../../redux/Thunks';
 
-interface Props  {
-  post?: BlogPost
+
+
+interface Props extends RouteComponentProps<TParams> 
+{
+  post?: BlogPost;
+  dispatch: ThunkDispatch<any, any, AnyAction>;
+  
 }
+
+type TParams = {
+  id : string;
+}
+
+
 
 interface State {
 
 }
+
+
 
 class BlockPostPage extends Component<Props, State>  {
 
@@ -28,6 +45,12 @@ class BlockPostPage extends Component<Props, State>  {
   {
     // this is temporary workaround for receiving 
     console.log('csharp',csharp, sql);
+    console.log(this.props.match.params.id)
+
+    const { id } = this.props.match.params;
+
+    this.props.dispatch(getBlogPost(id))
+
   }
  
 
@@ -56,26 +79,9 @@ class BlockPostPage extends Component<Props, State>  {
     if (isNullOrUndefined(source))
       return null;
 
-    // return <pre>
-    //   <code className='language-csharp'>
-    //   {`public void OnLogging(Customer customer)
-    //     {
-    //         // (...)
-      
-    //         if (customer.Accounts.Count >= 10)
-    //             ConvertToPremiumCustomer(customer);
-      
-    //         // (...)
-    //     }
-    //   `}
-    //   </code>
-    // </pre>
-      
-
     return  <div style={{display: 'block', overflowX: 'auto', overflowY: 'auto', height: '100%', paddingRight: '20%' }}>
         <div dangerouslySetInnerHTML={this.createMarkup(source)}  />
     </div>
-    
     
   }
 
@@ -89,9 +95,9 @@ class BlockPostPage extends Component<Props, State>  {
 
 }
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
   return {
-  
+      dispatch
   };
 };
 

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { CSSProperties } from 'react'
+import { BlogEngineSettings } from '../../config/BlogEngineSettings';
+import { Link } from 'react-router-dom';
 
 interface Props {
     name: string,
@@ -15,12 +17,11 @@ export class Tag extends Component<Props, State>  {
 
     render() {
         const {name, customStyle} = this.props;
-        return <div style={customStyle} onClick={this.handleClick.bind(this)} > {name}</div>
+        const path = BlogEngineSettings.ResolveTagPath(name);
+        return <Link style={customStyle} to={path}>{name}</Link>        
+        
     }
-
-    handleClick() {
-        this.props.tagSelected(this.props.name);
-    }
+  
 }
 
 

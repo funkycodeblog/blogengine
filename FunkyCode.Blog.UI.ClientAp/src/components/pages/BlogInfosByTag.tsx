@@ -6,30 +6,48 @@ import { ThunkDispatch } from 'redux-thunk';
 import { IAppState } from '../../redux/Store';
 import { BlogInfoModel } from '../../model/BlogInfoModel';
 import { IFunkyState } from '../../redux/State';
-import { getBlogInfos } from '../../redux/Thunks';
-import BlogInfosContainer from '../pages/BlogInfosContainer';
+import { getArticlesByTagAction } from '../../redux/Thunks';
+import BlogInfosContainer from './BlogInfosContainer';
+import { RouteComponentProps } from 'react-router-dom';
 import { isNullOrUndefined } from 'util';
 
-interface Props {
+type TParams = {
+  tag : string;
+}
 
+interface Props extends RouteComponentProps<TParams> {
   blogInfos?: BlogInfoModel[],
   dispatch: ThunkDispatch<any, any, AnyAction>
-
 }
 
 interface State {
 
 }
 
-export class BlogInfosPage extends Component<Props, State>  {
+export class BlogInfosByTagPage extends Component<Props, State>  {
 
   componentDidMount() {
-    this.props.dispatch(getBlogInfos());
+    const {tag} = this.props.match.params;
+    this.props.dispatch(getArticlesByTagAction(tag));
   }
+
+  componentWillReceiveProps(newProps : Props ) {
+
+    const oldTag = this.props.match.params.tag;
+    const {tag} = newProps.match.params;
+
+    if (oldTag !== tag)
+    {
+      this.props.dispatch(getArticlesByTagAction(tag));
+    }
+  }
+
 
   render() {
     const { blogInfos } = this.props;
+    
     if (isNullOrUndefined(blogInfos)) return null;
+
     return blogInfos && <BlogInfosContainer blogInfos={blogInfos} />
   }
 
@@ -51,7 +69,7 @@ const mapStateToProps = (store: IAppState) => {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BlogInfosPage);
+export default connect(mapStateToProps, mapDispatchToProps)(BlogInfosByTagPage);
 
 
 

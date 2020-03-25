@@ -9,6 +9,7 @@ import { IAppState } from '../../redux/Store';
 import { getArchives } from '../../redux/Thunks';
 import { ArchiveYearComponent } from './ArchiveYearComponent';
 import { ArchiveTitleComponent } from './ArchiveTitleComponent';
+import { Spacer } from '../Spacer';
 
 interface Props {
     archives?: ArchiveYearDto[];
@@ -31,14 +32,15 @@ class ArchivesPage extends Component<Props, State>  {
         const {archives} = this.props;
         if (isNullOrUndefined(archives)) return null;
 
-        return <div>
+        return <div style={{paddingTop: '30px'}}>
             { archives.map(y => {
 
-                return <div> 
+                return <div key={y.year} > 
                     <ArchiveYearComponent year={y} />
                     {
-                        y.articles.map(a => <ArchiveTitleComponent article = {a} /> )
+                        y.articles.map(a => <ArchiveTitleComponent key = {a.id} article = {a} /> )
                     }
+                    <Spacer height={20} />
 
                 </div>
 

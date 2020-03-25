@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ArchiveYearDto } from '../../model/ArchiveYearDto';
+import { Typography } from '@material-ui/core';
 
 interface Props {
     year: ArchiveYearDto;
@@ -13,7 +14,7 @@ export class ArchiveYearComponent extends Component<Props, State>  {
 
     render() {
         const {year} = this.props;
-        console.log(year);
-        return <div>{year.year}</div>
+       
+        return <Typography variant = 'h4'>{year.year}</Typography>
     }
 }

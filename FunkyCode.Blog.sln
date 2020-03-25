@@ -68,6 +68,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Articles", "Articles", "{59
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyCode.Blog.Inf.ScriptEngine", "FunkyCode.Blog.Inf.ScriptEngine\FunkyCode.Blog.Inf.ScriptEngine.csproj", "{06902420-01D5-4213-ABEF-566704FD614E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunkyCode.Blog.Test.Unit", "FunkyCode.Blog.Test.Unit\FunkyCode.Blog.Test.Unit.csproj", "{E889483C-5EED-413A-931A-5C4AF1395E4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,6 +112,10 @@ Global
 		{06902420-01D5-4213-ABEF-566704FD614E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06902420-01D5-4213-ABEF-566704FD614E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06902420-01D5-4213-ABEF-566704FD614E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E889483C-5EED-413A-931A-5C4AF1395E4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E889483C-5EED-413A-931A-5C4AF1395E4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E889483C-5EED-413A-931A-5C4AF1395E4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E889483C-5EED-413A-931A-5C4AF1395E4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -131,6 +137,7 @@ Global
 		{F344B514-F078-4C8E-8D6E-5A60E2628A71} = {54E8B3A5-506A-48E8-96BA-48D823ACF8B8}
 		{5919A651-F08B-44C8-9587-7D89153ABF87} = {178D2999-F9E2-42E1-80B1-7E74DAE42872}
 		{06902420-01D5-4213-ABEF-566704FD614E} = {54E8B3A5-506A-48E8-96BA-48D823ACF8B8}
+		{E889483C-5EED-413A-931A-5C4AF1395E4B} = {35A39431-511F-4C87-816F-2188DE6030AB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4D2052BF-4746-4303-A548-5F6A3408DA5C}

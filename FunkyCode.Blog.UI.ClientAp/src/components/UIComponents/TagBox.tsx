@@ -50,6 +50,7 @@ const tagNaviStyle : CSSProperties = {
     marginRight: '1px', 
     paddingLeft: '1px', 
     paddingRight: '1px',
+    textDecoration: 'none'
     
 }
 
@@ -67,7 +68,7 @@ const tagArticleStyle : CSSProperties = {
     marginRight: '1px', 
     paddingLeft: '1px', 
     paddingRight: '1px',
-    
+    textDecoration: 'none'
 }
 
 const boxStyle : CSSProperties = {
