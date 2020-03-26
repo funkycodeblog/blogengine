@@ -28,19 +28,21 @@ const RootApp: React.SFC<IProps> = () => {
 
     return ( 
     <Router>
-    <div style={{height: '100%', width: '100%', display: 'block'}} >
+    <div style={{height: '100%', width: '100%', display: 'block', position: 'fixed', top: '0px', left: '0px'}} >
         
-        <div style={{display: 'block', position: 'fixed', left: '0px', top: '0px', width: '300px', height: '100%', background: 'red'}} >
+        <div style={{float: 'left', width: '300px', height: '100%'}} >
             <NaviPanel />
         </div>
 
-        <div style={{height: '100%', width: '100%', background: 'white', position: 'fixed', left: '300px', top: '0px', paddingLeft: '30px'}} >
+        <div style={{float: 'left', height: '100%', width: 'calc(100% - 300px)', background: 'white', overflowY: 'auto'}}>
+          <div style = {{ paddingLeft: '30px', height: '100%' }} >
           <Route exact path={BlogEngineSettings.MainPath} component={BlogInfosPage} />
           <Route path={BlogEngineSettings.AboutPath} component={AboutPage} /> 
           <Route path={BlogEngineSettings.ArchivesPath} component={ArchivesPage} /> 
           <Route path={BlogEngineSettings.BlogPostPath} component={BlockPostPage} /> 
           <Route path={BlogEngineSettings.TagPath} component={BlockInfosByTagPage} /> 
           <Route path={BlogEngineSettings.SearchPath} component={BlogInfosBySearchPage} /> 
+          </div>
         </div>
 
         <Progress />

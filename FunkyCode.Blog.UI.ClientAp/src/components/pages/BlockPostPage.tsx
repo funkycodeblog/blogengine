@@ -48,6 +48,7 @@ class BlockPostPage extends Component<Props, State>  {
     console.log(this.props.match.params.id)
 
     const { id } = this.props.match.params;
+  
 
     this.props.dispatch(getBlogPost(id))
 
@@ -79,7 +80,7 @@ class BlockPostPage extends Component<Props, State>  {
     if (isNullOrUndefined(source))
       return null;
 
-    return  <div style={{display: 'block', overflowX: 'auto', overflowY: 'auto', height: '100%', paddingRight: '20%' }}>
+    return  <div style={{height: '100%', minWidth: '500px', paddingRight: '50%'}}>
         <div dangerouslySetInnerHTML={this.createMarkup(source)}  />
     </div>
     

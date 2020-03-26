@@ -29,7 +29,9 @@ class NaviPanel extends Component<Props, State>  {
         return <div style={{background: 'black', width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', }}>
         <div style={{height: '50px'}}/>
         
-        <MyAvatar size={120}/>
+        <Link to={BlogEngineSettings.MainPath}>
+          <MyAvatar size={120}/>
+        </Link>
 
         <div style={{height: '20px'}}/>
 

@@ -48,7 +48,7 @@ class BlogInfosContainer extends Component<Props, State>  {
 
     if (isNullOrUndefined(blogInfos)) return null;
 
-    return blogInfos && <div style={{height: '100%', overflowY: 'auto', display: 'block', paddingTop: '30px'}}>
+    return blogInfos && <div style={{height: '100%'}}>
 
       {blogInfos.map( blogInfo => 
       
