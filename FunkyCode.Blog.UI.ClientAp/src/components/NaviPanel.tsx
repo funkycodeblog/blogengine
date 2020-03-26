@@ -6,12 +6,13 @@ import { IAppState } from '../redux/Store';
 import { MyAvatar} from '../components/UIComponents/MyAvatar'
 import { Typography, List, ListItem } from '@material-ui/core';
 import { BlogEngineSettings } from '../config/BlogEngineSettings';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { TagBox } from './UIComponents/TagBox'
+import  SearchInput  from './UIComponents/SearchInput'
 import { getArticlesByTagAction } from '../redux/Thunks';
 import { IFunkyState } from '../redux/State';
 
-interface Props {
+interface Props extends RouteComponentProps  {
   
   dispatch: ThunkDispatch<any, any, AnyAction>;
   tags?: string[] ;
@@ -50,14 +51,25 @@ class NaviPanel extends Component<Props, State>  {
           <TagBox type='navi' tags= {this.props.tags } tagSelected={this.tagSelected.bind(this)} />
         </div>
 
+        <div style={{paddingTop: '30px', paddingLeft: '30px', paddingRight: '30px'}} >
+          <SearchInput onValueEntered={this.searchEntered.bind(this)}/>
+        </div>
+        
 
         </div>
     }
 
     private tagSelected(tag: string) {
-      
+     
       this.props.dispatch(getArticlesByTagAction(tag));
-    
+   
+    }
+
+    private searchEntered(value: string) {
+      const path = BlogEngineSettings.ResolveSearchPath(value);
+      console.log(this.props);
+      this.props.history.push(path);
+      
     }
 }
 
@@ -76,5 +88,5 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     };
   };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NaviPanel);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NaviPanel));
   

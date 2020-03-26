@@ -172,6 +172,47 @@ export const getArticlesByTagAction: ActionCreator<
 
 // ----------------------------------------------------------------------------------------
 
+export interface IGetArticlesBySearchAction {
+  type: FunkyActionTypes.GET_BLOG_ARTICLES_BY_SEARCH;
+  search: string;
+}
+
+export interface IGetArticlesBySearchAction_Success {
+  type: FunkyActionTypes.GET_BLOG_ARTICLES_BY_SEARCH_SUCCESS;
+  blogInfos: BlogInfoModel[]
+}
+
+export const getArticlesBySearchAction: ActionCreator<
+  ThunkAction<Promise<any>, IFunkyState, null, IGetArticlesBySearchAction_Success>
+> = (search: string) => {
+  return async (dispatch: Dispatch) => {
+    try {
+
+      dispatch(setLoadingStatusAction(true));
+
+      console.log('getArticlesBySearchAction');
+      const getPostsBySearchResponse = await iBlogService.GetBlogInfosBySearch(search);
+      const isOk = checkResponseAndDispatchError(getPostsBySearchResponse, dispatch);
+        if (!isOk) return;
+
+      const getPostsBySearchResponseSuccess : IGetArticlesBySearchAction_Success = {
+        type: FunkyActionTypes.GET_BLOG_ARTICLES_BY_SEARCH_SUCCESS,
+        blogInfos: getPostsBySearchResponse.Data
+      }
+
+      dispatch(getPostsBySearchResponseSuccess);
+
+    } catch (err) {
+      console.error(err);
+    } finally {
+      dispatch(setLoadingStatusAction(false));
+    }
+  };
+};
+
+
+// ----------------------------------------------------------------------------------------
+
 export interface IGetArchivesAction {
   type: FunkyActionTypes.GET_ARCHIVES;
 }

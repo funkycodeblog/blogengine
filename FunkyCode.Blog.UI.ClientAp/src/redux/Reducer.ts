@@ -31,6 +31,7 @@ export const funkyReducer: Reducer<IFunkyState, BlogEngineActions> = (
 
     case FunkyActionTypes.GET_BLOG_INFOS_SUCCESS:
     case FunkyActionTypes.GET_BLOG_ARTICLES_BY_TAGS_SUCCESS:
+    case FunkyActionTypes.GET_BLOG_ARTICLES_BY_SEARCH_SUCCESS:
        {
       return {
         ...state,

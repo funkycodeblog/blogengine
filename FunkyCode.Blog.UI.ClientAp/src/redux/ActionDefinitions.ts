@@ -21,6 +21,10 @@ export enum FunkyActionTypes {
   GET_BLOG_ARTICLES_BY_TAGS = 'GET_BLOG_ARTICLES_BY_TAGS',
   GET_BLOG_ARTICLES_BY_TAGS_SUCCESS = 'GET_BLOG_ARTICLES_BY_TAGS_SUCCESS',
 
+  GET_BLOG_ARTICLES_BY_SEARCH = 'GET_BLOG_ARTICLES_BY_SEARCH',
+  GET_BLOG_ARTICLES_BY_SEARCH_SUCCESS = 'GET_BLOG_ARTICLES_BY_SEARCH_SUCCESS',
+
+
   GET_ARCHIVES = 'GET_ARCHIVES',
   GET_ARCHIVES_SUCCESS = 'GET_ARCHIVES_SUCCESSS',
 
@@ -41,4 +45,6 @@ export type BlogEngineActions =
   | Thunks.IGetArticlesByTagAction_Success
   | Thunks.IGetArchivesAction
   | Thunks.IGetArchivesAction_Success
+  | Thunks.IGetArticlesBySearchAction
+  | Thunks.IGetArticlesBySearchAction_Success
   

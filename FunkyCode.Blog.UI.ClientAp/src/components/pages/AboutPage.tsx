@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import BlogPostPage from './BlockPostPage';
-import { IAppState } from '../../redux/Store';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
-import { getBlogPost } from '../../redux/Thunks';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { BlogEngineSettings } from '../../config/BlogEngineSettings';
@@ -33,7 +30,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
      };
  };
   
-  const mapStateToProps = (store: IAppState) => {
+  const mapStateToProps = () => {
     
   
   };

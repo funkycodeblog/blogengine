@@ -21,7 +21,8 @@ namespace FunkyCode.Blog.App
         IQueryHandler<GetBlogPostHeadersByTagQuery, List<BlogPostHeaderDto>>,
         IQueryHandler<CheckIfExistsQuery, bool>,
         IQueryHandler<GetAllTagsQuery, string[]>,
-        IQueryHandler<GetArchiveQuery, List<ArchiveYearDto>>
+        IQueryHandler<GetArchiveQuery, List<ArchiveYearDto>>,
+        IQueryHandler<GetBlogPostHeadersBySearchQuery, List<BlogPostHeaderDto>>
     {
         private readonly IMarkdownService _markdownService;
         private readonly IBlogRepository _blogRepository;
@@ -91,6 +92,22 @@ namespace FunkyCode.Blog.App
         {
             var blockPosts = await _blogRepository.GetHeaders(query.Tag);
             
+            var dtos = blockPosts.Select(p => new BlogPostHeaderDto
+            {
+                Id = p.Id,
+                Title = p.Title,
+                Text = p.Header,
+                Published = p.PublishingDate,
+                Tags = _tagMapper.Map(p.Tags).ToList()
+            }).ToList();
+
+            return dtos;
+        }
+
+        public async Task<List<BlogPostHeaderDto>> Handle(GetBlogPostHeadersBySearchQuery query)
+        {
+            var blockPosts = await _blogRepository.SearchHeaders(query.SearchItem);
+
             var dtos = blockPosts.Select(p => new BlogPostHeaderDto
             {
                 Id = p.Id,

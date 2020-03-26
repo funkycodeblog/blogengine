@@ -9,6 +9,7 @@ namespace FunkyCode.Blog.App.Core
     {
         Task<List<BlogPostHeader>> GetHeaders();
         Task<List<BlogPostHeader>> GetHeaders(string tag);
+        Task<List<BlogPostHeader>> SearchHeaders(string searchItem);
         Task<bool> Add(BlogPost post);
         Task<byte[]> GetImage(string blogPostId, string imageId);
         Task<BlogPost> GetBlogPostWithNoImages(string blogPostId);

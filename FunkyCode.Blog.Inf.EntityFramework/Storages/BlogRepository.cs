@@ -63,6 +63,33 @@ namespace FunkyCode.Blog.Inf.EntityFramework.Storages
             }
         }
 
+        public async Task<List<BlogPostHeader>> SearchHeaders(string searchItem)
+        {
+
+            var tag1 = $"{searchItem};";
+            var tag2 = $";{searchItem};";
+            var tag3 = $";{searchItem}";
+
+            using (var context = new BlogContext(_options))
+            {
+                var headers = await context.BlogPosts
+                    .Where(p => p.Status == BlogStatusTypeEnum.Active)
+                    .Where(p => p.Tags.StartsWith(tag1) || p.Tags.Contains(tag2) || p.Tags.EndsWith(tag3) || p.Tags == searchItem)
+                    .Where(p => p.Title.Contains(searchItem) || p.Content.Contains(searchItem))
+                    .Select(p => new BlogPostHeader
+                    {
+                        Id = p.Id,
+                        Header = p.Header,
+                        PublishingDate = p.PublishingDate,
+                        Status = p.Status,
+                        Title = p.Title,
+                        Tags = p.Tags
+                    }).ToListAsync();
+
+                return headers;
+            }
+        }
+
         public async Task<bool> Add(BlogPost post)
         {
             using (var context = new BlogContext(_options))

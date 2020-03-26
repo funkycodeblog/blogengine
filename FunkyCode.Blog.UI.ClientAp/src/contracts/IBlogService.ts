@@ -7,6 +7,7 @@ export interface IBlogService
 {
     GetBlogInfos() : Promise<ServiceResponse<BlogInfoModel[]>>
     GetBlogInfosByTag(tag: string) : Promise<ServiceResponse<BlogInfoModel[]>>
+    GetBlogInfosBySearch(search: string) : Promise<ServiceResponse<BlogInfoModel[]>>
     GetBlogPost(id: string) : Promise<ServiceResponse<BlogPost>>
     GetAllTags() : Promise<ServiceResponse<string[]>>
     GetArchives() : Promise<ServiceResponse<ArchiveYearDto[]>>

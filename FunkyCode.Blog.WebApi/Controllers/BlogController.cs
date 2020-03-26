@@ -52,6 +52,19 @@ namespace FunkyCode.Blog.Inf.WebApi.Controllers
             return Ok(headers);
         }
 
+        /// <summary>
+        ///     Returns blog article headers by search string
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("Search/{searchItem}")]
+        public async Task<ActionResult<List<BlogPostHeaderDto>>> GetHeadersBySearch(string searchItem)
+        {
+            var headers =
+                await _queryProcessor.Process<GetBlogPostHeadersBySearchQuery, List<BlogPostHeaderDto>>(
+                    new GetBlogPostHeadersBySearchQuery { SearchItem = searchItem });
+            return Ok(headers);
+        }
+
 
 
         /// <summary>

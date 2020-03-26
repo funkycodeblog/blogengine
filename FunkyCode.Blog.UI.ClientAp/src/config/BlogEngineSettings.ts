@@ -5,6 +5,7 @@ export class BlogEngineSettings {
 
     public static BlogPostPath  = "/post/:id";
     public static TagPath  = "/tag/:tag";
+    public static SearchPath  = "/search/:search";
 
 
     public static ResolveBlogPostPath(id: string) {
@@ -13,6 +14,10 @@ export class BlogEngineSettings {
 
     public static ResolveTagPath(tag: string) {
         return this.TagPath.replace(':tag', tag);
+    }
+
+    public static ResolveSearchPath(search: string) {
+        return this.SearchPath.replace(':search', search);
     }
 
 

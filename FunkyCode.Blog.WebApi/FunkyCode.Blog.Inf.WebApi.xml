@@ -16,6 +16,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:FunkyCode.Blog.Inf.WebApi.Controllers.BlogController.GetHeadersBySearch(System.String)">
+            <summary>
+                Returns blog article headers by search string
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:FunkyCode.Blog.Inf.WebApi.Controllers.BlogController.Get(System.String)">
             <summary>
                 Returns blog article by id.

@@ -10,7 +10,7 @@ import { Store } from 'redux';
 
 // Import the store function and state
 import configureStore, { IAppState } from './redux/Store';
-import { getBlogInfos, getAllTags } from './redux/Thunks';
+import { getAllTags } from './redux/Thunks';
 
 import './index.css';
 
@@ -29,7 +29,9 @@ const THEME = createMuiTheme({
    "fontWeightLight": 300,
    "fontWeightRegular": 400,
    "fontWeightMedium": 500
-  }
+  },
+  
+  
 });
 
 /* 

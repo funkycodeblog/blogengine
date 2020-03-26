@@ -8,6 +8,7 @@ import { ArchiveYearDto } from "../model/ArchiveYearDto";
 
 class BlogApiHttpService implements IBlogService
 {
+  
     async GetBlogInfos(): Promise<ServiceResponse<BlogInfoModel[]>> {
 
         const relativePath : string = `/api/Blog`;
@@ -25,6 +26,17 @@ class BlogApiHttpService implements IBlogService
        
         const axiosResponse : AxiosResponse = await axios.get(url);
     
+        return createServiceResponse<BlogInfoModel[]>(axiosResponse.data, axiosResponse.status, axiosResponse.statusText);
+    }
+
+    async GetBlogInfosBySearch(search: string): Promise<ServiceResponse<BlogInfoModel[]>> {
+        
+        const url : string  = IPathProvider.GetApiUrl(`/api/Blog/Search/${search}`);
+       
+        const axiosResponse : AxiosResponse = await axios.get(url);
+    
+        console.log('axiosResponse', axiosResponse);
+        
         return createServiceResponse<BlogInfoModel[]>(axiosResponse.data, axiosResponse.status, axiosResponse.statusText);
     }
 

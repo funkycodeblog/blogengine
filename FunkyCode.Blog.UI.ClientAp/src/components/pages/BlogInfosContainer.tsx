@@ -8,10 +8,8 @@ import { BlogEngineSettings } from '../../config/BlogEngineSettings';
 import { IAppState } from '../../redux/Store';
 import { BlogInfoModel } from '../../model/BlogInfoModel';
 import { BlogInfoComponent } from '../BlogInfoComponent';
-import { IFunkyState } from '../../redux/State';
 import { isNullOrUndefined } from 'util';
 import { Spacer } from '../Spacer';
-import { getArticlesByTagAction } from '../../redux/Thunks';
 
 interface Props  {
 
