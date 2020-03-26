@@ -74,8 +74,7 @@ namespace FunkyCode.Blog.Inf.EntityFramework.Storages
             {
                 var headers = await context.BlogPosts
                     .Where(p => p.Status == BlogStatusTypeEnum.Active)
-                    .Where(p => p.Tags.StartsWith(tag1) || p.Tags.Contains(tag2) || p.Tags.EndsWith(tag3) || p.Tags == searchItem)
-                    .Where(p => p.Title.Contains(searchItem) || p.Content.Contains(searchItem))
+                    .Where(p => p.Tags.StartsWith(tag1) || p.Tags.Contains(tag2) || p.Tags.EndsWith(tag3) || p.Tags == searchItem  || p.Title.Contains(searchItem) || p.Content.Contains(searchItem))
                     .Select(p => new BlogPostHeader
                     {
                         Id = p.Id,
