@@ -13,11 +13,11 @@ export class BlogEngineSettings {
     }
 
     public static ResolveTagPath(tag: string) {
-        return this.TagPath.replace(':tag', tag);
+        return `/?tag=${tag}`;
     }
 
     public static ResolveSearchPath(search: string) {
-        return this.SearchPath.replace(':search', search);
+        return `/?search=${search}`;
     }
 
 

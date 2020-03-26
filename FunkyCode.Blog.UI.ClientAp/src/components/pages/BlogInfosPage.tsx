@@ -6,11 +6,13 @@ import { ThunkDispatch } from 'redux-thunk';
 import { IAppState } from '../../redux/Store';
 import { BlogInfoModel } from '../../model/BlogInfoModel';
 import { IFunkyState } from '../../redux/State';
-import { getBlogInfos } from '../../redux/Thunks';
+import { getBlogInfos, getArticlesBySearchAction, getArticlesByTagAction } from '../../redux/Thunks';
 import BlogInfosContainer from '../pages/BlogInfosContainer';
 import { isNullOrUndefined } from 'util';
+import { RouteComponentProps } from 'react-router-dom';
+import * as QueryString from 'query-string';
 
-interface Props {
+interface Props extends RouteComponentProps {
 
   blogInfos?: BlogInfoModel[],
   dispatch: ThunkDispatch<any, any, AnyAction>
@@ -18,20 +20,70 @@ interface Props {
 }
 
 interface State {
-
+    currentKey?: string;
+    currentValue: string | string[] | null | undefined;
 }
 
 export class BlogInfosPage extends Component<Props, State>  {
 
+  state = {currentKey: '', currentValue: ''}
+
   componentDidMount() {
-    this.props.dispatch(getBlogInfos());
-    console.log(this.props);
+
+    this.executeDispatch(this.props);
+   
   }
+
+  componentWillReceiveProps(newProps : Props ) {
+
+    this.executeDispatch(newProps);
+   
+  }
+
+  executeDispatch(props : Props)
+  {
+    const params = QueryString.parse(props.location.search);
+    console.log('params', params);
+
+    if (params['search'] !== undefined)
+    {
+       const search = params['search'];
+
+       if (!(this.state.currentKey === 'search' && this.state.currentValue === search))
+       {
+          props.dispatch(getArticlesBySearchAction(search));
+          this.setState({currentKey: 'search', currentValue: search});
+       }
+       
+       return;
+    }
+
+    if (params['tag'] !== undefined)
+    {
+       const tag = params['tag'];
+
+       if (!(this.state.currentKey === 'tag' && this.state.currentValue === tag))
+       {
+
+        props.dispatch(getArticlesByTagAction(tag));
+        this.setState({currentKey: 'tag', currentValue: tag});
+       }
+       return;
+    }
+
+
+    if (!(this.state.currentKey === 'all' && this.state.currentValue === 'all'))
+    {
+       this.props.dispatch(getBlogInfos());
+       this.setState({currentKey: 'all', currentValue: 'all'});
+    }
+  }
+ 
 
   render() {
     const { blogInfos } = this.props;
     if (isNullOrUndefined(blogInfos)) return null;
-    return blogInfos && <BlogInfosContainer blogInfos={blogInfos} />
+    return <BlogInfosContainer blogInfos={blogInfos} />
   }
 
 }

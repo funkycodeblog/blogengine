@@ -6,8 +6,6 @@ import AboutPage  from './pages/AboutPage'
 import { BlogEngineSettings } from '../config/BlogEngineSettings'
 import BlogInfosPage from './pages/BlogInfosPage'
 import BlockPostPage  from './pages/BlockPostPage';
-import BlockInfosByTagPage  from './pages/BlogInfosByTag';
-import BlogInfosBySearchPage  from './pages/BlogInfosBySearch';
 
 import ArchivesPage  from './pages/ArchivesPage';
 
@@ -40,8 +38,6 @@ const RootApp: React.SFC<IProps> = () => {
           <Route path={BlogEngineSettings.AboutPath} component={AboutPage} /> 
           <Route path={BlogEngineSettings.ArchivesPath} component={ArchivesPage} /> 
           <Route path={BlogEngineSettings.BlogPostPath} component={BlockPostPage} /> 
-          <Route path={BlogEngineSettings.TagPath} component={BlockInfosByTagPage} /> 
-          <Route path={BlogEngineSettings.SearchPath} component={BlogInfosBySearchPage} /> 
           </div>
         </div>
 
