@@ -18,7 +18,7 @@ export class MyAvatar extends Component<Props, State>  {
         const radiusInPx = `${radius}px`;
         const sizeInPx = `${this.props.size}px`;
 
-        const url = require('../../assets/images/maciej-avatar-300.jpg');
+        const url = require('../../assets/images/maciej-brick-wall-250.png');
         
         return <img alt="?" src={url} style={{borderRadius: radiusInPx, width: sizeInPx, height: sizeInPx}} ></img>
     }

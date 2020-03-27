@@ -36,7 +36,7 @@ So, let’s start.
 4. I separated generating and executing Cypher statements. Here is generation:
 
 ``` csharp
-public static List&amp;amp;lt;string&amp;amp;gt; GenerateCypherStatements()
+public static List<string> GenerateCypherStatements()
 {
     var numberOfPersons = 10;
     var minKnownPersons = 2;
@@ -45,24 +45,24 @@ public static List&amp;amp;lt;string&amp;amp;gt; GenerateCypherStatements()
     var random = new Random(DateTime.Now.Millisecond);
     var randomNameGenerator = new PersonNameGenerator();
 
-    var statements = new List&amp;amp;lt;string&amp;amp;gt;();
-    for (int i = 1; i &amp;amp;lt;= numberOfPersons; i++)
+    var statements = new List<string>();
+    for (int i = 1; i <= numberOfPersons; i++)
     {
         var name = randomNameGenerator.GenerateRandomFirstName();
         var statement = $"CREATE (p:Person {{id:{i},  name:\"{name}\" }})";
         statements.Add(statement);
     }
 
-    for (int i = 1; i &amp;amp;lt;= numberOfPersons; i++)
+    for (int i = 1; i <= numberOfPersons; i++)
     {
         int numberOfPersonKnown = random.Next(minKnownPersons, maxKnownPersons);
 
-        for (int j = 1; j &amp;amp;lt;= numberOfPersonKnown; j++) { int destinationPersonId = i + j; if (destinationPersonId &amp;amp;gt; numberOfPersons)
+        for (int j = 1; j <= numberOfPersonKnown; j++) { int destinationPersonId = i + j; if (destinationPersonId > numberOfPersons)
                 destinationPersonId = destinationPersonId - numberOfPersons;
 
             string statement = $@"MATCH (s:Person),(d:Person)
                                   WHERE s.id = {i} AND d.id = {destinationPersonId}
-                                  CREATE (s) -[r: Knows]-&amp;amp;gt; (d)";
+                                  CREATE (s) -[r: Knows]-> (d)";
             statements.Add(statement);
         }
     }
@@ -74,7 +74,7 @@ public static List&amp;amp;lt;string&amp;amp;gt; GenerateCypherStatements()
 5. … and here’s execution of above generated statements.
 
 ``` csharp
-public static void ExecuteStatements(List&amp;amp;lt;string&amp;amp;gt; statements)
+public static void ExecuteStatements(List<string> statements)
 {
     var user = "neo4j";
     var password = "social";
@@ -84,7 +84,7 @@ public static void ExecuteStatements(List&amp;amp;lt;string&amp;amp;gt; statemen
     {
         using (var session = driver.Session())
         {
-            session.WriteTransaction(tx =&amp;amp;gt;
+            session.WriteTransaction(tx =>
             {
                 foreach (var statement in statements)
                 {

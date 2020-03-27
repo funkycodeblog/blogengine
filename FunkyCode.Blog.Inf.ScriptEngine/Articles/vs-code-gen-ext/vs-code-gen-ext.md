@@ -8,7 +8,7 @@
 I am a big fan of code generation. I would like to have code typed instantly after it is designed in my head. It seems that there’s popular belief that what could be done in this subject was done in Resharper. To my regret, I haven’t found many solutions. But those which I found are great.
 <!-- #endheader -->
 
-1. Object Exporter
+### 1. Object Exporter
 
 Object Exporter allows you to export whole object data to .NET code.
 
@@ -37,7 +37,7 @@ or they are created via a user interface. In general, it works like this:
 
 ![04](04.png)
 
-2. Mapping Generator
+### 2. Mapping Generator
 
 This one is useful for those who do not like AutoMapper. I meet a lot of people, who do not like this tool and practice manual mapping.
 

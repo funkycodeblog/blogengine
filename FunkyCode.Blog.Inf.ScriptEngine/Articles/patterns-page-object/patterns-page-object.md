@@ -21,7 +21,7 @@ Let’s assume that Google calculator is an application to be automatically test
 
 To start with Selenium you need to add references to Selenium.WebDriver (which is a base library) and implementation for desired browsers. You don’t need to write code for every browser (you work on interfaces), but you need a dedicated library when the code is executed.
 
-![01 Nuget](01_nuget.png)
+![01 Nuget](01.png)
 
 Then write some code in Test Project, and in general, that’s it.
 

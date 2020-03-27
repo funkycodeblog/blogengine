@@ -20,65 +20,58 @@ interface Props extends RouteComponentProps {
 }
 
 interface State {
-    currentKey?: string;
-    currentValue: string | string[] | null | undefined;
+  currentKey?: string;
+  currentValue: string | string[] | null | undefined;
 }
 
 export class BlogInfosPage extends Component<Props, State>  {
 
-  state = {currentKey: '', currentValue: ''}
+  state = { currentKey: '', currentValue: '' }
 
   componentDidMount() {
 
     this.executeDispatch(this.props);
-   
+
   }
 
-  componentWillReceiveProps(newProps : Props ) {
+  componentWillReceiveProps(newProps: Props) {
 
     this.executeDispatch(newProps);
-   
+
   }
 
-  executeDispatch(props : Props)
-  {
+  executeDispatch(props: Props) {
     const params = QueryString.parse(props.location.search);
     console.log('params', params);
 
-    if (params['search'] !== undefined)
-    {
-       const search = params['search'];
+    if (params['search'] !== undefined) {
+      const search = params['search'];
 
-       if (!(this.state.currentKey === 'search' && this.state.currentValue === search))
-       {
-          props.dispatch(getArticlesBySearchAction(search));
-          this.setState({currentKey: 'search', currentValue: search});
-       }
-       
-       return;
+      if (!(this.state.currentKey === 'search' && this.state.currentValue === search)) {
+        this.setState({ currentKey: 'search', currentValue: search });
+        props.dispatch(getArticlesBySearchAction(search));
+      }
+
+      return;
     }
 
-    if (params['tag'] !== undefined)
-    {
-       const tag = params['tag'];
+    if (params['tag'] !== undefined) {
+      const tag = params['tag'];
 
-       if (!(this.state.currentKey === 'tag' && this.state.currentValue === tag))
-       {
-
+      if (!(this.state.currentKey === 'tag' && this.state.currentValue === tag)) {
+        this.setState({ currentKey: 'tag', currentValue: tag });
         props.dispatch(getArticlesByTagAction(tag));
-        this.setState({currentKey: 'tag', currentValue: tag});
-       }
-       return;
+      }
+      return;
     }
 
 
-    if (!(this.state.currentKey === 'all' && this.state.currentValue === 'all'))
-    {
-       this.props.dispatch(getBlogInfos());
-       this.setState({currentKey: 'all', currentValue: 'all'});
+    if (!(this.state.currentKey === 'all' && this.state.currentValue === 'all')) {
+      this.setState({ currentKey: 'all', currentValue: 'all' });
+      this.props.dispatch(getBlogInfos());
     }
   }
- 
+
 
   render() {
     const { blogInfos } = this.props;

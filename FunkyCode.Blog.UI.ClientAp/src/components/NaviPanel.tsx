@@ -11,6 +11,7 @@ import { TagBox } from './UIComponents/TagBox'
 import  SearchInput  from './UIComponents/SearchInput'
 import { getArticlesByTagAction } from '../redux/Thunks';
 import { IFunkyState } from '../redux/State';
+import { Spacer } from './Spacer'
 
 interface Props extends RouteComponentProps  {
   
@@ -37,7 +38,7 @@ class NaviPanel extends Component<Props, State>  {
 
         <Typography style = {{color: 'white'}}>Funky Code</Typography>
 
-        <div style={{height: '20px'}}/>
+        <Spacer height={20} />
 
         <List>
               <ListItem button key='key01'>
@@ -49,11 +50,15 @@ class NaviPanel extends Component<Props, State>  {
               </ListItem>
         </List>
 
-        <div style={{paddingTop: '30px', paddingLeft: '30px', paddingRight: '30px'}} >
+        <Spacer height={20} />
+
+        <div style={{paddingLeft: '30px', paddingRight: '30px'}} >
           <TagBox type='navi' tags= {this.props.tags } tagSelected={this.tagSelected.bind(this)} />
         </div>
 
-        <div style={{paddingTop: '30px', paddingLeft: '30px', paddingRight: '30px'}} >
+        <Spacer height={40} />
+
+        <div style={{paddingLeft: '30px', paddingRight: '30px'}} >
           <SearchInput onValueEntered={this.searchEntered.bind(this)}/>
         </div>
         

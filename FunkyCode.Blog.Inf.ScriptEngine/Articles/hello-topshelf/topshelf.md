@@ -40,15 +40,15 @@ class Program
 {
     static void Main(string[] args)
     {
-        HostFactory.Run(configuration =&gt; {
-            configuration.Service&lt;FunkyFileConvertingService&gt;(instance =&gt;
+        HostFactory.Run(configuration => {
+            configuration.Service<FunkyFileConvertingService>(instance =>
             {
-                instance.ConstructUsing(() =&gt; new FunkyFileConvertingService(new ToUpperConvertingService()));
-                instance.WhenStarted(i =&gt; i.Start());
-                instance.WhenStopped(i =&gt; i.Stop());
+                instance.ConstructUsing(() => new FunkyFileConvertingService(new ToUpperConvertingService()));
+                instance.WhenStarted(i => i.Start());
+                instance.WhenStopped(i => i.Stop());
             });
     
-            configuration.SetServiceName("FunkyFileConvertingService"); // &lt;- remember, no spaces!
+            configuration.SetServiceName("FunkyFileConvertingService"); // <- remember, no spaces!
             configuration.SetDisplayName("Funky File Converting Service");
             configuration.SetDescription("This is Funky File Converting Service");
         });
@@ -98,7 +98,7 @@ There are a lot of limitations – they accept only numbers and give no response
 Add method as below to your interface and implementation.
 
 ``` csharp
-configuration.Service&lt;FunkyFileConvertingService&gt;(instance =&gt;
+configuration.Service<FunkyFileConvertingService>(instance =>
 {
     instance.ConstructUsing(() => new FunkyFileConvertingService(new ToUpperConvertingService()));
     instance.WhenStarted(i => i.Start());

@@ -39,7 +39,7 @@ public void Start()
     {
 
         var customersToBecomePremium = context.Customers
-            .Where(c =&amp;amp;amp;gt; c.Accounts.Count &amp;amp;amp;gt;= 10)
+            .Where(c => c.Accounts.Count >= 10)
             .ToList();
 
         Notify(customersToBecomePremium);
@@ -55,7 +55,7 @@ public void OnLogging(Customer customer)
 {
     // (...)
 
-    if (customer.Accounts.Count &amp;amp;amp;gt;= 12)
+    if (customer.Accounts.Count >= 12)
         ConvertToPremiumCustomer(customer);
 
     // (...)
@@ -71,7 +71,7 @@ Let’s do this as simple as it can be.
 Here’s interface:
 
 ``` csharp
-public interface ISpecification&amp;amp;amp;lt;T&amp;amp;amp;gt;
+public interface ISpecification<T>
 {
     bool IsSatisfiedBy(T entity);
 }
@@ -80,7 +80,7 @@ public interface ISpecification&amp;amp;amp;lt;T&amp;amp;amp;gt;
 … and here is implementation.
 
 ``` csharp
-public class SendInfoSpecification : ISpecification&amp;amp;amp;lt;Customer&amp;amp;amp;gt;
+public class SendInfoSpecification : ISpecification<Customer>
     {
         public bool IsSatisfiedBy(Customer customer)
         {

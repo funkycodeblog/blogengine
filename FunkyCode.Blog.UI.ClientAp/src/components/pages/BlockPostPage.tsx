@@ -80,7 +80,7 @@ class BlockPostPage extends Component<Props, State>  {
     if (isNullOrUndefined(source))
       return null;
 
-    return  <div style={{height: '100%', minWidth: '500px', paddingRight: '50%'}}>
+    return  <div id='blogArticleContainer' style={{height: '100%', minWidth: '500px', paddingRight: '50%'}}>
         <div dangerouslySetInnerHTML={this.createMarkup(source)}  />
     </div>
     

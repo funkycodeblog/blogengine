@@ -15,11 +15,12 @@ Create a tool with parameters as below:
 ![01](01.png)
 
 Here’s code for you to copy:
-
-Title: Run Batch File
-Command:	C:\Windows\System32\cmd.exe
-Arguments:	/C $(ItemPath)
-Initial directory:	$(ItemDir)
+<Table>
+<tr><td>Title:</td><td>Run Batch File</td></tr>
+<tr><td>Command:</td><td>C:\Windows\System32\cmd.exe</td></tr>
+<tr><td>Arguments:</td><td>/C$(ItemPath)</td></tr>
+<tr><td>Initial directory:</td><td>$(ItemDir)</td></tr>
+</Table>
 
 Focus on a batch file you want to launch.
 
