@@ -20,7 +20,6 @@ class PathProvider implements IPathProvider
     {
         if (process.env.NODE_ENV === 'development')
         {
-            //return 'https://skill-match.azurewebsites.net'; // this is for calling local WebApi
             return 'https://localhost:5001'; // this is for calling local WebApi
         }
         

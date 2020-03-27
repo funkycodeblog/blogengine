@@ -7,7 +7,7 @@ namespace FunkyCode.Blog.App.Core.Infrastructure.Blog
     public interface IBlogPostUploadService
     {
 
-        void Upload(string folderPath, bool isOverrideWhenExists);
+        void Upload(string host, string folderPath, bool isOverrideWhenExists);
 
     }
 }

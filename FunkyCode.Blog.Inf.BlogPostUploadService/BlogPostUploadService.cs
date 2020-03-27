@@ -13,7 +13,7 @@ namespace FunkyCode.Blog.Inf
     {
         private readonly IBlogEngineLogger<BlogPostUploadService> _logger;
         private readonly IBlogPostMetadataResolver _blockBlogPostMetadataResolver;
-        private string _url = $@"https://localhost:5001/api/blog";
+        //private string _url = $@"https://localhost:5001/api/blog";
 
         public BlogPostUploadService(IBlogEngineLogger<BlogPostUploadService> logger, IBlogPostMetadataResolver blockBlogPostMetadataResolver)
         {
@@ -21,9 +21,11 @@ namespace FunkyCode.Blog.Inf
             _blockBlogPostMetadataResolver = blockBlogPostMetadataResolver;
         }
 
-        public void Upload(string folderPath, bool isOverrideWhenExists)
+        public void Upload(string host, string folderPath, bool isOverrideWhenExists)
         {
             _logger.Info($"Processing folder: {folderPath} ...");
+
+            var url = $"{host}/api/blog";
 
             var markdownFiles = Directory.GetFiles(folderPath, "*.md")
                 .ToList();
@@ -43,7 +45,7 @@ namespace FunkyCode.Blog.Inf
             using (var client = new HttpClient())
             {
                 var markdownFile = markdownFiles.Single();
-                var isMarkdownOk = CheckMarkdownFile(client, markdownFile, isOverrideWhenExists);
+                var isMarkdownOk = CheckMarkdownFile(client, markdownFile, url, isOverrideWhenExists);
                 if (!isMarkdownOk)
                 {
                     _logger.Info($"Posting article cancelled.");
@@ -62,8 +64,10 @@ namespace FunkyCode.Blog.Inf
                         formData.Add(iStreamContent);
                     }
 
-                    _logger.Info($"Posting blog to: {_url} ...");
-                    var response = client.PostAsync(_url, formData).Result;
+                   
+
+                    _logger.Info($"Posting blog to: {url} ...");
+                    var response = client.PostAsync(url, formData).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         _logger.Success($"Posted!");
@@ -82,7 +86,7 @@ namespace FunkyCode.Blog.Inf
         }
     
 
-        private bool CheckMarkdownFile(HttpClient client, string filePath, bool isOverrideWhenExists)
+        private bool CheckMarkdownFile(HttpClient client, string filePath, string url, bool isOverrideWhenExists)
         {
             
             var file = File.ReadAllText(filePath);
@@ -102,7 +106,9 @@ namespace FunkyCode.Blog.Inf
 
             var id = metadata.Id;
             
-            var checkUrl = $"{_url}/CheckIfExists/{id}";
+            var checkUrl = $"{url}/CheckIfExists/{id}";
+            _logger.Info(checkUrl);
+
 
             _logger.Info($"Checking article with Id {id} if exists on server...");
             

@@ -13,11 +13,14 @@ namespace FunkyCode.Blog.Scripts
     {
         private readonly IBlogPostUploadService _blogPostUploadService;
 
-        [Verb("upload", HelpText = "Upload blog post to server")]
+        [Verb("upload", HelpText = "Upload blog post(s) to server")]
         public class Options : OptionsBase
         {
             [Option('p', "path", Required = true, HelpText = "Initial path")]
             public string Folder { get; set; }
+
+            [Option('h', "host", Required = false, Default= "https://localhost:5001", HelpText = "Host name")]
+            public string Host { get; set; }
 
             [Option('s', "subdirectories", Default = false, Required = false, HelpText = "Checks subdirectories for blog articles")]
             public bool IsSubdirectories { get; set; }
@@ -35,14 +38,14 @@ namespace FunkyCode.Blog.Scripts
         {
             if (!options.IsSubdirectories)
             {
-                _blogPostUploadService.Upload(options.Folder, options.IsOverrideWhenExists);
+                _blogPostUploadService.Upload(options.Host, options.Folder, options.IsOverrideWhenExists);
                 return;
             }
 
             var subdirectories = Directory.GetDirectories(options.Folder);
             foreach (var subdir in subdirectories)
             {
-                _blogPostUploadService.Upload(subdir, options.IsOverrideWhenExists);
+                _blogPostUploadService.Upload(options.Host, subdir, options.IsOverrideWhenExists);
             }
         }
     }
