@@ -17,8 +17,7 @@ namespace FunkyCode.Blog.Inf.EntityFramework.Configurations
 
             var converter = new EnumToStringConverter<BlogStatusTypeEnum>();
             builder.Property(e => e.Status)
-                .HasConversion(converter)
-                .HasDefaultValue(BlogStatusTypeEnum.New);
+                .HasConversion(converter);
 
             builder
                 .HasMany(b => b.Images)

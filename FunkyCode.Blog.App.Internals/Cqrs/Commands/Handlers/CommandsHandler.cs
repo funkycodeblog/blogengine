@@ -49,7 +49,9 @@ namespace FunkyCode.Blog.App.Core.Commands
                 Content = postFileContent,
                 Header = metadata.Header,
                 PublishingDate = date,
-                Status = BlogStatusTypeEnum.Active,
+                Status = (metadata.PostType == BlogPostMetadata.PostTypeEnum.Article) ? 
+                    BlogStatusTypeEnum.Active :
+                    BlogStatusTypeEnum.Page, 
                 Images = new List<BlogPostImage>(),
                 Tags = tags
             };
