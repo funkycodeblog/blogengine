@@ -1,52 +1,88 @@
-using System;
+using CommandLine;
+using FunkyCode.Blog.App.Core;
+using FunkyCode.Blog.ScriptEngine.Contract;
+using LibGit2Sharp;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using FunkyCode.Blog.ScriptEngine.Contract;
-using FunkyCode.Blog.Scripts;
-using FunkyCode.Blog.App.Core.Infrastructure.Blog;
-using CommandLine;
+using System.Linq;
 
 namespace FunkyCode.Blog.Scripts
 {
-    public class UploadBlogArticleCommand : IConsoleCommand<UploadBlogArticleCommand.Options>
+    public class GitPreCommitCommand : IConsoleCommand<GitPreCommitCommand.Options>
     {
-        private readonly IBlogPostUploadService _blogPostUploadService;
+        private readonly IBlogEngineLogger<GitPreCommitCommand> _logger;
+        
+        private static readonly string[] FileExtensions = new [] {".cs", ".tsx", ".ts"};
+        private static readonly string TODO = "TODO:";
 
-        [Verb("upload", HelpText = "Upload blog post(s) to server")]
+        [Verb("git-pre-commit", HelpText = "Handles git pre-commit hook")]
         public class Options : OptionsBase
         {
-            [Option('p', "path", Required = true, HelpText = "Initial path")]
-            public string Folder { get; set; }
-
-            [Option('h', "host", Required = false, Default= "https://localhost:5001", HelpText = "Host name")]
-            public string Host { get; set; }
-
-            [Option('s', "subdirectories", Default = false, Required = false, HelpText = "Checks subdirectories for blog articles")]
-            public bool IsSubdirectories { get; set; }
-
-            [Option('o', "override", Default = false, Required = false, HelpText = "Overrides article when exists")]
-            public bool IsOverrideWhenExists { get; set; }
+            [Option('d', "directory", Required = true, HelpText = "Working git directory")]
+            public string WorkingDirectory { get; set; }
         }
 
-        public UploadBlogArticleCommand(IBlogPostUploadService blogPostUploadService)
+        public GitPreCommitCommand(IBlogEngineLogger<GitPreCommitCommand> logger)
         {
-            _blogPostUploadService = blogPostUploadService;
+            _logger = logger;
         }
 
-        public void Execute(Options options)
+        public int Execute(Options options)
         {
-            if (!options.IsSubdirectories)
+            var workingDirectory = options.WorkingDirectory;
+
+            var gitPath = Path.Combine(options.WorkingDirectory, ".git");
+
+            var repo = new Repository(gitPath);
+
+            var currentBranch = repo.Branches.First(b => b.IsCurrentRepositoryHead);
+            if (currentBranch.FriendlyName != "master" && currentBranch.FriendlyName != "test-react-hooks")
+                return 0;
+
+            var fileStatus = repo.RetrieveStatus();
+
+            _logger.Info($"Checking '${TODO}' in files...");
+
+            var filesToCheck = fileStatus
+                .Where(f => f.State != FileStatus.Ignored)
+                .Where(f => FileExtensions.Contains(Path.GetExtension(f.FilePath)))
+                .Where(f => Path.GetFileNameWithoutExtension(f.FilePath) != nameof(GitPreCommitCommand))
+                .ToList();
+            
+            var filesWithTodo = new List<string>();
+            foreach (var file in filesToCheck)
             {
-                _blogPostUploadService.Upload(options.Host, options.Folder, options.IsOverrideWhenExists);
-                return;
+                var path = Path.Combine(workingDirectory, file.FilePath);
+                _logger.Info($"Checking {path}...");
+                var isOk = CheckIsNoToDoInFile(path);
+
+                if (!isOk)
+                    filesWithTodo.Add(path);
             }
 
-            var subdirectories = Directory.GetDirectories(options.Folder);
-            foreach (var subdir in subdirectories)
+            if (filesWithTodo.Any())
             {
-                _blogPostUploadService.Upload(options.Host, subdir, options.IsOverrideWhenExists);
+                _logger.Error("There are files containing '${TODO}'");
+                filesWithTodo.ForEach(_logger.Error);
+                _logger.Error("Commit interrupted!");
+                return 1;
             }
+
+            _logger.Success("Ok!");
+            return 0;
         }
+
+        private static bool CheckIsNoToDoInFile(string filePath)
+        {
+            var extension = Path.GetExtension(filePath);
+            if (!FileExtensions.Contains(extension)) return true;
+
+            var lines = File.ReadAllLines(filePath);
+            return lines.All(line => !line.Contains(TODO));
+        }
+
+
+
+
     }
 }

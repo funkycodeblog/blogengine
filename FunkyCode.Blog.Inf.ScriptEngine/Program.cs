@@ -18,6 +18,9 @@ namespace FunkyCode.Blog.Scripts
     internal class Program
     {
 
+        // TODO:
+        // test
+
         //public static int Main(string[] args)
         //{
         //    using (var container = ConfigureContainer())
@@ -42,9 +45,10 @@ namespace FunkyCode.Blog.Scripts
 
         public static int Main(string[] args)
         {
-            return Parser.Default.ParseArguments<UploadBlogArticleCommand.Options>(args)
+            return Parser.Default.ParseArguments<UploadBlogArticleCommand.Options, GitPreCommitCommand.Options>(args)
                 .MapResult(
                     (UploadBlogArticleCommand.Options opts) => DoExecute(opts),
+                    (GitPreCommitCommand.Options opts) => DoExecute(opts),
                     errs => 1);
         }
 

@@ -2,7 +2,7 @@
   "profiles": {
     "FunkyCode.Blog.ScriptEngine": {
       "commandName": "Project",
-      "commandLineArgs": "test --environment Development"
+      "commandLineArgs": "git-pre-commit -d c:\\Projects\\Tools\\BlogEngine "
     }
   }
 }

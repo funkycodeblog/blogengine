@@ -9,7 +9,7 @@ using CommandLine;
 
 namespace FunkyCode.Blog.Scripts
 {
-    public class GitPreCommitCommand : IConsoleCommand<GitPreCommitCommand.Options>
+    public class UploadBlogArticleCommand : IConsoleCommand<UploadBlogArticleCommand.Options>
     {
         private readonly IBlogPostUploadService _blogPostUploadService;
 
@@ -29,14 +29,26 @@ namespace FunkyCode.Blog.Scripts
             public bool IsOverrideWhenExists { get; set; }
         }
 
-        public GitPreCommitCommand(IBlogPostUploadService blogPostUploadService)
+        public UploadBlogArticleCommand(IBlogPostUploadService blogPostUploadService)
         {
             _blogPostUploadService = blogPostUploadService;
         }
 
-        public void Execute(Options options)
+        public int Execute(Options options)
         {
-          
+            if (!options.IsSubdirectories)
+            {
+                _blogPostUploadService.Upload(options.Host, options.Folder, options.IsOverrideWhenExists);
+                return 1;
+            }
+
+            var subdirectories = Directory.GetDirectories(options.Folder);
+            foreach (var subdir in subdirectories)
+            {
+                _blogPostUploadService.Upload(options.Host, subdir, options.IsOverrideWhenExists);
+            }
+
+            return 0;
         }
     }
 }
