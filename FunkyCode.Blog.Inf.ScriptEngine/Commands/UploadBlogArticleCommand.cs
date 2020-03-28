@@ -36,6 +36,9 @@ namespace FunkyCode.Blog.Scripts
 
         public int Execute(Options options)
         {
+            // TODO:
+
+
             if (!options.IsSubdirectories)
             {
                 _blogPostUploadService.Upload(options.Host, options.Folder, options.IsOverrideWhenExists);

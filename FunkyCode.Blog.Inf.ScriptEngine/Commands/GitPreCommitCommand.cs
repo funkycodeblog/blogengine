@@ -33,8 +33,14 @@ namespace FunkyCode.Blog.Scripts
 
             var gitPath = Path.Combine(options.WorkingDirectory, ".git");
 
-            var repo = new Repository(gitPath);
+            if (!Directory.Exists(gitPath))
+            {
+                _logger.Warning($"Directory {gitPath} doesn't exist!");
+                return 1;
+            }
 
+            var repo = new Repository(gitPath);
+            
             var currentBranch = repo.Branches.First(b => b.IsCurrentRepositoryHead);
             if (currentBranch.FriendlyName != "master" && currentBranch.FriendlyName != "test-react-hooks")
                 return 0;
