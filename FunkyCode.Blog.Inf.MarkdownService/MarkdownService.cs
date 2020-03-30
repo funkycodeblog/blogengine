@@ -22,7 +22,9 @@ namespace FunkyCode.Blog.Inf.MarkdownService
             
             var result = Markdown.ToHtml(preprocessed);
 
-            return Task.FromResult(result);
+            var withParagraphs = $"{result}<p></p><p></p><p></p>";
+
+            return Task.FromResult(withParagraphs);
         }
     }
 }

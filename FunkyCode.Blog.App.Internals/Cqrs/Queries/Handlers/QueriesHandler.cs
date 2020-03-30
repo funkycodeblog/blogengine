@@ -27,12 +27,14 @@ namespace FunkyCode.Blog.App
         private readonly IMarkdownService _markdownService;
         private readonly IBlogRepository _blogRepository;
         private readonly ITagMapper _tagMapper;
+        private readonly IMapper<BlogPostHeader, BlogPostHeaderDto> _headerMapper;
 
-        public QueriesHandler(IMarkdownService markdownService, IBlogRepository blogRepository, ITagMapper tagMapper)
+        public QueriesHandler(IMarkdownService markdownService, IBlogRepository blogRepository, ITagMapper tagMapper, IMapper<BlogPostHeader, BlogPostHeaderDto> headerMapper)
         {
             _markdownService = markdownService;
             _blogRepository = blogRepository;
             _tagMapper = tagMapper;
+            _headerMapper = headerMapper;
         }
 
         public async Task<BlogPostDto> Handle(GetBlogPostQuery query)
@@ -75,49 +77,22 @@ namespace FunkyCode.Blog.App
         public async Task<List<BlogPostHeaderDto>> Handle(GetBlogPostHeadersQuery query)
         {
             var blockPosts = await _blogRepository.GetHeaders();
-
-            var dtos = blockPosts.Select(p => new BlogPostHeaderDto
-            {
-                Id = p.Id,
-                Title = p.Title,
-                Text = p.Header,
-                Published = p.PublishingDate,
-                Tags = _tagMapper.Map(p.Tags).ToList()
-            }).ToList();
-
-            return dtos;
+            var dtos = _headerMapper.Map(blockPosts);
+            return dtos.OrderByDescending(p => p.Published).ToList();
         }
 
         public async Task<List<BlogPostHeaderDto>> Handle(GetBlogPostHeadersByTagQuery query)
         {
             var blockPosts = await _blogRepository.GetHeaders(query.Tag);
-            
-            var dtos = blockPosts.Select(p => new BlogPostHeaderDto
-            {
-                Id = p.Id,
-                Title = p.Title,
-                Text = p.Header,
-                Published = p.PublishingDate,
-                Tags = _tagMapper.Map(p.Tags).ToList()
-            }).ToList();
-
-            return dtos;
+            var dtos = _headerMapper.Map(blockPosts);
+            return dtos.OrderByDescending(p => p.Published).ToList();
         }
 
         public async Task<List<BlogPostHeaderDto>> Handle(GetBlogPostHeadersBySearchQuery query)
         {
             var blockPosts = await _blogRepository.SearchHeaders(query.SearchItem);
-
-            var dtos = blockPosts.Select(p => new BlogPostHeaderDto
-            {
-                Id = p.Id,
-                Title = p.Title,
-                Text = p.Header,
-                Published = p.PublishingDate,
-                Tags = _tagMapper.Map(p.Tags).ToList()
-            }).ToList();
-
-            return dtos;
+            var dtos = _headerMapper.Map(blockPosts);
+            return dtos.OrderByDescending(p => p.Published).ToList();
         }
 
         public async Task<bool> Handle(CheckIfExistsQuery query)
