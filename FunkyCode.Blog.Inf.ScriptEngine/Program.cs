@@ -20,29 +20,7 @@ namespace FunkyCode.Blog.Scripts
 
         // TODO:
         // test
-
-        //public static int Main(string[] args)
-        //{
-        //    using (var container = ConfigureContainer())
-        //    {
-        //        using (var scope = container.BeginLifetimeScope())
-        //        {
-
-        //            var command = scope.Resolve<IConsoleCommand<UploadBlogArticleCommand.Options>>();
-
-        //            var options = new UploadBlogArticleCommand.Options
-        //            {
-        //                Folder = @"c:\Projects\Tools\react-blog-engine\FunkyCode.Blog.ScriptEngine\_Articles",
-        //                IsSubdirectories = true
-        //            };
-
-        //            command.Execute(options);
-        //        }
-        //    }
-
-        //    return 0;
-        //}
-
+        
         public static int Main(string[] args)
         {
             return Parser.Default.ParseArguments<UploadBlogArticleCommand.Options, GitPreCommitCommand.Options>(args)
@@ -54,25 +32,18 @@ namespace FunkyCode.Blog.Scripts
 
         static int DoExecute<TOptions>(TOptions options) where TOptions : OptionsBase
         {
-
             try
             {
-                using (var container = ConfigureContainer())
-                {
-                    using (var scope = container.BeginLifetimeScope())
-                    {
-                        var command = scope.Resolve<IConsoleCommand<TOptions>>();
-                        command.Execute(options);
-                    }
-                }
-
+                using var container = ConfigureContainer();
+                using var scope = container.BeginLifetimeScope();
+                var command = scope.Resolve<IConsoleCommand<TOptions>>();
+                return command.Execute(options);
             }
             catch (Exception exc)
             {
                 Console.WriteLine(exc.Message);
+                return 1;
             }
-
-            return 0;
         }
 
         static IContainer ConfigureContainer()

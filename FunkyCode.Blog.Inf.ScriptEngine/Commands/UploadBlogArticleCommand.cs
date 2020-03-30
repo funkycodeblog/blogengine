@@ -37,7 +37,7 @@ namespace FunkyCode.Blog.Scripts
         public int Execute(Options options)
         {
             // TODO:
-
+            // test
 
             if (!options.IsSubdirectories)
             {
