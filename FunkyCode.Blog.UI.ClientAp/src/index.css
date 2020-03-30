@@ -21,7 +21,8 @@ body {
   max-width: 100%;
 }
 
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
+code {
+  background-color: rgb(245, 242, 240);
+  border-radius: 3px;
+  border: rgb(245, 242, 240);;
+}
