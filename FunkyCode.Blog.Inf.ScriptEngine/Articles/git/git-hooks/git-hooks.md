@@ -5,11 +5,11 @@
 <!-- Date: 20200330 -->
 
 <!-- #header -->
-TODO:
+In our modern CI/CD times commiting/pushing file(s) in many cases means creating release or event creating production release. There are many techniques that protect developers from contributing to system failures: tests, code reviews, branch policies etc. But not allways they are under our control and not allways they are enough.
 <!-- #endheader -->
 
 This post is part of series:
-1. [Hello Git Hooks](/post/git-hooks)
+1. Hello Git Hooks
 2. [Create command line tool](/post/create-cmd-line-tool)
 3. [Git API](/post/git-api)
 
@@ -20,11 +20,17 @@ Recently I was making order in one of biggest online shop and see what I acciden
 
 ![01](01.png)
 
-So it would be great there is possibility to do some source code validation before it is commited. To my relief Git has inbuilt feature to intercept Git workflow and feature name is [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks).
+So it would be great there is possibility to do some source code validation before it is commited. To my relief Git has inbuilt feature to intercept Git workflow and perform custom actions - [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks).
 
-There are two kinds of Git Hooks, Client-Side Hooks and Server-Side hooks. Client-Side Hooks are not copied when repository is cloned. Of course Server-Side Hooks implemented on git server can give us better control over whole team activities. But assumming that there's no such possibility during to policy restrictions Client-Side Hooks can be one solution.
+There are two kinds of Git Hooks, Client-Side Hooks and Server-Side hooks. Client-Side Hooks are not copied when repository is cloned. Of course Server-Side Hooks implemented on Git server can give us better control over whole team activities. But assumming that there's no such possibility during to policy restrictions Client-Side Hooks can be one solution.
 
 ![02](02.png)
+
+Other use cases for using Git Hooks:
+* Linting files
+* Running tests
+* Validate commit message
+* Cleaning up files
 
 To start with Git Hooks, let's dive into ```.git``` folder which is part of every project under Git source control.
 
@@ -43,11 +49,11 @@ Let's check if it really works. Here's the simplest implementation of ```pre-com
 echo "Hello from pre-commit hook"
 ```
 
-And after commiting it seems that it works.
+After commit creation we see our message in the console:
 
 ![05](05.png)
 
-Now let's acquire control over commit process. Code below will prevent commit in **any** case:
+Now let's acquire control over commit process. Code below will prevent commit in _any_ case:
 
 ```code
 #!/bin/bash

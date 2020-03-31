@@ -5,16 +5,16 @@
 <!-- Date: 20200331 -->
 
 <!-- #header -->
-TODO:
+Tasks such as copying files and folders, compressing files, running unit tests and so on I used to fulfill via batch, PowerShell or [Cake](https://cakebuild.net/). I was wondering why not just to use .NET Core Console App and take advantage of great libraries to create full fledged scripting engine.
 <!-- #endheader -->
 
 This post is part of series:
 1. [Hello Git Hooks](/post/git-hooks)
-2. [Create command line tool](/post/create-cmd-line-tool)
+2. Create command line tool
 3. [Git API](/post/git-api)
 
-In [previous post](/post/git-hooks) I introduced Git Hooks which I will use to check files before commit. So far I grasp only moment before commit is executed and promised to write logic in ```C#```.
-Git Hook will invoke my command line tool which I create.
+In [previous post](/post/git-hooks) I introduced Git Hooks - handlers for Git events which I intend to use to check content of the files which are about to be commited. So far I grasp only moment before commit is executed and promised to write logic in ```C#```.
+Git Hook will _only_ invoke my ```command line tool``` which I create.
 
 The simpliest command line tool is to create ```Console App``` project 
 
@@ -28,7 +28,6 @@ class Program
     static void Main(string[] args)
     {
         // You can parse args if you want but better use dedicated library
-       
     }
 }
 ```
@@ -37,7 +36,7 @@ But for sure better way is to use dedicated library for handling all concerns re
 
 ![01](01.png)
 
-.NET Core 3.0 provides [in-built feature](https://docs.microsoft.com/en-usarchive/msdn-magazine/2019/march/net-parse-the-command-line-with-system-commandline) for handling command line parameters, but I will stay with ```CommandLineParser```. I thing this library is much more convenient for use as it is self-descriptive.
+.NET Core 3.0 provides [in-built feature](https://docs.microsoft.com/en-usarchive/msdn-magazine/2019/march/net-parse-the-command-line-with-system-commandline) for handling command line parameters, but I will stay with ```CommandLineParser```. I thing this library is much more convenient for use as it is self-descriptive and allows me have all information about parameters and their settings in one file.
 
 ```CommandLineParser``` takes care only for command options, so there is freedom for create contracts for command with respect to their options.
 
@@ -68,7 +67,7 @@ public class GitPreCommitCommand : IConsoleCommand<GitPreCommitCommand.Options>
 }
 ```
 
-Here's place where commands can be bind with input parameters. I use AutoFac as dependency injection tool, as I see no reason why not to use it.
+Here's place where commands can be bind with input parameters. I also will use [Autofac](https://autofac.org/) for handling dependency injection.
 
 ``` csharp
 internal class Program
@@ -124,13 +123,13 @@ I use [dotnet-warp](https://github.com/Hubert-Rybak/dotnet-warp) tool which is r
 Tool should be run in folder which contains ```.sln``` or ```.csproj``` file.
 
 ``` code
-c:\Projects\Tools\BlogEngine\FunkyCode.Blog.Inf.ScriptEngine> dotnet tool install -g dotnet-warp
-c:\Projects\Tools\BlogEngine\FunkyCode.Blog.Inf.ScriptEngine> dotnet-warp
+dotnet tool install -g dotnet-warp
+dotnet-warp
 ```
 
 So far it's manual process, but after building project, it's only to type ```dotnet-warp``` to create single executable file.
 
-So far command is empty, but I will bind it to ```pre-commit``` hook.
+We have now just engine for commands. It can be applied one by one to this engine along with need that would occur during project evolvement. But just now this executable file can be bound with ```pre-commit``` hook.
 
 ``` code 
 #!/bin/sh
@@ -142,7 +141,7 @@ set -e
 ./FunkyCode.Blog.Inf.ScriptEngine/funky-scripts.exe git-pre-commit -d c:/Projects/Tools/BlogEngine
 ```
 
-Ok, now we have our command line tool executed whenever ```git commit``` is about to be perfomed. Still theres no logic, but this will be completed in next post.
+Ok, now we have our command line tool executed whenever ```git commit``` is about to be perfomed. Still theres no logic, but this will be completed in [next post](/post/git-api).
 
 
     

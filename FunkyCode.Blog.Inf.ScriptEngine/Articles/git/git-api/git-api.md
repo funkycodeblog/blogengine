@@ -5,25 +5,25 @@
 <!-- Date: 20200401  -->
 
 <!-- #header -->
-TODO:
+To complete my task I need to find a way how to obtain data from Git. All Git informations are kept in files in .git folder which is part of every project under Git version control. Let's take look at [LibGitSharp](https://github.com/libgit2/libgit2sharp) - probably most popular .NET library for interoping with Git.
 <!-- #endheader -->
 
 This post is part of series:
 1. [Hello Git Hooks](/post/git-hooks)
 2. [Create command line tool](/post/create-cmd-line-tool)
-3. [Git API](/post/git-api)
+3. Git API
 
-
+Among couple of .NET libraries for manipulation with Git by C# ```LibGitSharp``` seems to best solution. It has almost 2M downloads, so it's now so weird idea to speak with Git in C# language.
 
 ![01](01.png)
 
-It's only to instatiate ```Repository``` class with ```.git``` folder path.
+Usage is pretty straight forward especially for read-only operatons. It's only to instatiate ```Repository``` class with ```.git``` folder path.
 
 ``` csharp
 var repo = new Repository(gitPath);
 ```
 
-Now we have access to all ```git``` data.
+Now we have access to all Git data.
 
 ![02](02.png)
 
@@ -54,3 +54,10 @@ bool CheckIsNoToDoInFile(string filePath)
     return lines.All(line => !line.Contains("console.log"));
 }
 ```
+
+I will apply this code to ```GitPreCommitCommand``` which I created in [previous post](/post/create-cmd-line-tool). After recompiling and **rewarping** tool is ready to be used.
+
+### Summary
+
+My mission is completed. I created mechanism that will prevent myself for commiting files containing ```console.log```  statements to Git repository. To some extend it is overkill - it can be performed in ```pre-commit``` Git Hook directly. But I created robust engine for executing console commands which can be extended in future.
+
