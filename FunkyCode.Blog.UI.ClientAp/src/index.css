@@ -17,6 +17,7 @@ body {
 
 }
 
+/* This one makes image not wider than article width */
 #blogArticleContainer img {
   max-width: 100%;
 }

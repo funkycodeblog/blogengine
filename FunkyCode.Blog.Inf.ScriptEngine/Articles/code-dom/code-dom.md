@@ -5,7 +5,7 @@
 <!-- Date: 20200319 -->
 
 <!-- #header -->
-TODO
+CodeDOM is a part of .NET Framework which allows us to generate, compile and use code at runtime. It's quite sophisticated and I've been thinking that it was art for art's sake till I found it applied to real case scenario.
 <!-- #endheader -->
 
 Let’s consider the following scenario. Although simplified and changed it is based on true story.

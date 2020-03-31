@@ -5,10 +5,10 @@
 <!-- Date: 20180612  -->
 
 <!-- #header -->
-TODO
+Specification pattern allows us to encapsulate domain knowledge into single unit to make it reusable in different parts of the application.
 <!-- #endheader -->
 
-Let’s assume we have following business requirement:
+Let's assume we have following business requirement:
 
 When a customer has 10 accounts or more, he becomes a premium customer and must be informed about this.
 
@@ -25,9 +25,9 @@ public void OnLogging(Customer customer)
 
 ```
 
-After deployment, everything works great, but here’s another business requirement:
+After deployment, everything works great, but here's another business requirement:
 
-Many of our customers don’t log often, so let’s check every week if they are fit to become a premium customer and send them an email.
+Many of our customers don't log often, so let's check every week if they are fit to become a premium customer and send them an email.
 
 So implementation could look like this:
 
@@ -47,7 +47,7 @@ public void Start()
 }
 ```
 
-Everything works fine. But after some time, there’s another requirement: number of accounts, when customer is qualified as premium customer should be changed from 10 to 12.
+Everything works fine. But after some time, there's another requirement: number of accounts, when customer is qualified as premium customer should be changed from 10 to 12.
 The previous developer left for another company. No problem – we got the new one. There he is, making changes like this:
 
 ``` csharp
@@ -67,8 +67,8 @@ So now we have 12 account limit when he is logging, and 10 accounts limit when s
 
 Solution: specification pattern.
 
-Let’s do this as simple as it can be.
-Here’s interface:
+Let's do this as simple as it can be.
+Here's interface:
 
 ``` csharp
 public interface ISpecification<T>
@@ -93,11 +93,11 @@ For in-memory operations it is ok, but when you are new to LINQ and/or Entity Fr
 
 ![01](01.png)
 
-That means LINQ doesn’t know how to translate it into SQL. We will talk about it in future.
+That means LINQ doesn't know how to translate it into SQL. We will talk about it in future.
 
 So we need to enable LINQ to use our condition:
 
-Here’s abstraction:
+Here's abstraction:
 
 ``` csharp
 public abstract class Specification0<T> : ISpecification<T>

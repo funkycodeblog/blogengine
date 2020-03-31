@@ -23,13 +23,20 @@ export class BlogInfoComponent extends Component<Props, {}> {
         
 
         return <div style={{width: '750px'}}>
-        <Typography style = {{color: 'gray'}} >{ resolvePostDate(blogInfo.published)}  </Typography>
 
-        <TagBox type='article' tags={blogInfo.tags} tagSelected={this.props.handleTagSelected}  />
+            < >
+            <Typography display='inline' style={{color: 'gray'}}>{ resolvePostDate(blogInfo.published)}  </Typography>
+            <div style={{display: 'inline-block'}}>
+            <TagBox type='article' tags={blogInfo.tags} tagSelected={this.props.handleTagSelected}  />
+            </div>
+            </ >
         
-           <Typography  variant="h4" >{blogInfo.title}</Typography>
-           <Typography>{blogInfo.text}</Typography>
-           <Button onClick={this.handleClick.bind(this)} variant="outlined">Read more</Button>
+           <Typography  variant="h4" onClick={this.handleClick.bind(this)} style={{cursor: 'pointer'}} >{blogInfo.title}</Typography>
+           < >
+           <Typography display='inline'>{blogInfo.text}</Typography>
+           <Typography display='inline'>  </Typography>
+           <Typography display='inline' onClick={this.handleClick.bind(this)} style={{cursor: 'pointer'}} >Read more...</Typography>
+           </ >
         </div>
     }
 
@@ -37,10 +44,10 @@ export class BlogInfoComponent extends Component<Props, {}> {
         
         this.props.handleBlogInfoSelected(this.props.blogInfo.id);
     }
-
-    
+   
     
 }
+
 
 
 

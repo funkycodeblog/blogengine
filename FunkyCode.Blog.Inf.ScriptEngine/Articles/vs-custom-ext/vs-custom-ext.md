@@ -8,7 +8,7 @@
 In the project I recently had been worked on I needed to create a lot of POCO classes. To make my work easier I quickly created simple Windows Forms application that helped me a little bit.
 <!-- #endheader -->
 
-I was bored with typing, even copy-pasting ‘public’, ‘get’, ‘set’ and other stuff, and written myself app that try to guess type out of name.
+I was bored with typing, even copy-pasting 'public', 'get', 'set' and other stuff, and written myself app that try to guess type out of name.
 
 It works like this. I just type class name and property name:
 
@@ -48,13 +48,13 @@ You can instantly remove index.html and stylesheet.css files because they are re
 ![04](04.png)
 
 Click on source.extension.vsixmanifest file to open designer.
-In future, it will help us to create a full-fledged package, but now let’s just fill Description field.
+In future, it will help us to create a full-fledged package, but now let's just fill Description field.
 
 Things will get steam when we add New Item – Custom Command from Extensibility folder.
 
 ![05](05.png)
 
-Configuration of our command is located in .vsct file. At this moment let’s concentrate on Groups and Buttons node.
+Configuration of our command is located in .vsct file. At this moment let's concentrate on Groups and Buttons node.
 Group is set of items between two line separators. Button is nothing more than menu item.
 
 ![06](06.png)
@@ -67,7 +67,7 @@ GenerateClassCommand.cs is also automatically generated and contains a lot of co
 
 ![07](07.png)
 
-Here’s my code. Try it like inspiration, play with types which are exposed here. Most important thing is to obtain DTE2 object. Then we can extract data from Visual Studio.
+Here's my code. Try it like inspiration, play with types which are exposed here. Most important thing is to obtain DTE2 object. Then we can extract data from Visual Studio.
 
 ``` csharp
 IGenerateClassInputDataProvider _inputDataProvider = new GenerateClassInputDataProvider();
@@ -103,7 +103,7 @@ In Tools menu you should find our new command.
 
 ![09](09.png)
 
-For now let’s learn how to install extension locally, just to use it on daily basis.
+For now let's learn how to install extension locally, just to use it on daily basis.
 
 Go to .\bin\debug folder of our app. You should find .visx file.
 

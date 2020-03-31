@@ -5,14 +5,14 @@
 <!-- Date: 20181222  -->
 
 <!-- #header -->
-I am a big fan of code generation. I would like to have code typed instantly after it is designed in my head. It seems that there’s popular belief that what could be done in this subject was done in Resharper. To my regret, I haven’t found many solutions. But those which I found are great.
+I am a big fan of code generation. I would like to have code typed instantly after it is designed in my head. It seems that there's popular belief that what could be done in this subject was done in Resharper. To my regret, I haven't found many solutions. But those which I found are great.
 <!-- #endheader -->
 
 ### 1. Object Exporter
 
 Object Exporter allows you to export whole object data to .NET code.
 
-Under this link, there’s nice animation which illustrates the whole concept.
+Under this link, there's nice animation which illustrates the whole concept.
 
 [Link](https://marketplace.visualstudio.com/items?itemName=OmarElabd.ObjectExporter)
 
@@ -98,7 +98,7 @@ public interface IMapper<TSource, TDestination>
 }
 ```
 
-So we have scaffoldings for these mappers. Let’s see what Mapping Generator can do for us.
+So we have scaffoldings for these mappers. Let's see what Mapping Generator can do for us.
 
 ``` csharp
 public class BookMapper : IMapper<Book, BookDTO>
@@ -132,7 +132,7 @@ You need to put caret into the right place to see “Generate mapping code” comman
 
 ![05](05.png)
 
-What “the right place” means, it’s described under the link below.
+What “the right place” means, it's described under the link below.
 
 [https://github.com/cezarypiatek/MappingGenerator](https://github.com/cezarypiatek/MappingGenerator)
 

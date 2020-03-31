@@ -11,7 +11,11 @@ namespace FunkyCode.Blog.App.Internals.Tools
         public string Fix(string input)
         {
             var c1 = input[0];
-            return c1 == 65279 ? input.Substring(1) : input;
+            input = c1 == 65279 ? input.Substring(1) : input;
+            
+            input = input.Replace(@"<!-- #header -->\r\n", "<!-- #header -->\r\n#####");
+            
+            return input;
 
         }
     }

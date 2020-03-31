@@ -5,7 +5,7 @@
 <!-- Date: 20200321 -->
 
 <!-- #header -->
-TODO
+Executing batch file from Visual Studio isn't shipped  require some quick operations
 <!-- #endheader -->
 
 Select Tools -> External tools …
