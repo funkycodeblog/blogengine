@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
 using FunkyCode.Blog.App.Core.Infrastructure.Internals;
 
 namespace FunkyCode.Blog.App.Internals.Tools
@@ -12,10 +9,12 @@ namespace FunkyCode.Blog.App.Internals.Tools
         {
             var c1 = input[0];
             input = c1 == 65279 ? input.Substring(1) : input;
+
+            var replace = $"<!-- #header -->{Environment.NewLine}";
+
+            var result = input.Replace(replace, "<!-- #header -->\r\n#### ", StringComparison.CurrentCultureIgnoreCase);
             
-            input = input.Replace(@"<!-- #header -->\r\n", "<!-- #header -->\r\n#####");
-            
-            return input;
+            return result;
 
         }
     }

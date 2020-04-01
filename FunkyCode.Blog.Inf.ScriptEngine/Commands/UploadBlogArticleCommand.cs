@@ -45,7 +45,7 @@ namespace FunkyCode.Blog.Scripts
                 return 1;
             }
 
-            var subdirectories = Directory.GetDirectories(options.Folder);
+            var subdirectories = Directory.GetDirectories(options.Folder, "*.*", SearchOption.AllDirectories);
             foreach (var subdir in subdirectories)
             {
                 _blogPostUploadService.Upload(options.Host, subdir, options.IsOverrideWhenExists);
