@@ -51,6 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{3301
 	ProjectSection(SolutionItems) = preProject
 		FunkyCode.Blog.Inf.ScriptEngine\build-funky-scripts.bat = FunkyCode.Blog.Inf.ScriptEngine\build-funky-scripts.bat
 		FunkyCode.Blog.UI.ClientAp\build-wwwroot.bat = FunkyCode.Blog.UI.ClientAp\build-wwwroot.bat
+		FunkyCode.Blog.Inf.ScriptEngine\funky-scripts-publish-1-to-azure.bat = FunkyCode.Blog.Inf.ScriptEngine\funky-scripts-publish-1-to-azure.bat
 		FunkyCode.Blog.Inf.ScriptEngine\funky-scripts-publish-all-to-azure.bat = FunkyCode.Blog.Inf.ScriptEngine\funky-scripts-publish-all-to-azure.bat
 	EndProjectSection
 EndProject
