@@ -1,4 +1,4 @@
-export class BlogEngineSettings {
+export class BlogEnginePaths {
     public static MainPath  = "/"; 
     public static AboutPath  = "/about";
     public static ArchivesPath  = "/archives";

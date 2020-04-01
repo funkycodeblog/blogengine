@@ -3,7 +3,7 @@ import { BlogInfoModel } from '../model/BlogInfoModel';
 import { Typography, Button } from '@material-ui/core';
 import { resolvePostDate } from '../tools/tools';
 import { TagBox } from './UIComponents/TagBox';
-
+import { FunkyStyles } from '../config/FunkyStyles';
 
 
 interface Props {
@@ -25,7 +25,7 @@ export class BlogInfoComponent extends Component<Props, {}> {
         return <div style={{width: '750px'}}>
 
             < >
-            <Typography display='inline' style={{color: 'gray'}}>{ resolvePostDate(blogInfo.published)}  </Typography>
+            <Typography display='inline' style={{color: FunkyStyles.GrayColor}}>{ resolvePostDate(blogInfo.published)}  </Typography>
             <div style={{display: 'inline-block'}}>
             <TagBox type='article' tags={blogInfo.tags} tagSelected={this.props.handleTagSelected}  />
             </div>
@@ -35,7 +35,7 @@ export class BlogInfoComponent extends Component<Props, {}> {
            < >
            <Typography display='inline'>{blogInfo.text}</Typography>
            <Typography display='inline'>  </Typography>
-           <Typography display='inline' onClick={this.handleClick.bind(this)} style={{cursor: 'pointer'}} >Read more...</Typography>
+           <Typography display='inline' onClick={this.handleClick.bind(this)} style={{cursor: 'pointer', fontWeight: 500, color: FunkyStyles.GrayColor }} >Read more...</Typography>
            </ >
         </div>
     }

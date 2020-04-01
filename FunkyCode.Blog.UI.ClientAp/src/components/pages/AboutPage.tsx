@@ -3,7 +3,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { BlogEngineSettings } from '../../config/BlogEngineSettings';
+import { BlogEnginePaths } from '../../config/BlogEngineSettings';
 
 interface Props {
     dispatch: ThunkDispatch<any, any, AnyAction>;
@@ -17,7 +17,7 @@ class AboutPage extends Component<Props, State>  {
 
     render() {
     
-        const path = BlogEngineSettings.ResolveBlogPostPath('about-me');
+        const path = BlogEnginePaths.ResolveBlogPostPath('about-me');
         return <Redirect to={ path} />
     }
 }

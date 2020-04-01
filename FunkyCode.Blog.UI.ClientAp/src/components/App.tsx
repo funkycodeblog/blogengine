@@ -3,7 +3,7 @@ import '../App.css';
 import { hot } from 'react-hot-loader';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import AboutPage  from './pages/AboutPage'
-import { BlogEngineSettings } from '../config/BlogEngineSettings'
+import { BlogEnginePaths } from '../config/BlogEngineSettings'
 import BlogInfosPage from './pages/BlogInfosPage'
 import BlockPostPage  from './pages/BlockPostPage';
 
@@ -34,10 +34,10 @@ const RootApp: React.SFC<IProps> = () => {
 
         <div style={{float: 'left', height: '100%', width: 'calc(100% - 300px)', background: 'white', overflowY: 'auto'}}>
           <div style = {{ paddingLeft: '30px', height: '100%' }} >
-          <Route exact path={BlogEngineSettings.MainPath} component={BlogInfosPage} />
-          <Route path={BlogEngineSettings.AboutPath} component={AboutPage} /> 
-          <Route path={BlogEngineSettings.ArchivesPath} component={ArchivesPage} /> 
-          <Route path={BlogEngineSettings.BlogPostPath} component={BlockPostPage} /> 
+          <Route exact path={BlogEnginePaths.MainPath} component={BlogInfosPage} />
+          <Route path={BlogEnginePaths.AboutPath} component={AboutPage} /> 
+          <Route path={BlogEnginePaths.ArchivesPath} component={ArchivesPage} /> 
+          <Route path={BlogEnginePaths.BlogPostPath} component={BlockPostPage} /> 
           </div>
         </div>
 

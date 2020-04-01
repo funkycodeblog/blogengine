@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { IAppState } from '../redux/Store';
 import { MyAvatar} from '../components/UIComponents/MyAvatar'
 import { Typography, List, ListItem } from '@material-ui/core';
-import { BlogEngineSettings } from '../config/BlogEngineSettings';
+import { BlogEnginePaths } from '../config/BlogEngineSettings';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { TagBox } from './UIComponents/TagBox'
 import  SearchInput  from './UIComponents/SearchInput'
@@ -30,7 +30,7 @@ class NaviPanel extends Component<Props, State>  {
         return <div style={{background: 'black', width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', }}>
         <div style={{height: '50px'}}/>
         
-        <Link to={BlogEngineSettings.MainPath}>
+        <Link to={BlogEnginePaths.MainPath}>
           <MyAvatar size={120}/>
         </Link>
 
@@ -42,11 +42,11 @@ class NaviPanel extends Component<Props, State>  {
 
         <List>
               <ListItem button key='key01'>
-                <Link style={{ textDecoration: 'none', color: 'white' }} to={BlogEngineSettings.AboutPath}>about me</Link>
+                <Link style={{ textDecoration: 'none', color: 'white' }} to={BlogEnginePaths.AboutPath}>about me</Link>
               </ListItem>
 
               <ListItem button key='key02'>
-                <Link style={{ textDecoration: 'none', color: 'white' }} to={BlogEngineSettings.ArchivesPath}>archives</Link>
+                <Link style={{ textDecoration: 'none', color: 'white' }} to={BlogEnginePaths.ArchivesPath}>archives</Link>
               </ListItem>
         </List>
 
@@ -73,7 +73,7 @@ class NaviPanel extends Component<Props, State>  {
     }
 
     private searchEntered(value: string) {
-      const path = BlogEngineSettings.ResolveSearchPath(value);
+      const path = BlogEnginePaths.ResolveSearchPath(value);
       console.log(this.props);
       this.props.history.push(path);
       

@@ -44,8 +44,8 @@ class BlockPostPage extends Component<Props, State>  {
   componentDidMount()
   {
     // this is temporary workaround for receiving 
-    console.log('csharp',csharp, sql);
-    console.log(this.props.match.params.id)
+    console.log('csharp', csharp, sql);
+  
 
     const { id } = this.props.match.params;
   

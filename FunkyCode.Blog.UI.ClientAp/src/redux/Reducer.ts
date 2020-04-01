@@ -11,10 +11,24 @@ export const funkyReducer: Reducer<IFunkyState, BlogEngineActions> = (
   switch (action.type) {
 
     case FunkyActionTypes.SET_LOADING_STATUS: {
-      return {
-        ...state,
-        isLoading: action.isLoading
-      };
+
+      if (action.isLoading)
+      {
+        return {
+          ...state,
+          isLoading: action.isLoading,
+          currentPost: undefined
+        };
+
+      }
+      else
+      {
+        return {
+          ...state,
+          isLoading: action.isLoading
+        };
+      }
+      
     }
 
     case FunkyActionTypes.SET_ERROR_INFO: {

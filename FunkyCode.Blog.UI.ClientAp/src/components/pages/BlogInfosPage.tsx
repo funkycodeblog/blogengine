@@ -42,8 +42,7 @@ export class BlogInfosPage extends Component<Props, State>  {
 
   executeDispatch(props: Props) {
     const params = QueryString.parse(props.location.search);
-    console.log('params', params);
-
+    
     if (params['search'] !== undefined) {
       const search = params['search'];
 

@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 
-import { BlogEngineSettings } from '../../config/BlogEngineSettings';
+import { BlogEnginePaths } from '../../config/BlogEngineSettings';
 import { IAppState } from '../../redux/Store';
 import { BlogInfoModel } from '../../model/BlogInfoModel';
 import { BlogInfoComponent } from '../BlogInfoComponent';
@@ -34,13 +34,13 @@ class BlogInfosContainer extends Component<Props, State>  {
 
     if (isRedirectToBlog) {
       
-      const path = BlogEngineSettings.ResolveBlogPostPath(this.state.postId);
+      const path = BlogEnginePaths.ResolveBlogPostPath(this.state.postId);
       return <Redirect to={path} push />;
     }
 
     if (isRedirectToTags)
     {
-      const path = BlogEngineSettings.ResolveTagPath(this.state.tagId);
+      const path = BlogEnginePaths.ResolveTagPath(this.state.tagId);
       return <Redirect to={path} push />;
     }
 
@@ -48,7 +48,10 @@ class BlogInfosContainer extends Component<Props, State>  {
 
     if (isNullOrUndefined(blogInfos)) return null;
 
-    return blogInfos && <div style={{height: '100%'}}>
+   
+    return <div style={{height: '100%'}}>
+
+      <Spacer height={20} />
 
       {blogInfos.map( blogInfo => 
       

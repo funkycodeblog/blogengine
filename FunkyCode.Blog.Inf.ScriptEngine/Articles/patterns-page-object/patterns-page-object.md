@@ -2,7 +2,7 @@
 
 <!-- Id: patterns-page-object  -->
 <!-- Categories: Design patterns, Testing  -->
-<!-- Date: 20201205  -->
+<!-- Date: 20191205  -->
 
 <!-- #header -->
 The page object is quite fresh design pattern, much younger than folks from standard suite popularized by Gang of Four (founding fathers), although it is assigned to one of three Go4 pattern types (creational, structural and behavioural). As you quickly observe it is structural design pattern and helps us maintain clean code in user interface automation tests.

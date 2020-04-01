@@ -1,6 +1,7 @@
 import React, { Component, CSSProperties } from 'react';
 import { isNullOrUndefined } from 'util';
 import { Tag } from './Tag';
+import { FunkyStyles } from '../../config/FunkyStyles';
 
 interface Props  {
   tags?: string[],
@@ -60,10 +61,10 @@ const tagArticleStyle : CSSProperties = {
     
     borderWidth: 1, 
     borderStyle: 'solid', 
-    borderColor: 'black',
+    borderColor: FunkyStyles.GrayColor,
     margin: '2px',
     
-    color: 'black',
+    color: FunkyStyles.GrayColor,
     marginLeft: '1px', 
     marginRight: '1px', 
     paddingLeft: '1px', 

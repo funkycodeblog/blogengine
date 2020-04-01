@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { CSSProperties } from 'react'
-import { BlogEngineSettings } from '../../config/BlogEngineSettings';
+import { BlogEnginePaths } from '../../config/BlogEngineSettings';
 import { Link } from 'react-router-dom';
 
 interface Props {
@@ -17,7 +17,7 @@ export class Tag extends Component<Props, State>  {
 
     render() {
         const {name, customStyle} = this.props;
-        const path = BlogEngineSettings.ResolveTagPath(name);
+        const path = BlogEnginePaths.ResolveTagPath(name);
         return <Link style={customStyle} to={path}>{name}</Link>        
         
     }
