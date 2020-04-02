@@ -3,7 +3,8 @@ import { IAppState } from '../../redux/Store';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
-import { InputBase } from '@material-ui/core';
+import { InputBase, IconButton } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
 
 interface Props {
     dispatch: ThunkDispatch<any, any, AnyAction>;
@@ -25,8 +26,12 @@ class SearchInput extends Component<Props, State>  {
         render() {
             
             const combined = textField;
-            return <div><InputBase inputProps={{ style: {textAlign: 'center'} }} value = {this.state.searchValue}  style={combined} placeholder='Search' onChange={this.onChange.bind(this)} onKeyUp={this.onKeyUp.bind(this)} > 
+            return <div>
+                <InputBase inputProps={{ style: {textAlign: 'center'} }} value = {this.state.searchValue}  style={combined} placeholder='Search' onChange={this.onChange.bind(this)} onKeyUp={this.onKeyUp.bind(this)} > 
             </InputBase>
+            <IconButton  style={{position: 'relative', zIndex: 1000, bottom: '42px', left: '1px'}} onClick={this.onSearchClick.bind(this)}>
+                    <SearchIcon style={{color: 'white'}}/>
+                </IconButton>
              
             </div>
     
@@ -44,6 +49,8 @@ class SearchInput extends Component<Props, State>  {
                 this.props.onValueEntered(this.state.searchValue);
            }
         }
+
+        onSearchClick = () => this.props.onValueEntered(this.state.searchValue); 
     
     }
 
