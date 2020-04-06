@@ -4,14 +4,21 @@ import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
 import { IAppState } from '../redux/Store';
 import { MyAvatar} from '../components/UIComponents/MyAvatar'
-import { Typography, List, ListItem } from '@material-ui/core';
+import { Typography, List, ListItem, Link as LinkMaterialUi } from '@material-ui/core';
 import { BlogEnginePaths } from '../config/BlogEngineSettings';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+
+
+
 import { TagBox } from './UIComponents/TagBox'
 import  SearchInput  from './UIComponents/SearchInput'
 import { getArticlesByTagAction } from '../redux/Thunks';
 import { IFunkyState } from '../redux/State';
 import { Spacer } from './Spacer'
+
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import GitHubIcon from '@material-ui/icons/GitHub';
+
 
 interface Props extends RouteComponentProps  {
   
@@ -62,7 +69,12 @@ class NaviPanel extends Component<Props, State>  {
           <SearchInput onValueEntered={this.searchEntered.bind(this)}/>
         </div>
         
-
+        <div style={{paddingLeft: '30px', paddingRight: '30px', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start'}} >
+          <LinkMaterialUi href='https://www.linkedin.com/in/maciej-szczudlo-97528b79/'><LinkedInIcon style={{color: 'white'}} /></LinkMaterialUi>
+          <div style={{width: '10px'}} />
+          <LinkMaterialUi href='https://github.com/funkycodeblog'><GitHubIcon style={{color: 'white'}}  /></LinkMaterialUi>
+        </div>
+        
         </div>
     }
 
