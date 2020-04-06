@@ -11,61 +11,60 @@ interface Props {
     onValueEntered: (value: string) => void;
 }
 
-interface State  {
+interface State {
 
-    searchValue : string;
-    
+    searchValue: string;
+
 }
 
 class SearchInput extends Component<Props, State>  {
 
-        state = {searchValue: ''};
-        
-        ENTER_KEY_CODE : number = 13;
+    state = { searchValue: '' };
 
-        render() {
-            
-            const combined = textField;
-            return <div>
-                <InputBase inputProps={{ style: {textAlign: 'center'} }} value = {this.state.searchValue}  style={combined} placeholder='Search' onChange={this.onChange.bind(this)} onKeyUp={this.onKeyUp.bind(this)} > 
+    ENTER_KEY_CODE: number = 13;
+
+    render() {
+
+        const combined = textField;
+        return <div>
+            <InputBase inputProps={{ style: { textAlign: 'center' } }} value={this.state.searchValue} style={combined} placeholder='Search' onChange={this.onChange.bind(this)} onKeyUp={this.onKeyUp.bind(this)} >
             </InputBase>
-            <IconButton  style={{position: 'relative', zIndex: 1000, bottom: '42px', left: '1px'}} onClick={this.onSearchClick.bind(this)}>
-                    <SearchIcon style={{color: 'white'}}/>
-                </IconButton>
-             
-            </div>
-    
-        }
+            <IconButton style={{ position: 'relative', zIndex: 1000, bottom: '42px', left: '1px' }} onClick={this.onSearchClick.bind(this)}>
+                <SearchIcon style={{ color: 'white' }} />
+            </IconButton>
 
-        onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-            const newValue = e.target.value;
-            this.setState({searchValue: newValue});
-        }
+        </div>
 
-        onKeyUp = (e : React.KeyboardEvent<HTMLInputElement>) => {
-           const isEnter : boolean = e.keyCode === this.ENTER_KEY_CODE;
-           if (isEnter)
-           {
-                this.props.onValueEntered(this.state.searchValue);
-           }
-        }
-
-        onSearchClick = () => this.props.onValueEntered(this.state.searchValue); 
-    
     }
+
+    onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = e.target.value;
+        this.setState({ searchValue: newValue });
+    }
+
+    onKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        const isEnter: boolean = e.keyCode === this.ENTER_KEY_CODE;
+        if (isEnter) {
+            this.props.onValueEntered(this.state.searchValue);
+        }
+    }
+
+    onSearchClick = () => this.props.onValueEntered(this.state.searchValue);
+
+}
 
 
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
-     return {
-         dispatch
-     };
- };
-  
+    return {
+        dispatch
+    };
+};
+
 const mapStateToProps = (store: IAppState) => {
-    
+
     // var state : IFunkyState = store.funkyState;
-  
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchInput);
