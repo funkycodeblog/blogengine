@@ -6,15 +6,23 @@ interface Props {
     onClickEvent: () => void
     buttonType : "primary" | "secondary" | "blank" | "border"
     customStyle? : object
+    submit: boolean 
 }
 
 export class FunkyButton extends Component<Props, {}> {
+
+    public static defaultProps = {
+        submit: false
+    };
 
     render() {
         const buttonStyle = this.getButtonStyle(this.props.buttonType)
         const combined = { ...baseButtonStyle, ...buttonStyle, ...this.props.customStyle}
 
-        return <Button onClick={this.props.onClickEvent} style={combined}> {this.props.title} </Button>
+        if (this.props.submit)
+            return <Button onClick={this.props.onClickEvent} style={combined} type="submit" > {this.props.title} </Button>
+        else
+            return <Button onClick={this.props.onClickEvent} style={combined} > {this.props.title} </Button>
     }
 
     getButtonStyle(buttonType: string)

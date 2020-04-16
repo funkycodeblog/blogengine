@@ -9,9 +9,11 @@ namespace FunkyCode.Blog
         string DbConnectionString { get; }
         string Environment { get; }
         string UserPhotoPath { get; }
-        
+      
 
         string UsersAdGroup { get;  }
+
+        string SendGridApiKey { get; }
 
         EnvironmentTypeEnum EnvironmentType { get; }
         Dictionary<string, string> GetConfig();

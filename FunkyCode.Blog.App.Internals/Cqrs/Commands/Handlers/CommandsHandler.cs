@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FunkyCode.Blog.App.Core.Infrastructure.Email;
 using FunkyCode.Blog.App.Core.Infrastructure.Internals;
 using FunkyCode.Blog.App.Internals.Map;
 using FunkyCode.Blog.Domain.Entites;
@@ -13,18 +14,22 @@ namespace FunkyCode.Blog.App.Core.Commands
 {
     public class CommandsHandler : 
         ICommandHandler<UploadBlogPostCommand>,
-        ICommandHandler<DeleteBlogPostCommand>
+        ICommandHandler<DeleteBlogPostCommand>,
+        ICommandHandler<SendContactMessageCommand>
+
 
     {
         private readonly IBlogRepository _blogRepository;
         private readonly IBlogPostMetadataResolver _postMetadataResolver;
         private readonly ITagMapper _tagMapper;
+        private readonly IEmailService _emailService;
 
-        public CommandsHandler(IBlogRepository blogRepository, IBlogPostMetadataResolver postMetadataResolver, ITagMapper tagMapper)
+        public CommandsHandler(IBlogRepository blogRepository, IBlogPostMetadataResolver postMetadataResolver, ITagMapper tagMapper, IEmailService emailService)
         {
             _blogRepository = blogRepository;
             _postMetadataResolver = postMetadataResolver;
             _tagMapper = tagMapper;
+            _emailService = emailService;
         }
 
 
@@ -82,6 +87,12 @@ namespace FunkyCode.Blog.App.Core.Commands
         public async Task Execute(DeleteBlogPostCommand command)
         {
             await _blogRepository.DeleteBlogPost(command.BlogPostId);
+        }
+
+        public async Task Execute(SendContactMessageCommand command)
+        {
+            var msg = command.ContactMessage;
+            await _emailService.SendContactEmail(msg.Username, msg.Email, msg.Subject, msg.Message);
         }
     }
 }

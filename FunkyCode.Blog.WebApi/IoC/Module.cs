@@ -1,4 +1,3 @@
-using FunkyCode.Blog.App.Core;
 using FunkyCode.Blog.Inf.IoC;
 using FunkyCode.Blog.Inf.IoC.Modules;
 
@@ -16,14 +15,11 @@ namespace FunkyCode.Blog.Inf.WebApi.IoC
             builder.RegisterModule(new CqrsModule());
          
             builder.RegisterModule(new MarkdownServiceModule());
+            builder.RegisterModule(new SendGridEmailServiceModule());
 
             builder.RegisterType<BlogEngineConfiguration>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
-
-         
-
-
         }
     }
 }

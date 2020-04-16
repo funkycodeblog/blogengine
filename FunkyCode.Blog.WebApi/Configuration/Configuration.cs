@@ -52,6 +52,20 @@ namespace FunkyCode.Blog.Inf.WebApi
             }
         }
 
+        private string _sendGridApiKey;
+        public string SendGridApiKey
+        {
+            get
+            {
+                if (null != _sendGridApiKey)
+                    return _sendGridApiKey;
+
+                _sendGridApiKey = _configuration["SENDGRID_API_KEY"];
+                return _sendGridApiKey;
+            }
+        }
+
+
 
         public EnvironmentTypeEnum EnvironmentType
         {

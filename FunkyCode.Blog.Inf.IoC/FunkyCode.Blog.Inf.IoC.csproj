@@ -17,6 +17,7 @@
     <ProjectReference Include="..\FunkyCode.Blog.App.Internals\FunkyCode.Blog.App.Internals.csproj" />
     <ProjectReference Include="..\FunkyCode.Blog.Inf.EntityFramework\FunkyCode.Blog.Inf.EntityFramework.csproj" />
     <ProjectReference Include="..\FunkyCode.Blog.Inf.MarkdownService\FunkyCode.Blog.Inf.MarkdownService.csproj" />
+    <ProjectReference Include="..\FunkyCode.Blog.Inf.SendGridEmailService\FunkyCode.Blog.Inf.SendGridEmailService.csproj" />
   </ItemGroup>
 
 </Project>

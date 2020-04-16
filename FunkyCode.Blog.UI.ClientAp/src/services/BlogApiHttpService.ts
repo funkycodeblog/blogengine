@@ -5,9 +5,11 @@ import { BlogPost } from "../model/BlogPost";
 import axios, { AxiosResponse } from 'axios';
 import IPathProvider from './PathProvider';
 import { ArchiveYearDto } from "../model/ArchiveYearDto";
+import { ContactDataModel } from "../model/ContactDataModel";
 
 class BlogApiHttpService implements IBlogService
 {
+    
   
     async GetBlogInfos(): Promise<ServiceResponse<BlogInfoModel[]>> {
 
@@ -61,6 +63,12 @@ class BlogApiHttpService implements IBlogService
         const url : string  = IPathProvider.GetApiUrl(`/api/Blog/Archives`);
         const axiosResponse : AxiosResponse = await axios.get(url);
         return createServiceResponse<ArchiveYearDto[]>(axiosResponse.data, axiosResponse.status, axiosResponse.statusText);
+    }
+
+    async PostContactMessage(msgData: ContactDataModel): Promise<ServiceResponse<void>> {
+        const url : string  = IPathProvider.GetApiUrl(`/api/Contact`);
+        const axiosResponse : AxiosResponse = await axios.post(url, msgData);
+        return createServiceResponse<void>(axiosResponse.data, axiosResponse.status, axiosResponse.statusText);
     }
 
 }

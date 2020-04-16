@@ -1,6 +1,7 @@
 export class BlogEnginePaths {
     public static MainPath  = "/"; 
     public static AboutPath  = "/about";
+    public static ContactPath  = "/contact";
     public static ArchivesPath  = "/archives";
 
     public static BlogPostPath  = "/post/:id";

@@ -6,7 +6,7 @@ import { ErrorInfo } from '../../model/ErrorInfo';
 import { IFunkyState } from '../../redux/State';
 import { isNullOrUndefined } from 'util';
 import { Typography } from '@material-ui/core';
-import { FunkyButton } from '../UIComponents/Button';
+import { FunkyButton } from '../UIComponents/FunkyButton';
 
 
 interface Props {

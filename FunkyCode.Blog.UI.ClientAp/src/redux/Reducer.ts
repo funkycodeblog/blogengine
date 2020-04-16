@@ -75,6 +75,13 @@ export const funkyReducer: Reducer<IFunkyState, BlogEngineActions> = (
       };
     }
 
+    case FunkyActionTypes.POST_CONTACT_MESSAGE_SUCCESS: {
+      return {
+        ...state,
+        isContactMessagePosted: true
+      };
+    }
+
     default:
       return state;
   }

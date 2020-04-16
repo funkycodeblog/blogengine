@@ -12,6 +12,7 @@ import { ErrorInfo } from '../model/ErrorInfo';
 import { BlogInfoModel } from '../model/BlogInfoModel';
 import { BlogPost } from '../model/BlogPost';
 import { ArchiveYearDto } from '../model/ArchiveYearDto';
+import { ContactDataModel } from '../model/ContactDataModel';
 
 
 
@@ -248,6 +249,44 @@ export const getArchives: ActionCreator<
     }
   };
 };
+
+// ----------------------------------------------------------------------------------------
+
+export interface IPostContactMessage {
+  type: FunkyActionTypes.POST_CONTACT_MESSAGE;
+  contactMessage: ContactDataModel;
+}
+
+export interface IPostContactMessage_Success {
+  type: FunkyActionTypes.POST_CONTACT_MESSAGE_SUCCESS;
+}
+
+export const postContactMessage: ActionCreator<
+  ThunkAction<Promise<any>, IFunkyState, null, IPostContactMessage_Success>
+> = (contactMessage: ContactDataModel) => {
+  return async (dispatch: Dispatch) => {
+    try {
+
+      dispatch(setLoadingStatusAction(true));
+
+      const getResponse = await iBlogService.PostContactMessage(contactMessage);
+      const isOk = checkResponseAndDispatchError(getResponse, dispatch);
+        if (!isOk) return;
+
+      const getResponseSuccess : IPostContactMessage_Success = {
+        type: FunkyActionTypes.POST_CONTACT_MESSAGE_SUCCESS,
+      }
+
+      dispatch(getResponseSuccess);
+
+    } catch (err) {
+      console.error(err);
+    } finally {
+      dispatch(setLoadingStatusAction(false));
+    }
+  };
+};
+
 
 
 // ----------------------------------------------------------------------------------------

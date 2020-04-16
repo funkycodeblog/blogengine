@@ -12,10 +12,12 @@ export interface IFunkyState {
 
   errorInfo? : ErrorInfo,
   isLoading: boolean
+  isContactMessagePosted: boolean;
 }
 
 export const initialState: IFunkyState = {
   blogInfos: undefined,
-  isLoading: false
+  isLoading: false,
+  isContactMessagePosted: false
 };
 

@@ -64,5 +64,10 @@
             <param name="blogPostId"></param>
             <returns></returns>
         </member>
+        <member name="M:FunkyCode.Blog.Inf.WebApi.Controllers.ContactController.Post(FunkyCode.Blog.Domain.Entites.Client.ContactMessageDto)">
+            <summary>
+                Upload blog article
+            </summary>
+        </member>
     </members>
 </doc>

@@ -2,6 +2,7 @@ import { BlogInfoModel } from "../model/BlogInfoModel";
 import { ServiceResponse } from '../model/ServiceResponse'
 import { BlogPost } from "../model/BlogPost";
 import { ArchiveYearDto } from "../model/ArchiveYearDto";
+import { ContactDataModel } from "../model/ContactDataModel";
 
 export interface IBlogService
 {
@@ -11,4 +12,5 @@ export interface IBlogService
     GetBlogPost(id: string) : Promise<ServiceResponse<BlogPost>>
     GetAllTags() : Promise<ServiceResponse<string[]>>
     GetArchives() : Promise<ServiceResponse<ArchiveYearDto[]>>
+    PostContactMessage(msgData: ContactDataModel) : Promise<ServiceResponse<void>>
 }

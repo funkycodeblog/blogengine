@@ -24,9 +24,11 @@ export enum FunkyActionTypes {
   GET_BLOG_ARTICLES_BY_SEARCH = 'GET_BLOG_ARTICLES_BY_SEARCH',
   GET_BLOG_ARTICLES_BY_SEARCH_SUCCESS = 'GET_BLOG_ARTICLES_BY_SEARCH_SUCCESS',
 
-
   GET_ARCHIVES = 'GET_ARCHIVES',
   GET_ARCHIVES_SUCCESS = 'GET_ARCHIVES_SUCCESSS',
+
+  POST_CONTACT_MESSAGE = 'POST_CONTACT_MESSAGE',
+  POST_CONTACT_MESSAGE_SUCCESS = 'POST_CONTACT_MESSAGE_SUCCESS',
 
 }
 
@@ -47,4 +49,5 @@ export type BlogEngineActions =
   | Thunks.IGetArchivesAction_Success
   | Thunks.IGetArticlesBySearchAction
   | Thunks.IGetArticlesBySearchAction_Success
-  
+  | Thunks.IPostContactMessage
+  | Thunks.IPostContactMessage_Success
