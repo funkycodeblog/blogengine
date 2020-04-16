@@ -16,6 +16,7 @@ import { IFunkyState } from '../../redux/State';
 import { FunkyMessage } from '../UIComponents/FunkyMessage';
 import { BlogEnginePaths } from '../../config/BlogEngineSettings';
 import { Redirect } from 'react-router-dom';
+import { resetUiStateAction } from '../../redux/Actions';
 
 interface Props {
     dispatch: ThunkDispatch<any, any, AnyAction>;
@@ -62,6 +63,12 @@ class ContactPage extends Component<Props & FormikProps<ContactDataModel>, State
 
     state = { isMsgClosed: false }
 
+    componentWillMount()
+    {
+
+      this.props.dispatch(resetUiStateAction());
+
+    }
 
     render() {
 

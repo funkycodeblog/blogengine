@@ -30,6 +30,8 @@ export enum FunkyActionTypes {
   POST_CONTACT_MESSAGE = 'POST_CONTACT_MESSAGE',
   POST_CONTACT_MESSAGE_SUCCESS = 'POST_CONTACT_MESSAGE_SUCCESS',
 
+  RESET_UI_STATE = 'RESET_UI_STATE'
+
 }
 
 // ----------------------------------------------------------------------------------------
@@ -37,6 +39,7 @@ export enum FunkyActionTypes {
 export type BlogEngineActions =
   | Actions.ISetLoadingStatus
   | Actions.ISetErrorInfoAction
+  | Actions.IResetUiState
   | Thunks.IGetBlogInfosAction
   | Thunks.IGetBlogInfosAction_Success
   | Thunks.IGetBlogPostAction

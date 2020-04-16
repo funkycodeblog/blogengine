@@ -82,6 +82,15 @@ export const funkyReducer: Reducer<IFunkyState, BlogEngineActions> = (
       };
     }
 
+    case FunkyActionTypes.RESET_UI_STATE: {
+      return {
+        ...state,
+        isContactMessagePosted: false,
+        isLoading: false,
+        errorInfo: undefined
+      };
+    }
+
     default:
       return state;
   }
