@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Module = FunkyCode.Blog.Inf.WebApi.IoC.Module;
+using Microsoft.AspNetCore.Internal;
+using HealthChecks.UI.Client;
 
 namespace FunkyCode.Blog.WebApi
 {
@@ -70,8 +72,15 @@ namespace FunkyCode.Blog.WebApi
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options => { options.Cookie.SameSite = SameSiteMode.None; });
-            
 
+
+            var connStr = Configuration.GetConnectionString("defaultConnection");
+
+            services
+                .AddHealthChecks()
+                .AddSqlServer(connStr);
+
+            services.AddHealthChecksUI();
 
             var builder = new ContainerBuilder();
             builder.Populate(services);
@@ -106,6 +115,18 @@ namespace FunkyCode.Blog.WebApi
             app.UseMvc();
 
             app.UseSwaggerConfig();
+
+            app
+                .UseHealthChecks("/api/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                })
+                //.UseHealthChecksUI(setup => {
+                //    setup.UIPath = "/api/health-ui";
+                //    setup.ResourcesPath = "/health-ui";
+                //    });
+                .UseHealthChecksUI(); // this is default /healthchecks-ui
         }
     }
 }
