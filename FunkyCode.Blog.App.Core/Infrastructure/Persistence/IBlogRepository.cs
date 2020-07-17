@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,5 +16,6 @@ namespace FunkyCode.Blog.App.Core
         Task<BlogPost> GetBlogPostWithNoImages(string blogPostId);
         Task<bool> DeleteBlogPost(string blogPostId);
         Task<string[]> GetAllTags();
+        Task<Dictionary<string, string>> PerformHealthCheck();
     }
 }

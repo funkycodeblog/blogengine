@@ -22,7 +22,8 @@ namespace FunkyCode.Blog.App
         IQueryHandler<CheckIfExistsQuery, bool>,
         IQueryHandler<GetAllTagsQuery, string[]>,
         IQueryHandler<GetArchiveQuery, List<ArchiveYearDto>>,
-        IQueryHandler<GetBlogPostHeadersBySearchQuery, List<BlogPostHeaderDto>>
+        IQueryHandler<GetBlogPostHeadersBySearchQuery, List<BlogPostHeaderDto>>,
+        IQueryHandler<GetChealthchecksResultQuery, Dictionary<string, string>>
     {
         private readonly IMarkdownService _markdownService;
         private readonly IBlogRepository _blogRepository;
@@ -142,6 +143,12 @@ namespace FunkyCode.Blog.App
 
             return model;
 
+        }
+
+        public async Task<Dictionary<string, string>> Handle(GetChealthchecksResultQuery query)
+        {
+            var healthCheckResult = await _blogRepository.PerformHealthCheck();
+            return healthCheckResult;
         }
     }
 }

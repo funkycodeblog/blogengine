@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace FunkyCode.Blog.Inf.EntityFramework.Storages
     {
 
         private readonly DbContextOptions<BlogContext> _options;
+
+      
 
         public BlogRepository(DbContextOptions<BlogContext> options)
         {
@@ -148,6 +151,68 @@ namespace FunkyCode.Blog.Inf.EntityFramework.Storages
                     context.BlogPosts.Select(b => b.Tags).ToArrayAsync();
 
                 return tags;
+            }
+        }
+
+
+
+        public async Task<Dictionary<string, string>> PerformHealthCheck()
+        {
+
+           
+
+            var entities = typeof(BlogContext)
+                .GetProperties()
+                .Where(p => p.PropertyType.IsGenericType && p.PropertyType.GetGenericTypeDefinition() == typeof(DbSet<>))
+                .Select(p => p.PropertyType.GetGenericArguments()[0])
+                .ToList();
+
+            var entityRepoType = typeof(EntityTestRepository<>);
+
+            var excluded = new[] { "DIM_CITIES_MV", "MCP_USER_INSTALLS_V_2" };
+
+            var results = new Dictionary<string, string>();
+            foreach (var entityInfo in entities)
+            {
+                var entityTypeName = entityInfo.Name;
+
+                if (excluded.Contains(entityTypeName)) continue;
+
+                Console.WriteLine($"Querying {entityTypeName}...");
+
+                var typeArguments = new Type[] { entityInfo };
+                var entityRepoGenericType = entityRepoType.MakeGenericType(typeArguments);
+
+                var entityRepoInstance = (ITestable)Activator.CreateInstance(entityRepoGenericType);
+                var result = await entityRepoInstance.Test(_options);
+                results[entityTypeName]= result;
+            }
+
+            return results;
+
+        }
+
+        private interface ITestable
+        {
+            Task<string> Test(DbContextOptions<BlogContext> options);
+        }
+
+        private class EntityTestRepository<T> : ITestable where T : class
+        {
+            public async Task<string> Test(DbContextOptions<BlogContext> options)
+            {
+                using (var db = new BlogContext(options))
+                {
+                    try
+                    {
+                        var record = await db.Set<T>().FirstOrDefaultAsync();
+                        return "Ok";
+                    }
+                    catch(Exception exc)
+                    {
+                        return exc.Message;
+                    }
+                }
             }
         }
     }
