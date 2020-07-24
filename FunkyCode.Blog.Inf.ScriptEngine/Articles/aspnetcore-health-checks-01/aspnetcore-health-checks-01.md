@@ -8,6 +8,10 @@
 After application successful deployment I am wondering if all live connections with external components. I may be ensured that my app is 100% ok thanks to unit tests passed. But how to check if in current moment database is working along with our app? And what about email server? Will it send us email whenever exception occurs? In general I would like to know if all connections to external services are in order. 
 <!-- #endheader -->
 
+This post is the part of series:
+1. Hello ASP.NET Core Health Checks
+2. [Custom ASP.NET Core Health Check](/post/aspnetcore-health-checks-02)
+
 Before I discover `Health Checks` toolset I used to create something like hidden urls in my REST Api. I used to send GET requests which did some checks and send me raw response. That was quite ok but why not to use more sophisticated and professional tool that does this job even better.
 
 #### Package installation

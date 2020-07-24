@@ -73,7 +73,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyCode.Blog.Inf.ScriptEn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyCode.Blog.Test.Unit", "FunkyCode.Blog.Test.Unit\FunkyCode.Blog.Test.Unit.csproj", "{E889483C-5EED-413A-931A-5C4AF1395E4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunkyCode.Blog.Inf.SendGridEmailService", "FunkyCode.Blog.Inf.SendGridEmailService\FunkyCode.Blog.Inf.SendGridEmailService.csproj", "{2374E087-1A36-4255-9CB0-1ADF5EAB32F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunkyCode.Blog.Inf.SendGridEmailService", "FunkyCode.Blog.Inf.SendGridEmailService\FunkyCode.Blog.Inf.SendGridEmailService.csproj", "{2374E087-1A36-4255-9CB0-1ADF5EAB32F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunkyCode.Blog.Test.Integration", "FunkyCode.Blog.Test.Integration\FunkyCode.Blog.Test.Integration.csproj", "{E1042CED-F387-4CC2-ABFE-D3B4F3063A3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -125,6 +127,10 @@ Global
 		{2374E087-1A36-4255-9CB0-1ADF5EAB32F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2374E087-1A36-4255-9CB0-1ADF5EAB32F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2374E087-1A36-4255-9CB0-1ADF5EAB32F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1042CED-F387-4CC2-ABFE-D3B4F3063A3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1042CED-F387-4CC2-ABFE-D3B4F3063A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1042CED-F387-4CC2-ABFE-D3B4F3063A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1042CED-F387-4CC2-ABFE-D3B4F3063A3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,6 +154,7 @@ Global
 		{06902420-01D5-4213-ABEF-566704FD614E} = {54E8B3A5-506A-48E8-96BA-48D823ACF8B8}
 		{E889483C-5EED-413A-931A-5C4AF1395E4B} = {35A39431-511F-4C87-816F-2188DE6030AB}
 		{2374E087-1A36-4255-9CB0-1ADF5EAB32F3} = {54E8B3A5-506A-48E8-96BA-48D823ACF8B8}
+		{E1042CED-F387-4CC2-ABFE-D3B4F3063A3B} = {35A39431-511F-4C87-816F-2188DE6030AB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4D2052BF-4746-4303-A548-5F6A3408DA5C}

@@ -37,7 +37,7 @@ namespace FunkyCode.Blog.Inf.SendGridEmailService
             }
             catch (Exception e)
             {
-                // Must be Ignored. 
+                // Ignore
             }
         }
     }

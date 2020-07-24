@@ -200,7 +200,7 @@ commit transaction
 </table>
 
 
-### Solution: unrepeatable reads (not finished)
+### Solution: unrepeatable reads - Example 1
 
 <table>
 <tr>
@@ -217,14 +217,12 @@ set transaction isolation level READ COMMITTED
 -- (3)
 begin transaction A 
 
--- (6a)
-update dbo.Players set Points = 6 where Id = 1
+-- (6) 
+update dbo.Players set Points = 16 where Id = 2 -- will wait for (8) 
 
--- (6b)
-update dbo.Players set Points = 16 where Id = 2
-
--- (8)
+-- (9)
 commit transaction
+select * from dbo.Players -- 16
 ```
 
 </td>
@@ -238,11 +236,61 @@ set transaction isolation level REPEATABLE READ
 begin transaction B
 
 -- (5)
-select * from dbo.Players where Id = 2 -- 15
+select * from dbo.Players
 
+-- (7) 
+select * from dbo.Players -- obviously it's the same result
 
--- (7) - will wait for (8) to commit
-select * from dbo.Players where Id = 2 -- 16
+-- (8)
+commit transaction
+```
+
+</td>
+</tr>
+</table>
+
+### Solution: unrepeatable reads - Example 2
+
+<table>
+<tr>
+<th> A </th>
+<th> B </th>
+</tr>
+<tr>
+<td>
+
+```sql
+-- (1)
+set transaction isolation level READ COMMITTED
+
+-- (3)
+begin transaction A 
+
+-- (6) 
+update dbo.Players set Points = 16 where Id = 2 -- this time it won't wait for (9) !!!
+
+-- (8)
+commit transaction
+select * from dbo.Players -- 16
+
+```
+
+</td>
+<td>
+
+```sql
+-- (2)
+set transaction isolation level REPEATABLE READ
+
+-- (4)
+begin transaction B
+
+-- (5)
+select * from dbo.Players where Id = 1
+
+-- (7)
+select * from dbo.Players where Id = 2 -- but this will be wait for (8) otherwise we will have dirty read
+
 
 -- (9)
 commit transaction
@@ -251,7 +299,6 @@ commit transaction
 </td>
 </tr>
 </table>
-
 
 
 Table to copy

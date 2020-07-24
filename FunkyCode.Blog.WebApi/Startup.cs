@@ -2,6 +2,7 @@ using System;
 using FunkyCode.Blog.Inf.WebApi;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using FunkyCode.Blog.Inf.WebApi.HealthChecks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -78,7 +79,8 @@ namespace FunkyCode.Blog.WebApi
 
             services
                 .AddHealthChecks()
-                .AddSqlServer(connStr);
+                .AddSqlServer(connStr)
+                .AddCheck<DbIntegrationHealthCheck>("Database Integration");
 
             services.AddHealthChecksUI();
 

@@ -8,7 +8,7 @@
 To complete my task I need to find a way how to obtain data from Git. All Git informations are kept in files in .git folder which is part of every project under Git version control. Let's take look at [LibGitSharp](https://github.com/libgit2/libgit2sharp) - probably most popular .NET library for interoping with Git.
 <!-- #endheader -->
 
-This post is part of series:
+This post is the part of series:
 1. [Hello Git Hooks](/post/git-hooks)
 2. [Create command line tool](/post/create-cmd-line-tool)
 3. Git API

@@ -16,6 +16,6 @@ namespace FunkyCode.Blog.App.Core
         Task<BlogPost> GetBlogPostWithNoImages(string blogPostId);
         Task<bool> DeleteBlogPost(string blogPostId);
         Task<string[]> GetAllTags();
-        Task<Dictionary<string, string>> PerformHealthCheck();
+        Task<List<HealthCheckItem>> PerformHealthCheck();
     }
 }
