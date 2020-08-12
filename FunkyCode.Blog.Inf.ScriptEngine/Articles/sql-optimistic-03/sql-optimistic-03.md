@@ -1,6 +1,6 @@
 # SQL Row Versioning
 
-<!-- Id: sql-rowversion  -->
+<!-- Id: sql-optimistic-03  -->
 <!-- Categories: SQL -->
 <!-- Date: 20200728  -->
 
@@ -149,6 +149,8 @@ It was because both queries tried to update the same row.
 
 If you execute steps in a little different order: 1-2-4-3-6-5 you notice that it's not important which transaction started first. It's important which transaction perform write operation.
 
+Such conflicts are possible only with SI (not RCSI), so we need to be aware and prepared for them. Application must be written in a way that update conflicts are foreseen
+
 Now, let's analyse example above with one difference: *rollback* instead of *commit* in (5) step. 
 
 <table><tr><th> A </th><th> B </th></tr><tr><td valign='top'>
@@ -189,6 +191,14 @@ In this case as Transaction A hadn't changed row version in table, there's freed
 
 
 
+
+#### References
+
+[https://sqlperformance.com/2014/05/t-sql-queries/read-committed-snapshot-isolation](https://sqlperformance.com/2014/05/t-sql-queries/read-committed-snapshot-isolation)
+
+
+
+
 ### Summary
 
 Somehow to summary.
@@ -202,6 +212,7 @@ Somehow to summary.
 </td><td valign='top'>
 
 ```sql
+
 ```
 
 </td></tr></table>
