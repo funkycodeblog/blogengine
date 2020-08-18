@@ -28,9 +28,7 @@
 
 #### Remove functions from WHERE clauses
 
-
-
-
+#### Use ```sp_executesql``` instead of ```EXEC```
 
 
 
