@@ -20,7 +20,7 @@ class PathProvider implements IPathProvider
     {
         if (process.env.NODE_ENV === 'development')
         {
-            return 'https://localhost:5001'; // this is for calling local WebApi
+            return 'https://localhost:44364'; // this is for calling local WebApi
         }
         
         if (process.env.NODE_ENV === 'production')

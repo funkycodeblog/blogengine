@@ -13,6 +13,7 @@ import { BlogInfoModel } from '../model/BlogInfoModel';
 import { BlogPost } from '../model/BlogPost';
 import { ArchiveYearDto } from '../model/ArchiveYearDto';
 import { ContactDataModel } from '../model/ContactDataModel';
+import { SubscribeDto } from '../model/SubscribeDto';
 
 
 
@@ -275,6 +276,43 @@ export const postContactMessage: ActionCreator<
 
       const getResponseSuccess : IPostContactMessage_Success = {
         type: FunkyActionTypes.POST_CONTACT_MESSAGE_SUCCESS,
+      }
+
+      dispatch(getResponseSuccess);
+
+    } catch (err) {
+      console.error(err);
+    } finally {
+      dispatch(setLoadingStatusAction(false));
+    }
+  };
+};
+
+// ----------------------------------------------------------------------------------------
+
+export interface ISubscribe {
+  type: FunkyActionTypes.SUBSCRIBE;
+  subscribeData: SubscribeDto;
+}
+
+export interface ISubscribe_Success {
+  type: FunkyActionTypes.SUBSCRIBE_SUCCESS;
+}
+
+export const subscribeAction: ActionCreator<
+  ThunkAction<Promise<any>, IFunkyState, null, IPostContactMessage_Success>
+> = (subscribeData: SubscribeDto) => {
+  return async (dispatch: Dispatch) => {
+    try {
+
+      dispatch(setLoadingStatusAction(true));
+
+      const getResponse = await iBlogService.PostSubscription(subscribeData);
+      const isOk = checkResponseAndDispatchError(getResponse, dispatch);
+        if (!isOk) return;
+
+      const getResponseSuccess : ISubscribe_Success = {
+        type: FunkyActionTypes.SUBSCRIBE_SUCCESS,
       }
 
       dispatch(getResponseSuccess);

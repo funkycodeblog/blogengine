@@ -6,8 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using FunkyCode.Blog.App.Core.Infrastructure.Email;
 using FunkyCode.Blog.App.Core.Infrastructure.Internals;
+using FunkyCode.Blog.App.Core.Infrastructure.Persistence;
 using FunkyCode.Blog.App.Internals.Map;
 using FunkyCode.Blog.Domain.Entites;
+using FunkyCode.Blog.Domain.Entites.Client;
 
 
 namespace FunkyCode.Blog.App.Core.Commands
@@ -15,7 +17,8 @@ namespace FunkyCode.Blog.App.Core.Commands
     public class CommandsHandler : 
         ICommandHandler<UploadBlogPostCommand>,
         ICommandHandler<DeleteBlogPostCommand>,
-        ICommandHandler<SendContactMessageCommand>
+        ICommandHandler<SendContactMessageCommand>,
+        ICommandHandler<ProcessSubscriptionCommand>
 
 
     {
@@ -23,13 +26,16 @@ namespace FunkyCode.Blog.App.Core.Commands
         private readonly IBlogPostMetadataResolver _postMetadataResolver;
         private readonly ITagMapper _tagMapper;
         private readonly IEmailService _emailService;
+        private readonly IUserRepository _userRepository;
 
-        public CommandsHandler(IBlogRepository blogRepository, IBlogPostMetadataResolver postMetadataResolver, ITagMapper tagMapper, IEmailService emailService)
+
+        public CommandsHandler(IBlogRepository blogRepository, IBlogPostMetadataResolver postMetadataResolver, ITagMapper tagMapper, IEmailService emailService, IUserRepository userRepository)
         {
             _blogRepository = blogRepository;
             _postMetadataResolver = postMetadataResolver;
             _tagMapper = tagMapper;
             _emailService = emailService;
+            _userRepository = userRepository;
         }
 
 
@@ -93,6 +99,18 @@ namespace FunkyCode.Blog.App.Core.Commands
         {
             var msg = command.ContactMessage;
             await _emailService.SendContactEmail(msg.Username, msg.Email, msg.Subject, msg.Message);
+        }
+
+        public async Task Execute(ProcessSubscriptionCommand command)
+        {
+            if (command.SubscriptionData.Action == SubscribeDataActionTypeEnum.Subscribe)
+            {
+                await _userRepository.Subscribe(command.SubscriptionData);
+            }
+            else
+            {
+                await _userRepository.Unsubscribe(command.SubscriptionData);
+            }
         }
     }
 }

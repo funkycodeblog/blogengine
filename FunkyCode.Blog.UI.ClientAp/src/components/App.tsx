@@ -7,6 +7,7 @@ import { BlogEnginePaths } from '../config/BlogEngineSettings'
 import BlogInfosPage from './pages/BlogInfosPage'
 import BlockPostPage  from './pages/BlockPostPage';
 import ContactPage  from './pages/ContactPage';
+import SubscribePage  from './pages/SubscribePage';
 
 import ArchivesPage  from './pages/ArchivesPage';
 
@@ -40,6 +41,7 @@ const RootApp: React.SFC<IProps> = () => {
           <Route path={BlogEnginePaths.ArchivesPath} component={ArchivesPage} /> 
           <Route path={BlogEnginePaths.BlogPostPath} component={BlockPostPage} /> 
           <Route path={BlogEnginePaths.ContactPath} component={ContactPage} /> 
+          <Route path={BlogEnginePaths.SubscribePath} component={SubscribePage} /> 
           </div>
         </div>
 

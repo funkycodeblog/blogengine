@@ -19,6 +19,7 @@ namespace FunkyCode.Blog.Inf.EntityFramework.Context
 
         public DbSet<BlogPost> BlogPosts { get; set; }
         public DbSet<BlogPostImage> BlogPostImages { get; set; }
+        public DbSet<Subscriber> Subscribers { get; set; }
 
     }
 }

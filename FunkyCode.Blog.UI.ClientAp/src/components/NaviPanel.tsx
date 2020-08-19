@@ -60,6 +60,10 @@ class NaviPanel extends Component<Props, State>  {
                 <Link style={{ textDecoration: 'none', color: 'white' }} to={BlogEnginePaths.ContactPath}>contact</Link>
               </ListItem>
 
+              <ListItem button key='key04'>
+                <Link style={{ textDecoration: 'none', color: 'white' }} to={BlogEnginePaths.SubscribePath}>subscribe</Link>
+              </ListItem>
+
         </List>
 
         <Spacer height={20} />

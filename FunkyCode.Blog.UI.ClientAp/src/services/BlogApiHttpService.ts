@@ -6,10 +6,11 @@ import axios, { AxiosResponse } from 'axios';
 import IPathProvider from './PathProvider';
 import { ArchiveYearDto } from "../model/ArchiveYearDto";
 import { ContactDataModel } from "../model/ContactDataModel";
+import { SubscribeDto } from "../model/SubscribeDto";
 
 class BlogApiHttpService implements IBlogService
 {
-    
+   
   
     async GetBlogInfos(): Promise<ServiceResponse<BlogInfoModel[]>> {
 
@@ -70,6 +71,13 @@ class BlogApiHttpService implements IBlogService
         const axiosResponse : AxiosResponse = await axios.post(url, msgData);
         return createServiceResponse<void>(axiosResponse.data, axiosResponse.status, axiosResponse.statusText);
     }
+
+    async PostSubscription(subscriptionData: SubscribeDto): Promise<ServiceResponse<void>> {
+        const url : string  = IPathProvider.GetApiUrl(`/api/Contact/Subscribe`);
+        const axiosResponse : AxiosResponse = await axios.post(url, subscriptionData);
+        return createServiceResponse<void>(axiosResponse.data, axiosResponse.status, axiosResponse.statusText);
+    }
+    
 
 }
 

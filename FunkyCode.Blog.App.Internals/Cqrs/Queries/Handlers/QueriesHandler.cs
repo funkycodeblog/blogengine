@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using FunkyCode.Blog.App.Core;
 using FunkyCode.Blog.App.Core.Infrastructure.Internals;
+using FunkyCode.Blog.App.Core.Infrastructure.Persistence;
 using FunkyCode.Blog.App.Internals.Map;
 using FunkyCode.Blog.Domain;
 using FunkyCode.Blog.Domain.Entites;
@@ -23,19 +24,22 @@ namespace FunkyCode.Blog.App
         IQueryHandler<GetAllTagsQuery, string[]>,
         IQueryHandler<GetArchiveQuery, List<ArchiveYearDto>>,
         IQueryHandler<GetBlogPostHeadersBySearchQuery, List<BlogPostHeaderDto>>,
-        IQueryHandler<GetChealthchecksResultQuery, List<HealthCheckItem>>
+        IQueryHandler<GetChealthchecksResultQuery, List<HealthCheckItem>>,
+        IQueryHandler<CheckIfUserSubscribedQuery, bool>>
     {
         private readonly IMarkdownService _markdownService;
         private readonly IBlogRepository _blogRepository;
         private readonly ITagMapper _tagMapper;
         private readonly IMapper<BlogPostHeader, BlogPostHeaderDto> _headerMapper;
+        private readonly IUserRepository _userRepository;
 
-        public QueriesHandler(IMarkdownService markdownService, IBlogRepository blogRepository, ITagMapper tagMapper, IMapper<BlogPostHeader, BlogPostHeaderDto> headerMapper)
+        public QueriesHandler(IMarkdownService markdownService, IBlogRepository blogRepository, ITagMapper tagMapper, IMapper<BlogPostHeader, BlogPostHeaderDto> headerMapper, IUserRepository userRepository)
         {
             _markdownService = markdownService;
             _blogRepository = blogRepository;
             _tagMapper = tagMapper;
             _headerMapper = headerMapper;
+            _userRepository = userRepository;
         }
 
         public async Task<BlogPostDto> Handle(GetBlogPostQuery query)
@@ -149,6 +153,12 @@ namespace FunkyCode.Blog.App
         {
             var healthCheckResult = await _blogRepository.PerformHealthCheck();
             return healthCheckResult;
+        }
+
+        public async Task<bool> Handle(CheckIfUserSubscribedQuery query)
+        {
+            var isExists = await _userRepository.CheckIfSubscribed(query.SubscriberEmail);
+            return isExists;
         }
     }
 }
