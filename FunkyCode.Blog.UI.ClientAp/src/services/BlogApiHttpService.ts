@@ -7,6 +7,7 @@ import IPathProvider from './PathProvider';
 import { ArchiveYearDto } from "../model/ArchiveYearDto";
 import { ContactDataModel } from "../model/ContactDataModel";
 import { SubscribeDto } from "../model/SubscribeDto";
+import { SubscriptionResultTypeEnum } from "../model/SubscriptionResult";
 
 class BlogApiHttpService implements IBlogService
 {
@@ -72,10 +73,10 @@ class BlogApiHttpService implements IBlogService
         return createServiceResponse<void>(axiosResponse.data, axiosResponse.status, axiosResponse.statusText);
     }
 
-    async PostSubscription(subscriptionData: SubscribeDto): Promise<ServiceResponse<void>> {
+    async PostSubscription(subscriptionData: SubscribeDto): Promise<ServiceResponse<SubscriptionResultTypeEnum>> {
         const url : string  = IPathProvider.GetApiUrl(`/api/Contact/Subscribe`);
         const axiosResponse : AxiosResponse = await axios.post(url, subscriptionData);
-        return createServiceResponse<void>(axiosResponse.data, axiosResponse.status, axiosResponse.statusText);
+        return createServiceResponse<SubscriptionResultTypeEnum>(axiosResponse.data, axiosResponse.status, axiosResponse.statusText);
     }
     
 

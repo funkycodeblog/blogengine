@@ -91,6 +91,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>)�
 
 const mapStateToProps = (store: IAppState) => {
     
+  return {};
 
 };
 

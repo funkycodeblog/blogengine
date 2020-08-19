@@ -1,6 +1,7 @@
 import { Reducer } from 'redux';
 import { BlogEngineActions, FunkyActionTypes } from './ActionDefinitions';
 import { IFunkyState, initialState } from './State';
+import { SubscriptionResultTypeEnum } from '../model/SubscriptionResult';
 
 export const funkyReducer: Reducer<IFunkyState, BlogEngineActions> = (
   state = initialState,
@@ -82,10 +83,20 @@ export const funkyReducer: Reducer<IFunkyState, BlogEngineActions> = (
       };
     }
 
+    case FunkyActionTypes.SUBSCRIBE_SUCCESS: {
+      return {
+        ...state,
+        isContactMessagePosted: true,
+        subscriptionActionStatus: action.result
+      };
+
+    }
+
     case FunkyActionTypes.RESET_UI_STATE: {
       return {
         ...state,
         isContactMessagePosted: false,
+        subscriptionActionStatus: 'Unknown',
         isLoading: false,
         errorInfo: undefined
       };

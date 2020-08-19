@@ -17,7 +17,10 @@ namespace FunkyCode.Blog.Inf.EntityFramework.Storages
 
         private readonly DbContextOptions<BlogContext> _options;
 
-        
+        public UserRepository(DbContextOptions<BlogContext> options)
+        {
+            _options = options;
+        }
 
         public async Task<bool> CheckIfSubscribed(string email)
         {
@@ -34,12 +37,22 @@ namespace FunkyCode.Blog.Inf.EntityFramework.Storages
         {
             using (var context = new BlogContext(_options))
             {
+
+                var subscriber = await context.Subscribers.FindAsync(user.Email);
+                if (null != subscriber)
+                {
+                    subscriber.Status = SubscriptionStatusTypeEnum.Active;
+                    await context.SaveChangesAsync();
+                    return true;
+                }
+
                 var newSubscriber = new Subscriber
                 {
                     Name = user.Username,
-                    Email = user.Username,
+                    Email = user.Email,
                     Status = SubscriptionStatusTypeEnum.Active,
-                    IsTester = false
+                    IsTester = false,
+                    SubscriptionStart = DateTime.UtcNow
                 };
 
                 await context.Subscribers.AddAsync(newSubscriber);

@@ -35,7 +35,7 @@ namespace FunkyCode.Blog.Inf.SendGridEmailService
 
                 var response = await sendGridClient.SendEmailAsync(msg);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // Ignore
             }

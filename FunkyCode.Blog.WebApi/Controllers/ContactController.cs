@@ -48,7 +48,7 @@ namespace FunkyCode.Blog.Inf.WebApi.Controllers
             if (!isSubscriber && action == SubscribeDataActionTypeEnum.Unsubscribe)
                 return Ok(SubscriptionResult.NotInDatabase);
 
-            var command = new SendContactMessageCommand { ContactMessage = null };
+            var command = new ProcessSubscriptionCommand() { SubscriptionData = subscribeDto };
             await _commandDispatcher.Execute(command);
 
             if (action == SubscribeDataActionTypeEnum.Subscribe)

@@ -25,7 +25,7 @@ namespace FunkyCode.Blog.App
         IQueryHandler<GetArchiveQuery, List<ArchiveYearDto>>,
         IQueryHandler<GetBlogPostHeadersBySearchQuery, List<BlogPostHeaderDto>>,
         IQueryHandler<GetChealthchecksResultQuery, List<HealthCheckItem>>,
-        IQueryHandler<CheckIfUserSubscribedQuery, bool>>
+        IQueryHandler<CheckIfUserSubscribedQuery, bool>
     {
         private readonly IMarkdownService _markdownService;
         private readonly IBlogRepository _blogRepository;

@@ -31,8 +31,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
  };
   
   const mapStateToProps = () => {
-    
-  
+    return {};
   };
 
   export default connect(mapStateToProps, mapDispatchToProps)(AboutPage);

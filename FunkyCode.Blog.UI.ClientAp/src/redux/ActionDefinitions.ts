@@ -57,3 +57,5 @@ export type BlogEngineActions =
   | Thunks.IGetArticlesBySearchAction_Success
   | Thunks.IPostContactMessage
   | Thunks.IPostContactMessage_Success
+  | Thunks.ISubscribe
+  | Thunks.ISubscribe_Success

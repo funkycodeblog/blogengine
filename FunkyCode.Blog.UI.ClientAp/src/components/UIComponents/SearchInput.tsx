@@ -63,7 +63,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
 
 const mapStateToProps = (store: IAppState) => {
 
-    // var state : IFunkyState = store.funkyState;
+    return {};
 
 };
 

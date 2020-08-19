@@ -14,6 +14,7 @@ import { BlogPost } from '../model/BlogPost';
 import { ArchiveYearDto } from '../model/ArchiveYearDto';
 import { ContactDataModel } from '../model/ContactDataModel';
 import { SubscribeDto } from '../model/SubscribeDto';
+import { SubscriptionResultTypeEnum } from '../model/SubscriptionResult';
 
 
 
@@ -297,6 +298,7 @@ export interface ISubscribe {
 
 export interface ISubscribe_Success {
   type: FunkyActionTypes.SUBSCRIBE_SUCCESS;
+  result: SubscriptionResultTypeEnum
 }
 
 export const subscribeAction: ActionCreator<
@@ -313,6 +315,7 @@ export const subscribeAction: ActionCreator<
 
       const getResponseSuccess : ISubscribe_Success = {
         type: FunkyActionTypes.SUBSCRIBE_SUCCESS,
+        result: getResponse.Data
       }
 
       dispatch(getResponseSuccess);

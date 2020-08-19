@@ -4,8 +4,8 @@ import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
 import { TextField } from 'material-ui-formik-components/TextField'
 import * as yup from 'yup';
-import { Formik, FormikProps, Form, Field, FormikErrors } from 'formik';
-import { Typography, Dialog, DialogTitle, DialogActions, Button, DialogContent } from '@material-ui/core';
+import { Formik, FormikProps, Form, Field } from 'formik';
+import { Typography } from '@material-ui/core';
 import { Spacer } from '../Spacer';
 import { FunkyButton } from '../UIComponents/FunkyButton';
 import { isNullOrUndefined } from 'util';

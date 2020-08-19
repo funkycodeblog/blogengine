@@ -4,13 +4,12 @@ import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
 import { TextField } from 'material-ui-formik-components/TextField'
 import * as yup from 'yup';
-import { Formik, FormikProps, Form, Field, FormikErrors } from 'formik';
-import { Typography, Dialog, DialogTitle, DialogActions, Button, DialogContent } from '@material-ui/core';
+import { Formik, FormikProps, Form, Field } from 'formik';
+import { Typography } from '@material-ui/core';
 import { Spacer } from '../Spacer';
 import { FunkyButton } from '../UIComponents/FunkyButton';
-import { isNullOrUndefined } from 'util';
 import { ContactDataModel } from '../../model/ContactDataModel';
-import { postContactMessage, subscribeAction } from '../../redux/Thunks';
+import { subscribeAction } from '../../redux/Thunks';
 import { IAppState } from '../../redux/Store';
 import { IFunkyState } from '../../redux/State';
 import { FunkyMessage } from '../UIComponents/FunkyMessage';
@@ -20,10 +19,11 @@ import { resetUiStateAction } from '../../redux/Actions';
 import { SubscribeDataModel } from '../../model/SubscribeDataModel';
 import { SubscribeDataActionType } from "../../model/SubscribeDataActionType";
 import { SubscribeDto } from '../../model/SubscribeDto';
+import { SubscriptionResultTypeEnum } from '../../model/SubscriptionResult';
 
 interface Props {
     dispatch: ThunkDispatch<any, any, AnyAction>;
-    isContactMessagePosted: boolean;
+    subscriptionActionResult: SubscriptionResultTypeEnum;
 }
 
 interface State  {
@@ -46,6 +46,9 @@ class SubscribePage extends Component<Props & FormikProps<ContactDataModel>, Sta
 
     initialValues: SubscribeDataModel = { username: '', email: ''};
 
+    initialValuesUnsubscribe: SubscribeDataModel = { username: 'Unsubscriber', email: ''};
+
+
     state : State = { isMsgClosed: false, action: 'unknown'  }
 
     componentWillMount()
@@ -61,6 +64,9 @@ class SubscribePage extends Component<Props & FormikProps<ContactDataModel>, Sta
         {
             return <Redirect to={ BlogEnginePaths.MainPath} />
         }
+       
+        const message = this.processMessage(this.props.subscriptionActionResult);
+        const isMessageVisible = this.props.subscriptionActionResult !== 'Unknown';
 
         return <div style={{width: '600px'}}>
         
@@ -69,7 +75,7 @@ class SubscribePage extends Component<Props & FormikProps<ContactDataModel>, Sta
 
         <Formik
         initialValues={ this.initialValues} 
-        onSubmit={this.onSubmit.bind(this)}         
+        onSubmit={this.onSubmitSubscribe.bind(this)}         
         validationSchema={validationSchema}
         >
         {() => (
@@ -78,50 +84,58 @@ class SubscribePage extends Component<Props & FormikProps<ContactDataModel>, Sta
           <Field name="username" label="Username" component={TextField}  variant="filled" />
           <Field name="email" label="Email" component={TextField}  variant="filled"/>
           <Spacer height={20} />
-       
-          <div>
-            <span>
-            <FunkyButton buttonType="border" title="Register" onClickEvent={() => {this.subscribe()  }} submit />
-            </span>
-
-            <span>  
-              <FunkyButton buttonType="border" title="Unregister" onClickEvent={() => { this.unsubscribe()}} submit /> 
-            </span>
-
-
-
-          </div>
-         
-          
+          <FunkyButton buttonType="border" title="Subscribe" onClickEvent={() => {}} submit />
           </Form>
 
         )}
       </Formik>
 
-      <FunkyMessage title="Funky Code" message="Message was sent!" isOpen={this.props.isContactMessagePosted} onClose={this.onClose.bind(this)} />
+      <Formik
+        initialValues={ this.initialValuesUnsubscribe} 
+        onSubmit={this.onSubmitUnsubscribe.bind(this)}         
+        validationSchema={validationSchema}
+        >
+        {() => (
+          
+          <Form>
+          {/* <Field name="username" label="Username" component={TextField}  variant="filled"  /> */}
+          <Field name="email" label="Email" component={TextField}  variant="filled"/>
+          <Spacer height={20} />
+          <FunkyButton buttonType="border" title="Unsubscribe" onClickEvent={() => { }} submit /> 
+          </Form>
+
+        )}
+      </Formik>
+
+      
+
+      <FunkyMessage title="Funky Code" message={message} isOpen={isMessageVisible} onClose={this.onClose.bind(this)} />
 
       </div>
     }
 
-    subscribe()
-    {
-        this.setState({...this.state, action: 'subscribe' });
-    }
-
-    unsubscribe()
-    {
-      this.setState({...this.state, action: 'unsubscribe' });
-    }
-
-    onSubmit(data: SubscribeDataModel) {
-
-        const subscribeDto : SubscribeDto = {...data, action: this.state.action};
-
+    onSubmitSubscribe(data: SubscribeDataModel) {
+        const subscribeDto : SubscribeDto = {...data, action: 'subscribe'};
         this.props.dispatch(subscribeAction(subscribeDto));
+    }
+
+    onSubmitUnsubscribe(data: SubscribeDataModel) {
+      const subscribeDto : SubscribeDto = {...data, action: 'unsubscribe'};
+      this.props.dispatch(subscribeAction(subscribeDto));
     }
 
     onClose() {
         this.setState({isMsgClosed: true});
+    }
+
+    processMessage(substrictionResult: SubscriptionResultTypeEnum) : string
+    {
+        console.log('subsresult', substrictionResult);
+        if (substrictionResult === 'Subscribed') return "You have been added to subscribers.";
+        if (substrictionResult === 'Unsubscribed') return "You are no longer subscriber.";
+        if (substrictionResult === 'AlreadySubscribed') return "You already subscribed.";
+        if (substrictionResult === 'NotInDatabase') return "You have not been subscriber.";
+        return "";
     }
 
 }
@@ -138,7 +152,7 @@ const mapStateToProps = (store: IAppState) => {
   const state: IFunkyState = store.funkyState;
 
   return {
-      isContactMessagePosted: state.isContactMessagePosted
+    subscriptionActionResult: state.subscriptionActionStatus
   };
 
 };
