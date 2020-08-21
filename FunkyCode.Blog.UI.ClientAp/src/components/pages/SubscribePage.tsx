@@ -72,6 +72,8 @@ class SubscribePage extends Component<Props & FormikProps<ContactDataModel>, Sta
         
         <Spacer height={30} />
         <Typography variant="h4">Subscribe</Typography>
+        <Spacer height={10} />
+        <Typography>You can subscribe to receive information about new blog posts and nothing beside this. You can unsubscribe in any moment from this page or from every email you receive from me.</Typography>
 
         <Formik
         initialValues={ this.initialValues} 
@@ -83,13 +85,18 @@ class SubscribePage extends Component<Props & FormikProps<ContactDataModel>, Sta
           <Form>
           <Field name="username" label="Username" component={TextField}  variant="filled" />
           <Field name="email" label="Email" component={TextField}  variant="filled"/>
-          <Spacer height={20} />
+          <Spacer height={15} />
           <FunkyButton buttonType="border" title="Subscribe" onClickEvent={() => {}} submit />
           </Form>
 
         )}
       </Formik>
 
+      <Spacer height={50} />
+      <Typography variant="h4">... or unsubscribe</Typography>
+      <Spacer height={10} />
+      <Typography>If you are not happy with receiving emails then you can freely unsubscribe.</Typography>
+     
       <Formik
         initialValues={ this.initialValuesUnsubscribe} 
         onSubmit={this.onSubmitUnsubscribe.bind(this)}         
@@ -100,7 +107,7 @@ class SubscribePage extends Component<Props & FormikProps<ContactDataModel>, Sta
           <Form>
           {/* <Field name="username" label="Username" component={TextField}  variant="filled"  /> */}
           <Field name="email" label="Email" component={TextField}  variant="filled"/>
-          <Spacer height={20} />
+          <Spacer height={15} />
           <FunkyButton buttonType="border" title="Unsubscribe" onClickEvent={() => { }} submit /> 
           </Form>
 
@@ -131,10 +138,10 @@ class SubscribePage extends Component<Props & FormikProps<ContactDataModel>, Sta
     processMessage(substrictionResult: SubscriptionResultTypeEnum) : string
     {
         console.log('subsresult', substrictionResult);
-        if (substrictionResult === 'Subscribed') return "You have been added to subscribers.";
-        if (substrictionResult === 'Unsubscribed') return "You are no longer subscriber.";
-        if (substrictionResult === 'AlreadySubscribed') return "You already subscribed.";
-        if (substrictionResult === 'NotInDatabase') return "You have not been subscriber.";
+        if (substrictionResult === 'Subscribed') return "You have been added to Funky Code blog subscribers.";
+        if (substrictionResult === 'Unsubscribed') return "You are no longer Funky Code blog subscriber.";
+        if (substrictionResult === 'AlreadySubscribed') return "You have been already subscribed.";
+        if (substrictionResult === 'NotInDatabase') return "You weren't present in our DB therefore you weren't unsubscribed.";
         return "";
     }
 
