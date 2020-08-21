@@ -213,7 +213,27 @@ and launch again queries one by another. Now, because of this tiny typo which sh
 SQL Server uses hash value as representation for every query. When query is run, SQL Server calculates hash and checks if there's such hash in cache. The hash value for the query plan is generated directly from the text. If there is even a tiny change in the query text a new hash value will be generated and there will be no match with existing hash values. 
 
 
+### Simple parametrization limitation 
 
+We observed that there's `simple parametrization` mechanism which creates parametrized query plan for dynamic SQL statements. However I learned that usage of this feature is somehow limited to very simple queries.
 
+Let's examine very similar queries and launch them one by another.
 
+```sql
+SELECT LastName, FirstName FROM Person.Person WHERE ModifiedDate > '20100101'
+SELECT LastName, FirstName FROM Person.Person WHERE ModifiedDate > '20100201'
+SELECT LastName, FirstName FROM Person.Person WHERE ModifiedDate > '20100301'
+```
 
+In this case there's nothing like *Prepared* query plan. That means that `simple parametrization` didn't work.
+
+![10](10.png)
+
+For comparison launch queries below one by another.
+
+```sql
+EXEC sp_executesql N'SELECT LastName, FirstName FROM Person.Person WHERE ModifiedDate > @date', N'@date datetime', @date='20100101'
+EXEC sp_executesql N'SELECT LastName, FirstName FROM Person.Person WHERE ModifiedDate > @date', N'@date datetime', @date='20100201'
+EXEC sp_executesql N'SELECT LastName, FirstName FROM Person.Person WHERE ModifiedDate > @date', N'@date datetime', @date='20100301'
+```
+![11](11.png)
