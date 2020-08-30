@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FunkyCode.Blog.App.Core\FunkyCode.Blog.App.Core.csproj" />
+    <ProjectReference Include="..\FunkyCode.Blog.App.Internals\FunkyCode.Blog.App.Internals.csproj" />
   </ItemGroup>
 
 </Project>

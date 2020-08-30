@@ -1,0 +1,21 @@
+-- ten kod dodaje babelek 
+
+<ol>
+<li>My name is Donald</li>
+<li>I live in Ducksburg</li>
+<li>I live in Ducksburg</li>
+<li>I live in Ducksburg</li>
+<li>My name is Donald</li>
+<li>I live in Ducksburg</li>
+<li>I live in Ducksburg</li>
+<li>I live in Ducksburg</li>
+<li>I live in Ducksburg</li>
+</ol>
+
+
+li::before {
+    content:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='26px' height='26px' fill='black'><circle cx='13' cy='13' r='12' stroke='black' stroke-width='1' fill='transparent' /></svg>");
+    position: relative;
+    left: -24px; 
+    top: 8px;
+}

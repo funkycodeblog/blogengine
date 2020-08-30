@@ -9,18 +9,22 @@ namespace FunkyCode.Blog.Inf.MarkdownService
     public class MarkdownService : IMarkdownService
     {
         private readonly IMarkdownPreprocessor _markdownFixer;
+        private readonly IArticleItemsProcessor _articleItemsProcessor;
 
-        public MarkdownService(IMarkdownPreprocessor markdownFixer)
+        public MarkdownService(IMarkdownPreprocessor markdownFixer, IArticleItemsProcessor articleItemsProcessor)
         {
             _markdownFixer = markdownFixer;
+            _articleItemsProcessor = articleItemsProcessor;
         }
 
         public Task<string> ConvertToHtml(string markdownContent)
         {
 
             var preprocessed = _markdownFixer.Fix(markdownContent);
+
+            var withCaptions = _articleItemsProcessor.Process(preprocessed);
             
-            var result = Markdown.ToHtml(preprocessed);
+            var result = Markdown.ToHtml(withCaptions);
 
             var withParagraphs = $"{result}<br/><br/><br/>";
 

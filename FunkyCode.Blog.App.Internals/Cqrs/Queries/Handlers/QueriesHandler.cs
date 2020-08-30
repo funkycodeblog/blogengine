@@ -54,7 +54,7 @@ namespace FunkyCode.Blog.App
             {
                 var number = $"{i:00}";
                 var src = $"{number}.png";
-                var dest = $"/api/blog/{postId}/{number}";
+                var dest = $"https://localhost:44364/api/blog/{postId}/{number}";
 
                 postAsHtml = postAsHtml.Replace(src, dest);
             }
