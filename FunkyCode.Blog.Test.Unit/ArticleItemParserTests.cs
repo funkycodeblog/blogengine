@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using FunkyCode.Blog.App.Core.Infrastructure.Internals;
+using FunkyCode.Blog.App.Internals.Tools;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace FunkyCode.Blog.Test.Unit
         {
             const string input = "<!-- L:dropclean:Dropping -->";;
 
-            var parser = new ArticleInfoItemParser();
+            var parser = new ArticleItemInfoBuilder();
 
             var info = parser.Parse(input);
 

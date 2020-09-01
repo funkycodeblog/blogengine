@@ -8,7 +8,8 @@ namespace FunkyCode.Blog.App.Internals.Tools
         string BuildItemDescription(ArticleItemInfo info);
 
         List<string> GetReferences(string line);
-
+        bool IsFigure(string str);
+        bool IsListing(string str);
         string UpdateReferenceInLine(string line, ArticleItemInfo info, string reference);
     }
 }

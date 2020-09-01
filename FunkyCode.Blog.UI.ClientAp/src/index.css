@@ -20,6 +20,7 @@ body {
 /* This one makes image not wider than article width */
 #blogArticleContainer img {
   max-width: 100%;
+  margin-bottom: 5px;
 }
 
 code {
@@ -27,3 +28,41 @@ code {
   border-radius: 3px;
   border: rgb(245, 242, 240);;
 }
+
+
+.funky-example {
+  counter-reset: steps;
+  border-left: 5px solid lightgray;
+     margin-left: 5px;
+     padding-left: 20px;
+ }
+ 
+ .funky-example ol {
+   list-style: none;
+  
+ }
+ 
+ .funky-example ol li {
+   counter-increment: steps;
+ }
+ 
+ .funky-example ol li::before {
+   content: counter(steps);
+   margin-right: 0.5rem;
+   background: lightgray;
+   color: white;
+   width: 1.2em;
+   height: 1.2em;
+   border-radius: 50%;
+   display: inline-grid;
+   place-items: center;
+   line-height: 1.2em;
+ }
+
+ .funky-example ol ol li::before {
+   background: darkorchid;
+ }
+ 
+ .funky-example h3 {
+     color: darkgray;
+ }

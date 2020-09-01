@@ -5,6 +5,8 @@ namespace FunkyCode.Blog.App.Core.Infrastructure.Internals
 {
     public class BlogPostMetadata
     {
+        public const string HasCaptions = "HasCaptions";
+
         public enum PostTypeEnum
         {
             Article,
@@ -17,6 +19,7 @@ namespace FunkyCode.Blog.App.Core.Infrastructure.Internals
         public DateTime? PublishedDate { get; set; }
         public List<string> Categories { get; set; }
         public PostTypeEnum PostType { get; set; }
+        public List<string> Attributes { get; set; } = new List<string>();
     }
 
     

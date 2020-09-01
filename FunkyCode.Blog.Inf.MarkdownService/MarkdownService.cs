@@ -10,21 +10,30 @@ namespace FunkyCode.Blog.Inf.MarkdownService
     {
         private readonly IMarkdownPreprocessor _markdownFixer;
         private readonly IArticleItemsProcessor _articleItemsProcessor;
+        private readonly IBlogPostMetadataResolver _metadataresolver;
+        private readonly IImageUrlResolver _imageUrlResolver;
 
-        public MarkdownService(IMarkdownPreprocessor markdownFixer, IArticleItemsProcessor articleItemsProcessor)
+        public MarkdownService(IMarkdownPreprocessor markdownFixer, IArticleItemsProcessor articleItemsProcessor, IBlogPostMetadataResolver metadataresolver, IImageUrlResolver imageUrlResolver)
         {
             _markdownFixer = markdownFixer;
             _articleItemsProcessor = articleItemsProcessor;
+            _metadataresolver = metadataresolver;
+            _imageUrlResolver = imageUrlResolver;
         }
 
         public Task<string> ConvertToHtml(string markdownContent)
         {
 
+            var metadata = _metadataresolver.Resolve(markdownContent);
+
             var preprocessed = _markdownFixer.Fix(markdownContent);
 
-            var withCaptions = _articleItemsProcessor.Process(preprocessed);
+            if (metadata.Result.Attributes.Contains(BlogPostMetadata.HasCaptions))
+                preprocessed = _articleItemsProcessor.Process(preprocessed);
             
-            var result = Markdown.ToHtml(withCaptions);
+            var result = Markdown.ToHtml(preprocessed);
+
+            result = _imageUrlResolver.GetWithImageUrlResolved(result, metadata.Result.Id);
 
             var withParagraphs = $"{result}<br/><br/><br/>";
 

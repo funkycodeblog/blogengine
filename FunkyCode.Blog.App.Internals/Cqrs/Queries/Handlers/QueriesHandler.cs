@@ -50,15 +50,6 @@ namespace FunkyCode.Blog.App
 
             var postAsHtml = await _markdownService.ConvertToHtml(blogPost.Content);
             
-            for (var i = 0; i < 20; i++)
-            {
-                var number = $"{i:00}";
-                var src = $"{number}.png";
-                var dest = $"https://localhost:44364/api/blog/{postId}/{number}";
-
-                postAsHtml = postAsHtml.Replace(src, dest);
-            }
-
             return new BlogPostDto
             {
                 Id = postId,

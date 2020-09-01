@@ -4,6 +4,7 @@ using FunkyCode.Blog.App.Internals.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace FunkyCode.Blog.Inf.MarkdownService
@@ -28,39 +29,57 @@ namespace FunkyCode.Blog.Inf.MarkdownService
             var output = new List<string>();
 
             string pendingDescription = null;
+            var isCombined = false;
 
-            foreach (var lineToTrim in lines)
+            for (int i = 0; i < lines.Length; i++)
             {
+                string lineToTrim = lines[i];
                 var line = lineToTrim.Trim();
+               
+
+                if (line.Contains("3 times"))
+                {
+
+                }
 
                 if (_articleItemInfoParser.TryParse(line, out ArticleItemInfo info))
                 {
-                    if (info.ItemType == ArticleItemTypeEnum.Listing)
+                    if (info.ItemType == ArticleItemTypeEnum.Listing || info.ItemType == ArticleItemTypeEnum.ListingWithFigure)
                     {
                         _listings.Add(info);
                         info.Position = _listings.Count;
                         var description = _articleItemInfoBuilder.BuildItemDescription(info);
                         output.Add(line);
-                        pendingDescription = description;                        
+                        pendingDescription = description;
+
+                        if (info.ItemType == ArticleItemTypeEnum.ListingWithFigure)
+                            isCombined = true;
                     }
                     else if (info.ItemType == ArticleItemTypeEnum.Figure)
                     {
                         _figures.Add(info);
                         info.Position = _figures.Count;
                         var description = _articleItemInfoBuilder.BuildItemDescription(info);
-                        output.Add(line);
+                        output.Add(line + "<br>");
                         output.Add(description);
+                        isCombined = false;
                     }
-                    else
-                        throw new ArgumentException();
+                    else if (info.ItemType == ArticleItemTypeEnum.FigureAsListingPart)
+                    {
+                        output.Add(line);
+                        output.Add(pendingDescription.ToString());
+                        isCombined = false;
+                        pendingDescription = null;
 
-                   
+                    }
+                        else
+                        throw new ArgumentException();
                 }
                 else
                 {
                     output.Add(line);
 
-                    if (line.StartsWith("```") && null != pendingDescription)
+                    if (line.StartsWith("```") && null != pendingDescription && !isCombined)
                     {
                         output.Add(pendingDescription.ToString());
                         pendingDescription = null;

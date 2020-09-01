@@ -19,6 +19,7 @@ namespace FunkyCode.Blog.App.Internals.Tools
             var categoriesPattern = "<!-- Categories: (?<match>.*) -->";
             var headerPattern = "<!-- #header -->(?<match>(?s).*)<!-- #endheader -->";
             var pagePattern = "<!-- Page -->";
+            var attributePattern = "<!-- Meta: (?<match>.*) -->";
 
             var titleToProcess = blog.Split(Environment.NewLine).FirstOrDefault();
             var title = titleToProcess.Replace("# ", "");
@@ -45,6 +46,16 @@ namespace FunkyCode.Blog.App.Internals.Tools
             var date = GetMatched(blog, datePattern).Trim();
             var categories = GetMatched(blog, categoriesPattern);
             var header = GetMatched(blog, headerPattern);
+            var attributesStr = GetMatched(blog, attributePattern);
+            var attributes = new List<string>();
+            if (null != attributesStr)
+            {
+                attributes = attributesStr
+                    .Split(";")
+                    .Select(s => s.Trim())
+                    .ToList();
+            }    
+
             var headerNoNewLines = header.Replace(Environment.NewLine, "");
 
 
@@ -69,7 +80,8 @@ namespace FunkyCode.Blog.App.Internals.Tools
                 Header = headerNoNewLines,
                 Categories = categoriesAsList,
                 PublishedDate = datetime,
-                PostType = BlogPostMetadata.PostTypeEnum.Article
+                PostType = BlogPostMetadata.PostTypeEnum.Article,
+                Attributes = attributes.ToList()
             };
 
             result.Status = result.Messages.Count == 0 ? ProcessingStatus.Ok : ProcessingStatus.Error;

@@ -4,6 +4,8 @@
     {
         Unknown,
         Figure,
-        Listing
+        FigureAsListingPart,
+        Listing,
+        ListingWithFigure
     }
 }

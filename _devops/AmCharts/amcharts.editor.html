@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>chart created with amCharts | amCharts</title>
+		<meta name="description" content="chart created using amCharts live editor" />
+		
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/patterns.js"></script>
+		
+
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv",
+				{
+					"type": "serial",
+					"categoryField": "category",
+					"startDuration": 1,
+					"theme": "patterns",
+					"categoryAxis": {
+						"gridPosition": "start"
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"balloonText": "[[title]] of [[category]]:[[value]]",
+							"fillAlphas": 1,
+							"id": "AmGraph-1",
+							"title": "DynamicSqlService ",
+							"type": "column",
+							"valueField": "column-1"
+						},
+						{
+							"balloonText": "[[title]] of [[category]]:[[value]]",
+							"fillAlphas": 1,
+							"id": "AmGraph-2",
+							"title": "ParametrizedSqlService ",
+							"type": "column",
+							"valueField": "column-2"
+						}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"includeAllValues": true,
+							"includeHidden": true,
+							"minimum": 0,
+							"offset": 2,
+							"title": "Time elapsed [seconds]"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"legend": {
+						"enabled": true,
+						"useGraphSettings": true
+					},
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 15,
+							"text": "Benchmark results"
+						}
+					],
+					"dataProvider": [
+						{
+							"category": "",
+							"column-1": "79.252",
+							"column-2": "46.823"
+						}
+					]
+				}
+			);
+		</script>
+	</head>
+	<body>
+		<div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;" ></div>
+	</body>
+</html>
